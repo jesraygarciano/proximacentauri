@@ -1,0 +1,84 @@
+.scout-tile{
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.16),0 2px 3px 0 rgba(0,0,0,0.12)!important;
+    padding:19px;
+    border:1px solid #f0ad4e;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+.feature-info-list{
+    list-style: none;
+    padding: 0px;
+}
+
+.feature-info-list li .label{
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.feature-info-list li > i {
+    margin-right: 10px;
+}
+
+.feature-info-list li .hover-info{
+    position: absolute;
+    top: 100%;
+    left: 0px;
+    margin-top: 5px;
+    display: none;
+}
+
+.feature-info-list li .label:hover .hover-info{
+    display: block;
+}
+
+.feature-info-list li .hover-info .pointer{
+    position: absolute;
+    bottom:100%;
+    left: 10px;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 5px 5px 5px;
+    border-color: transparent transparent #cecece transparent;
+}
+
+.feature-info-list li .hover-info .content{
+    background: white;
+    border:1px solid #cecece;
+    color: white;
+    padding: 5px;
+    border-radius: 5px;
+    background: #4d5355
+}
+
+.feature-info-list li .hover-info .content ul{
+    padding-left: 15px;
+}
+
+.scout-position{
+    padding: 5px;
+    color: white;
+    border-radius: 3px;
+    font-weight: bold;
+}
+
+.scout-tile .footer{
+    display: table;
+    width: 100%;
+}
+
+.scout-tile .footer a{
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.foggy-text{
+    color: #808080;
+}
+
+.scout-title{
+    margin-top:15px;
+    font-size: 20px;
+}

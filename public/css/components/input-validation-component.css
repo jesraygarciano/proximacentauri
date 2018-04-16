@@ -1,0 +1,34 @@
+/**/
+
+.error-label{
+    color: #de2c2c;
+    font-size: 10px;
+    font-weight: normal;
+    display: none;
+}
+
+.has-error .error-label{
+    display: block;
+}
+
+.has-error-seman-dropdown{
+    border-color:red!important;
+}
+
+.error-border
+{
+    border-color:#a94442!important;
+}
+
+.ui.form .error-label{
+	display: none;
+}
+
+.ui.form.has-error input,.ui.form.has-error .dropdown, .ui.form.has-error textarea{
+	border-color:#a94442;
+}
+
+.ui.form.has-error .error-label{
+	color: #a94442;
+	display: block;
+}

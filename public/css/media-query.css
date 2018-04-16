@@ -1,0 +1,179 @@
+
+@media (min-width: 1281px) {
+/* 
+  ##Device = Desktops
+  ##Screen = 1281px to higher resolution desktops
+*/
+
+  
+}
+
+
+
+@media (min-width: 1025px) and (max-width: 1280px) {
+/* 
+  ##Device = Laptops, Desktops
+  ##Screen = B/w 1025px to 1280px
+*/
+.container > .navbar-collapse{
+    margin-right: 0!important;
+    margin-left: 0!important;
+}
+.navbar-collapse{
+    margin-right: 0!important;
+    margin-left: 0!important;
+}
+
+}
+
+
+
+@media (min-width: 768px) and (max-width: 1024px) {
+/* 
+  ##Device = Tablets, Ipads (portrait)
+  ##Screen = B/w 768px to 1024px
+*/
+
+}
+
+
+
+
+
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+/* 
+  ##Device = Tablets, Ipads (landscape)
+  ##Screen = B/w 768px to 1024px
+*/  
+  
+}
+
+
+
+@media (min-width: 481px) and (max-width: 767px) {
+/* 
+  ##Device = Low Resolution Tablets, Mobiles (Landscape)
+  ##Screen = B/w 481px to 767px
+*/
+.general_heading {
+    position: absolute;
+    top: 25%;
+    text-align: center;
+    left: 50%;
+    width: 450px;
+    -webkit-transform: translateX(-50%);
+}
+
+.general_heading h2 {
+    font-size: 2.5rem;
+    padding-bottom: .5rem;
+}
+.general_heading h5 {
+    font-size: 17px;
+}  
+  
+}
+
+
+
+@media (min-width: 320px) and (max-width: 480px) {
+  
+/* 
+  ##Device = Most of the Smartphones Mobiles (Portrait)
+  ##Screen = B/w 320px to 479px
+*/
+.mt-0 .mb-1{
+  font-size: 20px!important;
+}
+
+.landing-cover{
+}
+.general_heading {
+    position: absolute;
+    top: 25%;
+    text-align: center;
+    left: 50%;
+    width: 280px;
+    -webkit-transform: translateX(-50%);
+}
+
+.general_heading h2 {
+    font-size: 2.5rem;
+
+}
+.general_heading h5 {
+    font-size: 14px;
+    color: #cac7c7;
+  
+}
+
+.landing-cover .landing-page-search{
+  display: none;
+}
+
+.feature-post-carosel .xtext12{
+  font-size: 25px;
+}
+
+.oblong-bttn {
+    border-radius: 6px;
+    font-size: 18px;
+    display: inline-block;
+    padding: 11px 30px;
+    box-shadow: 0 1px 5px rgb(27, 31, 35);
+    text-decoration: none!important;
+    }
+
+.violet-bttn {
+    background: #154f86;
+    color: white!important;
+}
+
+.medium-round-icon {
+    width: 75px;
+    height: 75px;
+}
+
+.feature-post-carosel .carosel-controls .left, .feature-post-carosel .carosel-controls .right{
+    background: #e3f6ff;
+    padding: 16px;
+    border: 1px solid #0982d8;
+    cursor: pointer;
+    position: absolute;
+    top: 170px;
+    opacity: 0.8;  
+}
+    
+}
+
+/*Customized Media Queries*/
+
+@media (max-width: 991px) {
+.nexseed-logos figure a .nex-seedlogo{
+padding-top: 0!important;
+/*display: none;*/
+}
+.nexseed-logos figure a .gscamplogo{
+padding-top: 3.5rem!important;
+/*display: none;*/
+}
+.landing-cont-logos{
+  height: 150px!important;
+}
+
+}
+
+
+@media (max-width: 378px) {
+
+.btn-opposite{
+  margin-top: 1rem;
+}
+}
+
+@media (max-width: 768px) {
+
+#schedulenskills{
+  margin-top: 2rem;
+}
+}

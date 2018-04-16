@@ -1,0 +1,321 @@
+/* line 6, ../../resources/assets/sass/sss.scss */
+body .navbar .container .navbar-header a img {
+  width: 100%;
+}
+/* line 13, ../../resources/assets/sass/sss.scss */
+body #body-container {
+  /*SINGLE OPENINGS END */
+  /* RESUME-INFO */
+}
+/* line 15, ../../resources/assets/sass/sss.scss */
+body #body-container .general_portal #carousel {
+  padding: 0;
+  margin: 0;
+}
+/* line 18, ../../resources/assets/sass/sss.scss */
+body #body-container .general_portal #carousel img {
+  width: 100%;
+}
+/* line 22, ../../resources/assets/sass/sss.scss */
+body #body-container .general_portal hr.job-hr {
+  padding: 1rem;
+  margin: 0;
+}
+/* line 26, ../../resources/assets/sass/sss.scss */
+body #body-container .general_portal #or-search {
+  font-size: 1.5em;
+  text-transform: uppercase;
+}
+/* line 30, ../../resources/assets/sass/sss.scss */
+body #body-container .general_portal #all-jobs {
+  margin: 0 auto;
+}
+/* line 34, ../../resources/assets/sass/sss.scss */
+body #body-container .general_portal #all-jobs #port-opening {
+  display: flex;
+  flex-wrap: wrap;
+}
+/* line 38, ../../resources/assets/sass/sss.scss */
+body #body-container .general_portal #all-jobs #port-opening .col-xs-2 {
+  flex-direction: column;
+  border: 1px solid #f3c91c;
+  margin: 1rem;
+  border-radius: 0;
+}
+/* line 44, ../../resources/assets/sass/sss.scss */
+body #body-container .general_portal #all-jobs #port-opening .col-xs-2 .row .list-opening-comp-logo {
+  margin: 1rem;
+}
+/* line 47, ../../resources/assets/sass/sss.scss */
+body #body-container .general_portal #all-jobs #port-opening .col-xs-2 .row .list-opening-comp-body {
+  margin: 1rem;
+}
+/* line 51, ../../resources/assets/sass/sss.scss */
+body #body-container .general_portal #all-jobs #port-opening .col-xs-2 #full-open-list {
+  vertical-align: middle;
+}
+/* line 53, ../../resources/assets/sass/sss.scss */
+body #body-container .general_portal #all-jobs #port-opening .col-xs-2 #full-open-list div {
+  position: relative;
+  float: left;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+/* line 63, ../../resources/assets/sass/sss.scss */
+body #body-container .general_portal #all-jobs #port-opening .col-xs-2:hover {
+  border: 1px solid red;
+}
+/* line 68, ../../resources/assets/sass/sss.scss */
+body #body-container .general_portal #all-jobs h2 {
+  color: #000;
+}
+/* line 72, ../../resources/assets/sass/sss.scss */
+body #body-container .general_portal .row {
+  margin-bottom: 2rem;
+}
+/* line 77, ../../resources/assets/sass/sss.scss */
+body #body-container .general_portal .row .col-md-6 .row .col-xs-4 h4 {
+  color: #0f739b;
+}
+/* line 81, ../../resources/assets/sass/sss.scss */
+body #body-container .general_portal .row .col-md-6 .row .col-xs-4 hr.hr {
+  color: #f3c91c;
+  background-color: #f3c91c;
+  height: 3px;
+}
+/* line 90, ../../resources/assets/sass/sss.scss */
+body #body-container .general_portal .row .col-md-6 .general_companies .row .col-xs-5 {
+  border: 1px solid #f3c91c;
+  margin: 1rem;
+  border-radius: 0;
+}
+/* line 95, ../../resources/assets/sass/sss.scss */
+body #body-container .general_portal .row .col-md-6 .general_companies .row .col-xs-5 .row .col-xs-4 {
+  margin: 1rem;
+}
+/* line 98, ../../resources/assets/sass/sss.scss */
+body #body-container .general_portal .row .col-md-6 .general_companies .row .col-xs-5 .row .col-xs-6 {
+  margin: 1rem;
+}
+/* line 103, ../../resources/assets/sass/sss.scss */
+body #body-container .general_portal .row .col-md-6 .general_companies .row .col-xs-5:hover {
+  border: 1px solid red;
+}
+/* line 108, ../../resources/assets/sass/sss.scss */
+body #body-container .general_portal .row .col-md-6 #all-companies {
+  margin: 0 1rem;
+}
+/* line 111, ../../resources/assets/sass/sss.scss */
+body #body-container .general_portal .row .col-md-6 #prog-lang {
+  text-align: center;
+}
+/* line 113, ../../resources/assets/sass/sss.scss */
+body #body-container .general_portal .row .col-md-6 #prog-lang .col-xs-2 {
+  border: 1px solid #f3c91c;
+  margin: 1rem 2rem;
+}
+/* line 116, ../../resources/assets/sass/sss.scss */
+body #body-container .general_portal .row .col-md-6 #prog-lang .col-xs-2 img {
+  width: 80%;
+}
+/* line 120, ../../resources/assets/sass/sss.scss */
+body #body-container .general_portal .row .col-md-6 #prog-lang .col-xs-2:hover {
+  border: 1px solid red;
+  margin: 1rem 2rem;
+}
+/* line 124, ../../resources/assets/sass/sss.scss */
+body #body-container .general_portal .row .col-md-6 #prog-lang .col-xs-2:hover img {
+  width: 80%;
+}
+/* line 131, ../../resources/assets/sass/sss.scss */
+body #body-container .general_portal .row .col-md-12 button {
+  margin: 1rem;
+}
+/* line 136, ../../resources/assets/sass/sss.scss */
+body #body-container .general_portal .row .col-md-12 .row .col-xs-5 h4 {
+  color: #0f739b;
+}
+/* line 140, ../../resources/assets/sass/sss.scss */
+body #body-container .general_portal .row .col-md-12 .row .col-xs-5 hr.hr {
+  color: #f3c91c;
+  background-color: #f3c91c;
+  height: 3px;
+}
+/* line 147, ../../resources/assets/sass/sss.scss */
+body #body-container .general_portal .row .col-md-12 .row .col-xs-2 h4 {
+  color: #0f739b;
+}
+/* line 153, ../../resources/assets/sass/sss.scss */
+body #body-container .general_portal .row .col-md-12 .row .archipelago h4 {
+  color: #f3c91c;
+}
+/* line 168, ../../resources/assets/sass/sss.scss */
+body #body-container #single-opening {
+  /* TAB-CONTENT ENDS */
+}
+/* line 169, ../../resources/assets/sass/sss.scss */
+body #body-container #single-opening .nav-pills > .active > a, body #body-container #single-opening .nav-pills > .active > a:hover, body #body-container #single-opening .nav-pills > .active > a:focus {
+  border-color: #337ab7;
+  border-bottom-color: transparent;
+}
+/* line 175, ../../resources/assets/sass/sss.scss */
+body #body-container #single-opening .nav-pills > li > a {
+  border-radius: 0;
+}
+/* line 178, ../../resources/assets/sass/sss.scss */
+body #body-container #single-opening .nav-pills > li {
+  border: 1px solid #337ab7;
+  margin: 0;
+}
+/* line 182, ../../resources/assets/sass/sss.scss */
+body #body-container #single-opening .nav-pills {
+  border-bottom: 3px solid #337ab7;
+}
+/* line 185, ../../resources/assets/sass/sss.scss */
+body #body-container #single-opening .tab-content {
+  /* JOB INFO ENDS*/
+}
+/* line 188, ../../resources/assets/sass/sss.scss */
+body #body-container #single-opening .tab-content #jobinfo {
+  /* SHOW OPENING ENDS */
+}
+/* line 192, ../../resources/assets/sass/sss.scss */
+body #body-container #single-opening .tab-content #jobinfo #show_opening {
+  /* OPENINGS BODY ENDS */
+}
+/* line 195, ../../resources/assets/sass/sss.scss */
+body #body-container #single-opening .tab-content #jobinfo #show_opening .row .col-md-12 img {
+  border-top: solid #f3c91c 7px;
+}
+/* line 200, ../../resources/assets/sass/sss.scss */
+body #body-container #single-opening .tab-content #jobinfo #show_opening #openings-title {
+  padding-top: 2em;
+}
+/* line 203, ../../resources/assets/sass/sss.scss */
+body #body-container #single-opening .tab-content #jobinfo #show_opening #openings-body {
+  padding: 3em 0 0 2em;
+  /* COL-MD-5 ENDS */
+}
+/* line 206, ../../resources/assets/sass/sss.scss */
+body #body-container #single-opening .tab-content #jobinfo #show_opening #openings-body .col-md-7 .job-description {
+  padding-bottom: 2em;
+}
+/* line 209, ../../resources/assets/sass/sss.scss */
+body #body-container #single-opening .tab-content #jobinfo #show_opening #openings-body .col-md-7 .job-description h4 i {
+  color: #0f739b;
+}
+/* line 213, ../../resources/assets/sass/sss.scss */
+body #body-container #single-opening .tab-content #jobinfo #show_opening #openings-body .col-md-7 .job-description .hr-desc {
+  height: 5px;
+  color: #f3c91c;
+}
+/* line 220, ../../resources/assets/sass/sss.scss */
+body #body-container #single-opening .tab-content #jobinfo #show_opening #openings-body .col-md-7 .job-qualify h4 i {
+  color: #0f739b;
+}
+/* line 224, ../../resources/assets/sass/sss.scss */
+body #body-container #single-opening .tab-content #jobinfo #show_opening #openings-body .col-md-7 .job-qualify hr {
+  color: #f3c91c;
+}
+/* line 231, ../../resources/assets/sass/sss.scss */
+body #body-container #single-opening .tab-content #jobinfo #show_opening #openings-body .col-md-5 h4 i {
+  color: #0f739b;
+}
+/* line 235, ../../resources/assets/sass/sss.scss */
+body #body-container #single-opening .tab-content #jobinfo #show_opening #openings-body .col-md-5 hr {
+  color: #f3c91c;
+}
+/* line 244, ../../resources/assets/sass/sss.scss */
+body #body-container .applicant-desc {
+  /* applicant-resume-info */
+}
+/* line 247, ../../resources/assets/sass/sss.scss */
+body #body-container .applicant-desc #applicant-desc-info .col-md-12 .well-lg, body #body-container .applicant-desc #applicant-resume-info .col-md-12 .well-lg {
+  padding: 0 0 1em 0;
+  border-radius: 0;
+  border: 1px solid #0f739b;
+  box-shadow: 0 3px 4px rgba(15, 115, 155, 0.4);
+}
+/* line 252, ../../resources/assets/sass/sss.scss */
+body #body-container .applicant-desc #applicant-desc-info .col-md-12 .well-lg h4, body #body-container .applicant-desc #applicant-resume-info .col-md-12 .well-lg h4 {
+  text-align: center;
+  margin: 0 0 10px 0;
+  color: #fff;
+  background-color: #0f739b;
+  line-height: 35px;
+}
+/* line 259, ../../resources/assets/sass/sss.scss */
+body #body-container .applicant-desc #applicant-desc-info .col-md-12 .well-lg p, body #body-container .applicant-desc #applicant-resume-info .col-md-12 .well-lg p {
+  padding-left: 1em;
+}
+/* line 263, ../../resources/assets/sass/sss.scss */
+body #body-container .applicant-desc #applicant-desc-info .col-md-12 .well-lg:hover, body #body-container .applicant-desc #applicant-resume-info .col-md-12 .well-lg:hover {
+  border-radius: 0;
+  box-shadow: 0 5px 10px rgba(15, 115, 155, 0.4);
+}
+/* line 269, ../../resources/assets/sass/sss.scss */
+body #body-container .applicant-desc #applicant-resume-info {
+  padding-top: 2em;
+}
+/* line 274, ../../resources/assets/sass/sss.scss */
+body #body-container .applicant-desc #applicant-resume-info .col-md-12 .well-lg .row {
+  margin: 2em;
+}
+/* line 277, ../../resources/assets/sass/sss.scss */
+body #body-container .applicant-desc #applicant-resume-info .col-md-12 .well-lg .row .col-md-3 .well-lg {
+  padding: 1em;
+  margin-top: 10px;
+}
+/* line 289, ../../resources/assets/sass/sss.scss */
+body #body-container #company_letter .well {
+  padding: 0 0 1em 0;
+  border-radius: 0;
+  border: 1px solid #0f739b;
+}
+/* line 293, ../../resources/assets/sass/sss.scss */
+body #body-container #company_letter .well h3 {
+  padding-left: .5em;
+  margin: 0;
+  line-height: 30px;
+  background-color: #0f739b;
+  color: #fff;
+}
+/* line 300, ../../resources/assets/sass/sss.scss */
+body #body-container #company_letter .well h5 {
+  padding-left: .5em;
+  margin: 0;
+  line-height: 30px;
+}
+/* line 307, ../../resources/assets/sass/sss.scss */
+body #body-container .resume-info {
+  border: 1px solid #0f739b;
+}
+/* line 311, ../../resources/assets/sass/sss.scss */
+body #body-container .resume-info .row .col-md-12 #resume-info-title {
+  padding-left: .5em;
+  margin: 0;
+  line-height: 30px;
+  background-color: #0f739b;
+  color: #fff;
+}
+/* line 318, ../../resources/assets/sass/sss.scss */
+body #body-container .resume-info .row .col-md-12 .row {
+  margin: 1em 0;
+}
+/* line 321, ../../resources/assets/sass/sss.scss */
+body #body-container .resume-info .row .col-md-12 .row .col-md-12 .resume-info-sub-title {
+  border-bottom: 1px solid #0f739b;
+  margin: 0;
+  line-height: 30px;
+  color: #0f739b;
+}
+/* line 333, ../../resources/assets/sass/sss.scss */
+body #body-container .user_index_show {
+  border: 1px solid red;
+}
+/* line 337, ../../resources/assets/sass/sss.scss */
+body #body-container .user_index_show .col-md-12 .row .col-md-8 {
+  background-color: #0f739b;
+  color: #fff;
+}

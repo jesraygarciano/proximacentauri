@@ -1,0 +1,68 @@
+.applicant-tile{
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.16),0 2px 3px 0 rgba(0,0,0,0.12)!important;
+    border:1px solid #dddddd;
+    /*padding:15px 19px 8px 19px;*/
+    padding:19px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    position: relative;
+}
+
+.applicant-position{
+    padding: 5px;
+    background: white;
+    border-radius: 3px;
+    font-weight: bold;
+}
+
+.applicant-tile .footer{
+    display: table;
+    width: 100%;
+}
+
+.applicant-tile .footer a{
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.foggy-text{
+    color: #808080;
+}
+
+.applicant-name{
+    margin-top:15px;
+    font-size: 20px;
+}
+
+.company-name{
+    /**/
+    margin-bottom: 20px;
+}
+
+.company-name a{
+    color: inherit;
+}
+
+.applicant-tile .applicant-image{
+    position: relative;
+    overflow: hidden;
+}
+
+.applicant-tile .applicant-image .bg-img{
+    opacity: 0;
+    z-index: -11;
+    width: 100%;
+}
+
+.applicant-tile .applicant-image ._image{
+    width: 100%;
+    top:50%;
+    left: 0px;
+    position: absolute;
+    transform:translateY(-50%);
+}
+
+.applicant-tile .fa-bookmark{
+    color: #a3a3a3;
+    cursor: pointer;
+}

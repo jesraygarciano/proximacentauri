@@ -1,0 +1,266 @@
+.job-tile{
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.16),0 2px 3px 0 rgba(0,0,0,0.12)!important;
+    padding:15px 19px 8px 19px;
+    border:1px solid #dddddd;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    position: relative;
+}
+
+.job-tile .edit-bttn{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 0px;
+    overflow: hidden;
+    display: block;
+    transition: 200ms ease all;
+}
+
+.job-tile:hover .edit-bttn{
+    opacity: 1;
+    width: 30px;
+}
+
+.job-tile .title{
+    position: absolute;
+    width: 100%;
+    left:0px;
+    padding:0px 15px;
+}
+
+.job-tile .photo-adjust{
+    /*transform: translate(-8px,-70px);*/
+}
+
+.job-tile .photo-wrapper{
+    float: right;
+    width: 150px;
+    background: #f3f3f3;
+    margin-top: -25px;
+    border: 1px solid #ececec;
+    border-radius: 4px;
+}
+
+.opening-feature-info-list{
+    list-style: none;
+    padding: 0px;
+    margin-left: 15px;
+    margin-top: 5px;
+}
+
+.opening-feature-info-list li{
+    padding-top: 1px;
+    /*min-height: 30px;*/
+}
+
+.opening-feature-info-list li .label{
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    font-size: 90%;
+    padding-top: 4px;
+}
+
+.opening-feature-info-list li > i {
+    margin-right: 10px;
+}
+
+.opening-feature-info-list li .hover-info{
+    position: absolute;
+    top: 100%;
+    left: 0px;
+    margin-top: 5px;
+    display: none;
+}
+
+.opening-feature-info-list li .label:hover .hover-info{
+    display: block;
+}
+
+.opening-feature-info-list li .hover-info .pointer{
+    position: absolute;
+    bottom:100%;
+    left: 10px;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 5px 5px 5px;
+    border-color: transparent transparent #cecece transparent;
+}
+
+.opening-feature-info-list li .hover-info .content{
+    background: white;
+    border:1px solid #cecece;
+    color: white;
+    padding: 5px;
+    border-radius: 5px;
+    background: #4d5355
+}
+
+.opening-feature-info-list li .hover-info .content ul{
+    padding-left: 15px;
+}
+
+.job-position{
+    padding: 4px;
+    background: white;
+    font-weight: bold;
+}
+
+.job-tile .footer{
+    display: table;
+    width: 100%;
+    position: relative;
+}
+
+.job-tile .footer a{
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.job-tile .footer a{
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.job-desc-active{
+    padding:.7rem;
+    color:#fff;
+    border-radius: 5px;
+    position: absolute;
+    top: 30px;
+    right: 0;
+}
+
+.date-disabled{
+    color: #a9a9a9;
+}
+
+.foggy-text{
+    color: #808080;
+}
+
+.job-title{
+    margin-top:10px;
+    font-size: 20px;
+}
+
+.company-name{
+    /**/
+    margin-bottom: 7px;
+}
+
+.company-name a{
+    color: inherit;
+}
+
+.photo-adjust{
+    position: absolute;
+    right: 12px;
+    top: 85px;
+}
+
+.job-card{
+    position: relative;
+    margin-top: 5px;
+}
+
+.job-card .header{
+    padding: 10px;
+    color: white;
+    font-weight: bold;
+    font-size: 15px;
+    border-radius: 4px 4px 0 0;
+    background: gray;
+}
+
+.job-card .body{
+    border: 1px solid #e5e5e5;
+    border-radius: 0 0 4px 4px;
+}
+
+.job-card .body > div{
+    border-bottom:1px solid #e5e5e5;
+    padding: 5px;
+    background: white;
+}
+
+.job-card .body > div::last-child{
+    border:none;
+}
+
+.content-list-forjob>li{
+  position:relative;
+  padding-left: 0px !important;
+}
+
+.content-list-forjob>li>div>.fa-file-text{
+  position:absolute;
+  left:6px;
+  top:4.3px;
+  font-size: 10px;
+}
+
+.content-list-forjob>li>div>.fa-map-marker{
+  position:absolute;
+  left:6.5px;
+  top:4.3px;
+  font-size: 12px;
+}
+
+.content-list-forjob>li>div>.fa-dollar{
+  position:absolute;
+  left:6.8px;
+  top:4.2px;
+  font-size: 12px;
+}
+
+.content-list-forjob>li>div>.fa-code{
+  position:absolute;
+  left:3.5px;
+  top:4px;
+  font-size: 12px;
+}
+
+.content-list-forjob>li>.li-content-forjob{
+  display: inline-block;
+}
+
+.content-list-forjob>li>.i-wrapper-forjob{
+  position: relative;
+  height: 20px;
+  width: 20px;
+  border-radius: 10px;
+  left: 5px;
+  background-color: rgb(31, 89, 149);
+  color: white;
+}
+
+.content-list-forjob>li>.text-wrapper{
+  position: absolute;
+  top:-1px;
+  left:30px;
+  right: 110px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  /*height:30px;*/
+}
+
+@media(max-width: 428px){
+  .job-tile .photo-adjust{
+    top:5px;
+    right: 5px;
+    height: 60px!important;
+    width: 60px!important;
+  }
+
+  .content-list-forjob>li>.text-wrapper{
+    right: 0px;
+  }
+
+  .job-tile .job-title{
+    margin-top: 30px;
+  }
+}

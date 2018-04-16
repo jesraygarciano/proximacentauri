@@ -1,0 +1,29 @@
+.default-hide-ed{
+    display: none;
+    overflow: hidden;
+    height: 0;
+}
+
+.default-hide-ex{
+    display: none;
+    overflow: hidden;
+    height: 0;
+}
+
+.default-hide-cr{
+    display: none;
+    overflow: hidden;
+    height: 0;
+}
+
+.ed-margin{
+    margin-top: 10px;
+}
+
+.ex-margin{
+    margin-top: 10px;
+}
+
+.progress-buttons{
+
+}

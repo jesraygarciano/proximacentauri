@@ -1,0 +1,747 @@
+@media screen and (min-width: 768px) and (max-width: 992px) {
+  /* line 10, ../../resources/assets/sass/app.scss */
+  #navigation-bar .container {
+    width: 800px !important;
+  }
+  /* line 15, ../../resources/assets/sass/app.scss */
+  #navigation-bar .container .navbar-collapse .navbar-right {
+    margin-right: 0px !important;
+  }
+}
+
+#navigation-bar .name{
+  display: inline;
+}
+
+@media(min-width: 728px){
+  #navigation-bar .name{
+    vertical-align: middle; text-align: right; width: 150px; display: inline-block;
+  }
+}
+
+/* line 23, ../../resources/assets/sass/app.scss */
+body {
+  /* body-container */
+}
+/* line 27, ../../resources/assets/sass/app.scss */
+body .navbar .container .navbar-header button {
+  border: 1px solid #eda637;
+  background-color: #f89c0e;
+  color: #fff;
+}
+/* line 33, ../../resources/assets/sass/app.scss */
+body .navbar .container .navbar-header a img {
+  width: 100%;
+}
+/* line 40, ../../resources/assets/sass/app.scss */
+body .navbar .container .navbar-collapse > ul > li {
+/*  font-family: "Raleway", sans-serif;
+  font-weight: 600;*/
+  font-size: 1.1em;
+  height: 50px;
+}
+/* line 45, ../../resources/assets/sass/app.scss */
+body .navbar .container .navbar-collapse ul li a:hover {
+  color: #f89c0e;
+}
+/* line 54, ../../resources/assets/sass/app.scss */
+body footer #footer {
+  padding-top: 1rem;
+}
+/* line 61, ../../resources/assets/sass/app.scss */
+body footer #footer .row .col-md-3 h4 {
+  border-bottom: 1px solid #f89c0e;
+}
+/* line 64, ../../resources/assets/sass/app.scss */
+body footer #footer .row .col-md-3 ul {
+  padding: 0;
+}
+/* line 66, ../../resources/assets/sass/app.scss */
+body footer #footer .row .col-md-3 ul li {
+  list-style: none;
+  padding: 5px 0;
+}
+/* line 73, ../../resources/assets/sass/app.scss */
+body footer #footer .row .col-md-3 h4 {
+  border-bottom: 1px solid #f89c0e;
+  padding-bottom: 10px;
+}
+/* line 77, ../../resources/assets/sass/app.scss */
+body footer #footer .row .col-md-3 ul {
+  padding: 0;
+}
+/* line 79, ../../resources/assets/sass/app.scss */
+body footer #footer .row .col-md-3 ul li {
+  list-style: none;
+  padding: 5px 0;
+}
+/* line 86, ../../resources/assets/sass/app.scss */
+body footer #footer .row .col-md-2 h4 {
+  border-bottom: 1px solid #f89c0e;
+  padding-bottom: 10px;
+}
+/* line 90, ../../resources/assets/sass/app.scss */
+body footer #footer .row .col-md-2 ul {
+  padding: 0;
+}
+/* line 92, ../../resources/assets/sass/app.scss */
+body footer #footer .row .col-md-2 ul li {
+  list-style: none;
+  padding: 5px 0;
+}
+/* line 105, ../../resources/assets/sass/app.scss */
+body #body-container {
+  /* End company list  */
+  /*SINGLE OPENINGS END */
+  /*MANAGE PORTAL END */
+  /* RESUME-INFO */
+}
+/* line 107, ../../resources/assets/sass/app.scss */
+body #body-container #followed-company_lists .col-md-12 {
+  /* First comp list */
+}
+/* line 108, ../../resources/assets/sass/app.scss */
+body #body-container #followed-company_lists .col-md-12 #first-comp-list {
+  /* Media */
+}
+/* line 109, ../../resources/assets/sass/app.scss */
+body #body-container #followed-company_lists .col-md-12 #first-comp-list .media {
+  font-family: "Montserrat", sans-serif;
+  letter-spacing: 1px;
+  border-color: #f89c0e;
+  box-shadow: 0 10px 4px 0 rgba(0, 0, 0, 0.18), 0 2px 3px 0 rgba(0, 0, 0, 0.2) !important;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: start;
+  -webkit-align-items: flex-start;
+  -ms-flex-align: start;
+  align-items: flex-start;
+  /* Media body */
+}
+/* line 123, ../../resources/assets/sass/app.scss */
+body #body-container #followed-company_lists .col-md-12 #first-comp-list .media .media-body {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1 1 0%;
+  -ms-flex: 1 1 0%;
+  flex: 1 1 0%;
+}
+/* line 128, ../../resources/assets/sass/app.scss */
+body #body-container #followed-company_lists .col-md-12 #first-comp-list .media .media-body h3 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-family: "Raleway", sans-serif;
+  font-weight: 900;
+}
+/* line 134, ../../resources/assets/sass/app.scss */
+body #body-container #followed-company_lists .col-md-12 #first-comp-list .media .media-body h3 .mt-0 {
+  margin-top: 0 !important;
+}
+/* line 137, ../../resources/assets/sass/app.scss */
+body #body-container #followed-company_lists .col-md-12 #first-comp-list .media .media-body h3 .mb-1 {
+  margin-bottom: 0.25rem !important;
+}
+/* line 141, ../../resources/assets/sass/app.scss */
+body #body-container #followed-company_lists .col-md-12 #first-comp-list .media .media-body ul {
+  margin: 0;
+  padding: 0;
+}
+/* line 144, ../../resources/assets/sass/app.scss */
+body #body-container #followed-company_lists .col-md-12 #first-comp-list .media .media-body ul li {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  list-style: none;
+}
+/* line 149, ../../resources/assets/sass/app.scss */
+body #body-container #followed-company_lists .col-md-12 #first-comp-list .media .media-body ul li i {
+  padding-right: 1rem;
+}
+/* line 156, ../../resources/assets/sass/app.scss */
+body #body-container #followed-company_lists .col-md-12 #first-comp-list .media img .d-flex {
+  display: -webkit-box !important;
+  display: -webkit-flex !important;
+  display: -ms-flexbox !important;
+  display: flex !important;
+}
+/* line 162, ../../resources/assets/sass/app.scss */
+body #body-container #followed-company_lists .col-md-12 #first-comp-list .media img .ml-3 {
+  margin-left: 1rem !important;
+}
+/* line 166, ../../resources/assets/sass/app.scss */
+body #body-container #followed-company_lists .col-md-12 #first-comp-list .media #company-bookmark {
+  position: absolute;
+  right: 25px;
+  bottom: 42px;
+}
+/* line 171, ../../resources/assets/sass/app.scss */
+body #body-container #followed-company_lists .col-md-12 #first-comp-list .media #company-bookmark a i {
+  padding: 0;
+}
+/* line 175, ../../resources/assets/sass/app.scss */
+body #body-container #followed-company_lists .col-md-12 #first-comp-list .media #company-bookmark a:hover {
+  text-decoration: none;
+  color: #f89c0e;
+  cursor: pointer;
+}
+/* line 181, ../../resources/assets/sass/app.scss */
+body #body-container #followed-company_lists .col-md-12 #first-comp-list .media .class-hr {
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid #1377a1;
+  margin: 1em 0;
+  padding: 0;
+}
+/* line 193, ../../resources/assets/sass/app.scss */
+body #body-container #company-list {
+  /* End company search */
+  /* End company-single lists */
+}
+/* line 199, ../../resources/assets/sass/app.scss */
+body #body-container #company-list #company-search {
+  /* End row */
+}
+/* line 200, ../../resources/assets/sass/app.scss */
+body #body-container #company-list #company-search .row {
+  /* md3 */
+  /* Custom select */
+}
+/* line 205, ../../resources/assets/sass/app.scss */
+body #body-container #company-list #company-search .row .col-md-6 .input-group .form-control {
+  z-index: 1;
+}
+/* line 215, ../../resources/assets/sass/app.scss */
+body #body-container #company-list #company-single-lists .row .col-md-10 .row {
+  /* First comp list */
+}
+/* line 216, ../../resources/assets/sass/app.scss */
+body #body-container #company-list #company-single-lists .row .col-md-10 .row #first-comp-list {
+  /* Media */
+}
+/* line 217, ../../resources/assets/sass/app.scss */
+body #body-container #company-list #company-single-lists .row .col-md-10 .row #first-comp-list .media {
+  font-family: "Montserrat", sans-serif;
+  letter-spacing: 1px;
+  border-color: #f89c0e;
+  box-shadow: 0 10px 4px 0 rgba(0, 0, 0, 0.18), 0 2px 3px 0 rgba(0, 0, 0, 0.2) !important;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: start;
+  -webkit-align-items: flex-start;
+  -ms-flex-align: start;
+  align-items: flex-start;
+  /* Media body */
+}
+/* line 230, ../../resources/assets/sass/app.scss */
+body #body-container #company-list #company-single-lists .row .col-md-10 .row #first-comp-list .media .media-body {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1 1 0%;
+  -ms-flex: 1 1 0%;
+  flex: 1 1 0%;
+}
+/* line 235, ../../resources/assets/sass/app.scss */
+body #body-container #company-list #company-single-lists .row .col-md-10 .row #first-comp-list .media .media-body h3 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  /*font-family: "Raleway", sans-serif;*/
+  /*font-weight: 900;*/
+}
+/* line 241, ../../resources/assets/sass/app.scss */
+body #body-container #company-list #company-single-lists .row .col-md-10 .row #first-comp-list .media .media-body h3 .mt-0 {
+  margin-top: 0 !important;
+}
+/* line 244, ../../resources/assets/sass/app.scss */
+body #body-container #company-list #company-single-lists .row .col-md-10 .row #first-comp-list .media .media-body h3 .mb-1 {
+  margin-bottom: 0.25rem !important;
+}
+/* line 248, ../../resources/assets/sass/app.scss */
+body #body-container #company-list #company-single-lists .row .col-md-10 .row #first-comp-list .media .media-body ul {
+  margin: 0;
+  padding: 0;
+}
+/* line 251, ../../resources/assets/sass/app.scss */
+body #body-container #company-list #company-single-lists .row .col-md-10 .row #first-comp-list .media .media-body ul li {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  list-style: none;
+}
+/* line 256, ../../resources/assets/sass/app.scss */
+body #body-container #company-list #company-single-lists .row .col-md-10 .row #first-comp-list .media .media-body ul li i {
+  padding-right: 1rem;
+}
+/* line 263, ../../resources/assets/sass/app.scss */
+body #body-container #company-list #company-single-lists .row .col-md-10 .row #first-comp-list .media img .d-flex {
+  display: -webkit-box !important;
+  display: -webkit-flex !important;
+  display: -ms-flexbox !important;
+  display: flex !important;
+}
+/* line 269, ../../resources/assets/sass/app.scss */
+body #body-container #company-list #company-single-lists .row .col-md-10 .row #first-comp-list .media img .ml-3 {
+  margin-left: 1rem !important;
+}
+/* line 273, ../../resources/assets/sass/app.scss */
+body #body-container #company-list #company-single-lists .row .col-md-10 .row #first-comp-list .media #company-bookmark {
+  position: absolute;
+  right: 25px;
+  bottom: 42px;
+}
+/* line 278, ../../resources/assets/sass/app.scss */
+body #body-container #company-list #company-single-lists .row .col-md-10 .row #first-comp-list .media #company-bookmark a i {
+  padding: 0;
+}
+/* line 282, ../../resources/assets/sass/app.scss */
+body #body-container #company-list #company-single-lists .row .col-md-10 .row #first-comp-list .media #company-bookmark a:hover {
+  text-decoration: none;
+  color: #f89c0e;
+  cursor: pointer;
+}
+/* line 288, ../../resources/assets/sass/app.scss */
+body #body-container #company-list #company-single-lists .row .col-md-10 .row #first-comp-list .media .class-hr {
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid #1377a1;
+  margin: 1em 0;
+  padding: 0;
+}
+/* line 301, ../../resources/assets/sass/app.scss */
+body #body-container #company-list #company-single-lists .row #comp-advertisement .well {
+  border-color: #f89c0e;
+}
+/* line 311, ../../resources/assets/sass/app.scss */
+body #body-container .row .col-md-3 img {
+  width: 100%;
+}
+/* line 317, ../../resources/assets/sass/app.scss */
+body #body-container .general_portal #carousel {
+  padding: 0;
+  margin: 0;
+}
+/* line 320, ../../resources/assets/sass/app.scss */
+body #body-container .general_portal #carousel img {
+  width: 100%;
+}
+/* line 324, ../../resources/assets/sass/app.scss */
+body #body-container .general_portal hr.job-hr {
+  padding: 1rem;
+  margin: 0;
+}
+/* line 328, ../../resources/assets/sass/app.scss */
+body #body-container .general_portal #or-search {
+  font-size: 1.5em;
+  text-transform: uppercase;
+}
+/* line 332, ../../resources/assets/sass/app.scss */
+body #body-container .general_portal #all-jobs {
+  margin: 0 auto;
+}
+/* line 336, ../../resources/assets/sass/app.scss */
+body #body-container .general_portal #all-jobs #port-opening {
+  display: flex;
+  flex-wrap: wrap;
+}
+/* line 340, ../../resources/assets/sass/app.scss */
+body #body-container .general_portal #all-jobs #port-opening .col-xs-2 {
+  flex-direction: column;
+  border: 1px solid #f3c91c;
+  margin: 1rem;
+  border-radius: 0;
+}
+/* line 346, ../../resources/assets/sass/app.scss */
+body #body-container .general_portal #all-jobs #port-opening .col-xs-2 .row .list-opening-comp-logo {
+  margin: 1rem;
+}
+/* line 349, ../../resources/assets/sass/app.scss */
+body #body-container .general_portal #all-jobs #port-opening .col-xs-2 .row .list-opening-comp-body {
+  margin: 1rem;
+}
+/* line 353, ../../resources/assets/sass/app.scss */
+body #body-container .general_portal #all-jobs #port-opening .col-xs-2 #full-open-list {
+  vertical-align: middle;
+}
+/* line 355, ../../resources/assets/sass/app.scss */
+body #body-container .general_portal #all-jobs #port-opening .col-xs-2 #full-open-list div {
+  position: relative;
+  float: left;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+/* line 365, ../../resources/assets/sass/app.scss */
+body #body-container .general_portal #all-jobs #port-opening .col-xs-2:hover {
+  border: 1px solid red;
+}
+/* line 370, ../../resources/assets/sass/app.scss */
+body #body-container .general_portal #all-jobs h2 {
+  color: #000;
+}
+/* line 374, ../../resources/assets/sass/app.scss */
+body #body-container .general_portal .row {
+  margin-bottom: 2rem;
+}
+/* line 379, ../../resources/assets/sass/app.scss */
+body #body-container .general_portal .row .col-md-6 .row .col-xs-4 h4 {
+  color: #0f739b;
+}
+/* line 383, ../../resources/assets/sass/app.scss */
+body #body-container .general_portal .row .col-md-6 .row .col-xs-4 hr.hr {
+  color: #f3c91c;
+  background-color: #f3c91c;
+  height: 3px;
+}
+/* line 392, ../../resources/assets/sass/app.scss */
+body #body-container .general_portal .row .col-md-6 .general_companies .row .col-xs-5 {
+  border: 1px solid #f3c91c;
+  margin: 1rem;
+  border-radius: 0;
+}
+/* line 397, ../../resources/assets/sass/app.scss */
+body #body-container .general_portal .row .col-md-6 .general_companies .row .col-xs-5 .row .col-xs-4 {
+  margin: 1rem;
+}
+/* line 399, ../../resources/assets/sass/app.scss */
+body #body-container .general_portal .row .col-md-6 .general_companies .row .col-xs-5 .row .col-xs-4 img {
+  width: 100%;
+}
+/* line 403, ../../resources/assets/sass/app.scss */
+body #body-container .general_portal .row .col-md-6 .general_companies .row .col-xs-5 .row .col-xs-6 {
+  margin: 1rem;
+}
+/* line 408, ../../resources/assets/sass/app.scss */
+body #body-container .general_portal .row .col-md-6 .general_companies .row .col-xs-5:hover {
+  border: 1px solid red;
+}
+/* line 413, ../../resources/assets/sass/app.scss */
+body #body-container .general_portal .row .col-md-6 #all-companies {
+  margin: 0 1rem;
+}
+/* line 416, ../../resources/assets/sass/app.scss */
+body #body-container .general_portal .row .col-md-6 #prog-lang {
+  text-align: center;
+}
+/* line 418, ../../resources/assets/sass/app.scss */
+body #body-container .general_portal .row .col-md-6 #prog-lang .col-xs-2 {
+  border: 1px solid #f3c91c;
+  margin: 1rem 2rem;
+}
+/* line 421, ../../resources/assets/sass/app.scss */
+body #body-container .general_portal .row .col-md-6 #prog-lang .col-xs-2 img {
+  width: 80%;
+}
+/* line 425, ../../resources/assets/sass/app.scss */
+body #body-container .general_portal .row .col-md-6 #prog-lang .col-xs-2:hover {
+  border: 1px solid red;
+  margin: 1rem 2rem;
+}
+/* line 429, ../../resources/assets/sass/app.scss */
+body #body-container .general_portal .row .col-md-6 #prog-lang .col-xs-2:hover img {
+  width: 80%;
+}
+/* line 436, ../../resources/assets/sass/app.scss */
+body #body-container .general_portal .row .col-md-12 button {
+  margin: 1rem;
+}
+/* line 441, ../../resources/assets/sass/app.scss */
+body #body-container .general_portal .row .col-md-12 .row .col-xs-5 h4 {
+  color: #0f739b;
+}
+/* line 445, ../../resources/assets/sass/app.scss */
+body #body-container .general_portal .row .col-md-12 .row .col-xs-5 hr.hr {
+  color: #f3c91c;
+  background-color: #f3c91c;
+  height: 3px;
+}
+/* line 452, ../../resources/assets/sass/app.scss */
+body #body-container .general_portal .row .col-md-12 .row .col-xs-2 h4 {
+  color: #0f739b;
+}
+/* line 458, ../../resources/assets/sass/app.scss */
+body #body-container .general_portal .row .col-md-12 .row .archipelago h4 {
+  color: #f3c91c;
+}
+/* line 479, ../../resources/assets/sass/app.scss */
+body #body-container #opening .row .col-md-9 .media-list .well .row .col-xs-3 img {
+  width: 100%;
+}
+/* line 492, ../../resources/assets/sass/app.scss */
+body #body-container .single-page {
+  /* TAB-CONTENT ENDS */
+}
+/* line 493, ../../resources/assets/sass/app.scss */
+body #body-container .single-page .tab-content {
+  /* JOB INFO ENDS*/
+  /* END OPENING COMPANY INFORMATION */
+  /* COMPANY INFO ENDS */
+}
+/* line 496, ../../resources/assets/sass/app.scss */
+body #body-container .single-page .tab-content #jobinfo {
+  /* SHOW OPENING ENDS */
+}
+/* line 500, ../../resources/assets/sass/app.scss */
+body #body-container .single-page .tab-content #jobinfo #show_opening {
+  /* OPENINGS BODY ENDS */
+}
+/* line 503, ../../resources/assets/sass/app.scss */
+body #body-container .single-page .tab-content #jobinfo #show_opening .row .col-md-12 img {
+  width: 100%;
+  border-top: solid #f3c91c 7px;
+}
+/* line 509, ../../resources/assets/sass/app.scss */
+body #body-container .single-page .tab-content #jobinfo #show_opening #openings-title {
+  padding-top: 2em;
+}
+/* line 512, ../../resources/assets/sass/app.scss */
+body #body-container .single-page .tab-content #jobinfo #show_opening #openings-title .col-md-2 img {
+  width: 100%;
+}
+/* line 517, ../../resources/assets/sass/app.scss */
+body #body-container .single-page .tab-content #jobinfo #show_opening #openings-body {
+  padding: 3em 0 0 2em;
+  /* COL-MD-5 ENDS */
+}
+/* line 520, ../../resources/assets/sass/app.scss */
+body #body-container .single-page .tab-content #jobinfo #show_opening #openings-body .col-md-7 .job-description {
+  padding-bottom: 2em;
+}
+/* line 523, ../../resources/assets/sass/app.scss */
+body #body-container .single-page .tab-content #jobinfo #show_opening #openings-body .col-md-7 .job-description h4 i {
+  color: #0f739b;
+}
+/* line 527, ../../resources/assets/sass/app.scss */
+body #body-container .single-page .tab-content #jobinfo #show_opening #openings-body .col-md-7 .job-description .hr-desc {
+  height: 5px;
+  color: #f3c91c;
+}
+/* line 534, ../../resources/assets/sass/app.scss */
+body #body-container .single-page .tab-content #jobinfo #show_opening #openings-body .col-md-7 .job-qualify h4 i {
+  color: #0f739b;
+}
+/* line 538, ../../resources/assets/sass/app.scss */
+body #body-container .single-page .tab-content #jobinfo #show_opening #openings-body .col-md-7 .job-qualify hr {
+  color: #f3c91c;
+}
+/* line 545, ../../resources/assets/sass/app.scss */
+body #body-container .single-page .tab-content #jobinfo #show_opening #openings-body .col-md-5 h4 i {
+  color: #0f739b;
+}
+/* line 549, ../../resources/assets/sass/app.scss */
+body #body-container .single-page .tab-content #jobinfo #show_opening #openings-body .col-md-5 hr {
+  color: #f3c91c;
+}
+/* line 557, ../../resources/assets/sass/app.scss */
+body #body-container .single-page .tab-content #companyinfo {
+  /* OPENING COMPANY INFORMATION */
+}
+/* line 558, ../../resources/assets/sass/app.scss */
+body #body-container .single-page .tab-content #companyinfo .row {
+  /*margin: 0;*/
+}
+/* line 560, ../../resources/assets/sass/app.scss */
+body #body-container .single-page .tab-content #companyinfo .row .col-md-3 {
+  padding: 0;
+}
+/* line 562, ../../resources/assets/sass/app.scss */
+body #body-container .single-page .tab-content #companyinfo .row .col-md-3 img {
+  border: 1px solid #ddd;
+  width: 70%;
+}
+/* line 568, ../../resources/assets/sass/app.scss */
+body #body-container .single-page .tab-content #companyinfo .row .col-md-7 h1 {
+  text-transform: capitalize;
+  font-family: "Raleway", sans-serif;
+  font-weight: bold;
+}
+/* line 573, ../../resources/assets/sass/app.scss */
+body #body-container .single-page .tab-content #companyinfo .row .col-md-7 .employee_number {
+  font-weight: 900;
+}
+/* line 575, ../../resources/assets/sass/app.scss */
+body #body-container .single-page .tab-content #companyinfo .row .col-md-7 .employee_number i {
+  color: #f89c0e;
+  font-size: 2rem;
+}
+/* line 580, ../../resources/assets/sass/app.scss */
+body #body-container .single-page .tab-content #companyinfo .row .col-md-7 .company-email {
+  font-weight: 900;
+}
+/* line 582, ../../resources/assets/sass/app.scss */
+body #body-container .single-page .tab-content #companyinfo .row .col-md-7 .company-email .fa-envelope-open-o {
+  font-size: 2rem;
+  color: #1377a1;
+}
+/* line 588, ../../resources/assets/sass/app.scss */
+body #body-container .single-page .tab-content #companyinfo .row .col-md-2 {
+  padding-top: 3rem;
+}
+/* line 590, ../../resources/assets/sass/app.scss */
+body #body-container .single-page .tab-content #companyinfo .row .col-md-2 i {
+  font-size: 2rem;
+  color: red;
+}
+/* line 594, ../../resources/assets/sass/app.scss */
+body #body-container .single-page .tab-content #companyinfo .row .col-md-2 span {
+  font-size: 1.7em;
+  font-weight: bold;
+  font-family: "Raleway", sans-serif;
+}
+/* line 610, ../../resources/assets/sass/app.scss */
+body #body-container .single-page .tab-content #compinfo .row .col-md-4 img {
+  width: 100%;
+}
+/* line 630, ../../resources/assets/sass/app.scss */
+body #body-container .single-page .tab-content #joblists .row .col-md-10 .media-list .well .row .col-xs-3 img {
+  width: 100%;
+}
+/* line 644, ../../resources/assets/sass/app.scss */
+body #body-container .manage-portal {
+  /* TAB-CONTENT ENDS */
+}
+/* line 645, ../../resources/assets/sass/app.scss */
+body #body-container .manage-portal .nav-pills > .active > a, body #body-container .manage-portal .nav-pills > .active > a:hover, body #body-container .manage-portal .nav-pills > .active > a:focus {
+  border-color: #1377a1;
+  border-bottom-color: transparent;
+  background-color: #1377a1;
+  color: #fff;
+}
+/* line 652, ../../resources/assets/sass/app.scss */
+body #body-container .manage-portal .nav-pills > li > a {
+  border-radius: 0;
+  color: #1377a1;
+}
+/* line 656, ../../resources/assets/sass/app.scss */
+body #body-container .manage-portal .nav-pills > li {
+  border: 1px solid #1377a1;
+  margin: 0;
+}
+/* line 660, ../../resources/assets/sass/app.scss */
+body #body-container .manage-portal .nav-pills {
+  border-bottom: 3px solid #1377a1;
+}
+/* line 663, ../../resources/assets/sass/app.scss */
+body #body-container .manage-portal .tab-content {
+  border: 1px solid #1377a1;
+  border-top-color: transparent;
+  padding: 2em;
+}
+/* line 668, ../../resources/assets/sass/app.scss */
+body #body-container .manage-portal .tab-content .tab-pane h3 {
+  color: #f89c0e;
+}
+/* line 674, ../../resources/assets/sass/app.scss */
+body #body-container .manage-portal .tab-content .tab-pane table thead tr th {
+  color: #1377a1;
+}
+/* line 685, ../../resources/assets/sass/app.scss */
+body #body-container .applicant-desc {
+  /* applicant-resume-info */
+}
+/* line 688, ../../resources/assets/sass/app.scss */
+body #body-container .applicant-desc #applicant-desc-info .col-md-12 .well-lg, body #body-container .applicant-desc #applicant-resume-info .col-md-12 .well-lg {
+  padding: 0 0 1em 0;
+  border-radius: 0;
+  border: 1px solid #0f739b;
+  box-shadow: 0 3px 4px rgba(15, 115, 155, 0.4);
+}
+/* line 693, ../../resources/assets/sass/app.scss */
+body #body-container .applicant-desc #applicant-desc-info .col-md-12 .well-lg h4, body #body-container .applicant-desc #applicant-resume-info .col-md-12 .well-lg h4 {
+  text-align: center;
+  margin: 0 0 10px 0;
+  color: #fff;
+  background-color: #0f739b;
+  line-height: 35px;
+}
+/* line 700, ../../resources/assets/sass/app.scss */
+body #body-container .applicant-desc #applicant-desc-info .col-md-12 .well-lg p, body #body-container .applicant-desc #applicant-resume-info .col-md-12 .well-lg p {
+  padding-left: 1em;
+}
+/* line 704, ../../resources/assets/sass/app.scss */
+body #body-container .applicant-desc #applicant-desc-info .col-md-12 .well-lg:hover, body #body-container .applicant-desc #applicant-resume-info .col-md-12 .well-lg:hover {
+  border-radius: 0;
+  box-shadow: 0 5px 10px rgba(15, 115, 155, 0.4);
+}
+/* line 710, ../../resources/assets/sass/app.scss */
+body #body-container .applicant-desc #applicant-resume-info {
+  padding-top: 2em;
+}
+/* line 715, ../../resources/assets/sass/app.scss */
+body #body-container .applicant-desc #applicant-resume-info .col-md-12 .well-lg .row {
+  margin: 2em;
+}
+/* line 718, ../../resources/assets/sass/app.scss */
+body #body-container .applicant-desc #applicant-resume-info .col-md-12 .well-lg .row .col-md-3 .well-lg {
+  padding: 1em;
+  margin-top: 10px;
+}
+/* line 730, ../../resources/assets/sass/app.scss */
+body #body-container #company_letter .well {
+  padding: 0 0 1em 0;
+  border-radius: 0;
+  border: 1px solid #0f739b;
+}
+/* line 734, ../../resources/assets/sass/app.scss */
+body #body-container #company_letter .well h3 {
+  padding-left: .5em;
+  margin: 0;
+  line-height: 30px;
+  background-color: #0f739b;
+  color: #fff;
+}
+/* line 741, ../../resources/assets/sass/app.scss */
+body #body-container #company_letter .well h5 {
+  padding-left: .5em;
+  margin: 0;
+  line-height: 30px;
+}
+/* line 748, ../../resources/assets/sass/app.scss */
+body #body-container .resume-info {
+  border: 1px solid #0f739b;
+}
+/* line 752, ../../resources/assets/sass/app.scss */
+body #body-container .resume-info .row .col-md-12 #resume-info-title {
+  padding-left: .5em;
+  margin: 0;
+  line-height: 30px;
+  background-color: #0f739b;
+  color: #fff;
+}
+/* line 759, ../../resources/assets/sass/app.scss */
+body #body-container .resume-info .row .col-md-12 .row {
+  margin: 1em 0;
+}
+/* line 762, ../../resources/assets/sass/app.scss */
+body #body-container .resume-info .row .col-md-12 .row .col-md-12 .resume-info-sub-title {
+  border-bottom: 1px solid #0f739b;
+  margin: 0;
+  line-height: 30px;
+  color: #0f739b;
+}
+/* line 776, ../../resources/assets/sass/app.scss */
+body #body-container .user_index_show .col-md-12 {
+  border: 1px solid #0f739b;
+}
+/* line 779, ../../resources/assets/sass/app.scss */
+body #body-container .user_index_show .col-md-12 .row .col-md-8 {
+  background-color: #0f739b;
+  color: #fff;
+}
+/* line 782, ../../resources/assets/sass/app.scss */
+body #body-container .user_index_show .col-md-12 .row .col-md-8 h3 {
+  margin: .5em;
+}
+/* line 786, ../../resources/assets/sass/app.scss */
+body #body-container .user_index_show .col-md-12 .row .col-md-4 {
+  background-color: #0f739b;
+  color: #fff;
+}
+/* line 789, ../../resources/assets/sass/app.scss */
+body #body-container .user_index_show .col-md-12 .row .col-md-4 h3 {
+  margin: .5em;
+}

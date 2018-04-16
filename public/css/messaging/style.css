@@ -1,0 +1,339 @@
+/*
+  Uelmar Ortega Author
+  Feb. 14, 2018
+*/
+
+#threads{
+  position: absolute;
+  top: 50px;
+  bottom: 0px;
+  overflow: auto;
+  width: 100%;
+  line-height: initial;
+}
+
+
+/*side bar code*/
+
+#threads .side-bar{
+  position: absolute;
+  z-index: 1;
+  width: 300px;
+  left: 0px;
+  top: 0px;
+  bottom: 0px;
+  box-shadow: 0 2px 4px 0 rgba(0,0,0,0.16),0 2px 3px 0 rgba(0,0,0,0.12)!important;
+  background: white;
+  transition: 500ms ease all;
+}
+
+#threads .side-bar .thread-list{
+  padding: 20px 0;
+  overflow: auto;
+  position: absolute;
+  top: 0px;
+  bottom: 50px;
+  width: 100%;
+}
+
+#threads .side-bar .thread-list .thread{
+  /**/
+}
+
+#threads .side-bar .active{
+  background: #e9e9e9;
+}
+
+#threads .side-bar .footer{
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  width: 100%;
+  background: #dbdbdb;
+  height: 50px;
+}
+
+#threads .side-bar .footer .search-box{
+  display: table;
+  width: 100%;
+}
+
+#threads .side-bar .footer .search-box .box, #threads .side-bar .footer .search-box .button{
+  display: table-cell;
+  padding: 10px;
+  height: 50px;
+  vertical-align: middle;
+  text-align: center;
+}
+
+#threads .side-bar .footer .search-box .box input{
+  border-radius: 10px;
+  width: 100%;
+  background-color: #fff;
+  background-image: none;
+  border: 1px solid #ccc;
+  outline: none;
+  padding: 5px 10px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+  -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+  -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+  transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+}
+
+.infoer{
+  position: relative;
+  height: 50px;
+  border-bottom:1px solid #f6f6f6;
+  background: white;
+  cursor: pointer;
+  display: table;
+  width: 100%;
+  height: 50px;
+}
+
+.cursor-norm{
+  cursor: default;
+}
+
+.infoer .col{
+  display: table-cell;
+  position: relative;
+  vertical-align: middle;
+}
+
+.infoer .prio{
+  width: 100%;
+}
+
+.infoer .active-icon{
+  position: absolute;
+  height: 10px;
+  width: 10px;
+  border-radius: 50%;
+  background: #52c454;
+  left: 35px;
+  top: 35px;
+  border: 1px solid gray;
+  display: none;
+}
+
+.infoer.online .active-icon{
+  display: block;
+}
+
+.infoer img{
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  border:1px solid #cecece;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.infoer .text{
+  padding: 5px;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+}
+
+.infoer .text .title{
+  font-weight: bold;
+  color: #757575;
+}
+
+.infoer .text .description{
+  color: #b2b2b2;
+}
+
+.infoer.unseen .text .description{
+  font-weight: bold;
+  color: #404040;
+}
+
+.infoer.unseen img{
+  border-color:#ff0c08;
+}
+
+.infoer .text .description, .infoer .text .title{
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.infoer:hover{
+  background: #fcfcfc;
+}
+
+/*end code*/
+
+
+/*message box code*/
+
+#threads .message-box{
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  left: 300px;
+  bottom: 0px;
+  transition: 700ms ease all;
+}
+
+#threads .message-box .header{
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 60px;
+  border-bottom:1px solid #d0d0d0;
+  padding-left: 50px;
+}
+
+#threads .message-box .header .ellipsis{
+  padding: 10px;
+  font-size: 20px;
+}
+
+#threads .message-box .header .status_indector{
+  position: absolute;
+  left: 60px;
+  top: 33px;
+  color: gray;
+}
+
+#threads .message-box .active .status_indector{
+  color: #52c454;
+}
+
+#threads .message-box .header img{
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  border:1px solid #cecece;
+  transform: translateY(-50%);
+}
+
+#threads .message-box .message-list{
+  position: absolute;
+  top: 60px;
+  overflow: auto;
+  bottom: 50px;
+  width: 100%;
+}
+
+#threads .message-box .message-list .message-item{
+  position: relative;
+  padding: 10px;
+  padding-left: 50px;
+}
+
+#threads .message-box .message-list .message-item .date_sent{
+  font-size: 10px;
+  font-weight: bold;
+  color: gray;
+}
+
+#threads .message-box .message-list .message-item img{
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  border:1px solid #cecece;
+}
+
+#threads .message-box .message-list .message-item .text{
+  background: #a1a1a1;
+  display: inline-block;
+  color: white;
+  padding: 10px;
+  border-radius: 10px;
+  word-break: break-all;
+}
+
+#threads .message-box .message-list .right{
+  text-align: right;
+  padding: 10px;
+  padding-right: 50px;
+}
+
+#threads .message-box .message-list .right img{
+  right: 10px;
+  left: initial;
+}
+
+#threads .message-box .message-list .right .text{
+  background: #286090;
+}
+
+#threads .message-box .footer{
+  position: absolute;
+  bottom: 0px;
+  height: 50px;
+  width: 100%;
+  background: red;
+  border: 1px solid #20beff;
+}
+
+#threads .message-box .footer .box{
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: white;
+  outline: none;
+  border:0px;
+  font-size: 15px;
+  padding: 0 20px;
+}
+
+#threads .message-box .footer .send-icon{
+  display: block;
+  position: absolute;
+  color: black;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 20px;
+  font-size: 30px;
+  color: #646464;
+}
+
+.pdd-5{
+  padding: 5px;
+}
+
+@media(max-width: 728px){
+  #threads .message-box{
+    left: initial;
+    width: 85%;
+  }
+
+  #threads .side-bar{
+    width: 15%;
+  }
+
+  .hide-728{
+    display: none!important;
+  }
+
+  #threads.focus-search .side-bar .col{
+    display: table-cell!important;
+  }
+
+  #threads.focus-search .message-box{
+    /*left: initial;
+    width: 200px;*/
+  }
+
+  #threads.focus-search .side-bar{
+    /*width: initial;*/
+    /*right: 90px;*/
+    width: 85%;
+  }
+}

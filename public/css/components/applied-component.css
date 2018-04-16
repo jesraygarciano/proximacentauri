@@ -1,0 +1,73 @@
+.applied-tile{
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.16),0 2px 3px 0 rgba(0,0,0,0.12)!important;
+    padding:19px;
+    border:1px solid #f0ad4e;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+.feature-info-list{
+    list-style: none;
+    padding: 0px;
+    margin-top: 10px;
+}
+
+.feature-info-list li .label{
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.feature-info-list li{
+    position: relative;
+    padding-left: 20px;
+}
+
+.feature-info-list li > i {
+    position: absolute;
+    left: 0px;
+    top: 4px;
+}
+
+.applied-tile .applied-image{
+    position: relative;
+    overflow: hidden;
+}
+
+.applied-tile .applied-image .bg-img{
+    opacity: 0;
+    z-index: -11;
+    width: 100%;
+}
+
+.applied-tile .applied-image ._image{
+    width: 100%;
+    top:50%;
+    left: 0px;
+    position: absolute;
+    transform:translateY(-50%);
+}
+
+.applied-tile .footer{
+    display: table;
+    width: 100%;
+}
+
+.applied-tile .footer a{
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.applied-title{
+    margin-top:15px;
+    font-size: 20px;
+}
+
+.company-name{
+    /**/
+    margin-bottom: 20px;
+}
+
+.company-name a{
+    color: inherit;
+}

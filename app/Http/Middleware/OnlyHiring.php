@@ -1,0 +1,35 @@
+<?php
+
+namespace App\Http\Middleware;
+
+use Closure;
+use Auth;
+
+class OnlyHiring
+{
+    /**
+     * Handle an incoming request.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Closure  $next
+     * @return mixed
+     */
+    public function handle($request, Closure $next){
+
+        if (Auth::user()->role == 0) {
+            if ($request->ajax()) {
+                return response('Unauthorized.', 401);
+            } else {
+                // return redirect('/auth/register/student');
+                // return redirect()->route('auth/register', ['student']);
+                // return redirect()->action('PortalController@index');
+                // return redirect()->action('Auth\AuthController@judge', 'student');
+                // return route('auth.login')->with('status', 'student');
+                // dd('tomaru');
+                return redirect()->route('auth.logout');
+                // return route('auth.login')->with('status', 'student');
+            }
+        }
+        return $next($request);
+    }
+}

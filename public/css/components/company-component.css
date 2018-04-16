@@ -1,0 +1,257 @@
+.company-tile{
+    border: 1px solid #f89c0e;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.16),0 2px 3px 0 rgba(0,0,0,0.12)!important;
+    background: white;
+    border-radius: 10px;
+    padding:15px 15px 9px 15px;
+    margin:0px -7px 15px -7px;
+
+}
+
+.company-tile ul li{
+    margin-bottom: 4px;
+}
+
+.job-position-list{
+    margin-top: -10px;
+}
+
+.company_tile_photo{
+    border-radius: 4px;
+    background: #ccc;
+    border:1px solid #ccc;
+    height:110px;
+    width:110px;
+    position: absolute;
+    top:50px;
+    right:17px;
+}
+
+.advertisement-2{
+    height: 600px;
+    font-size: 15px;
+    background-color: gray;
+    /*border-radius: 10px;*/
+    padding: 0px;
+    color:white;
+    line-height: 600px;
+    font-weight: 800;
+}
+
+.content-list-forcom>li{
+    position:relative;
+}
+
+.content-list-forcom{
+    margin-bottom: 0px;
+}
+
+.content-list-forcom>li>div>.fa-map-marker{
+    position:absolute;
+    left:8px;
+    top:4.5px;
+    font-size: 15px;
+}
+
+.content-list-forcom>li>div>.fa-users{
+    position:absolute;
+    left:5px;
+    top:5.5px;
+    font-size: 14px;
+}
+
+.content-list-forcom>li>div>.fa-laptop{
+    position:absolute;
+    left:5px;
+    top:5.5px;
+    font-size: 14px;
+}
+
+.content-list-forcom>li>div>.fa-file-o{
+    position:absolute;
+    left:6.5px;
+    top:5.5px;
+    font-size: 14px;
+}
+
+.content-list-forcom>li>div>.fa-calendar{
+    position:absolute;
+    left:6px;
+    top:4.5px;
+    font-size: 14px;
+}
+
+.content-list-forcom>li>.li-content-forcom{
+    display: inline-block;
+}
+
+.content-list-forcom>li>.i-wrapper{
+    position: relative;
+    height: 25px;
+    width: 25px;
+    border-radius: 12.5px;
+    background-color: rgb(31, 89, 149);
+    color: white;
+}
+
+.content-list-forcom>li>.text-wrapper{
+    position: absolute;
+    top:1px;
+    left:35px;
+    right: 110px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    /*height:30px;*/
+}
+
+.company-title-list{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+}
+
+.company-title-list{
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.16),0 2px 3px 0 rgba(0,0,0,0.12)!important;
+    padding: 15px 19px 8px 19px;
+    border: 1px solid #dddddd;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    position: relative;
+}
+
+.no-cover-image{
+    position: relative;
+    height: 300px;
+    background: #c8c8c8;
+    overflow: hidden;
+    border: 1px solid #cecece;
+}
+
+.no-cover-image img{
+    position: absolute;
+    top: 50%;
+    transform:translateY(-50%);
+    width: 100%;
+    left: 0px;
+}
+
+.cover-image>img{
+    width: 100%;
+}
+
+.cover-info .picture{
+    padding: 5px;
+    background: white;
+    border: 1px solid #cecece;
+    position: absolute;
+    bottom:-40px;
+    left:40px;
+}
+
+.cover-info .picture img{
+    width: 100%;
+}
+
+.cover-info{
+    position: relative;
+}
+
+.cover-info img{
+    border:none!important;
+}
+
+.under-photo{
+    margin-top: 55px;
+}
+
+@media screen and (min-width: 992px) {
+    .address-established{
+        margin-top: -40px;
+    }
+}
+
+@media screen and (max-width: 991px) {
+    .address-established{
+        margin-top: 10px;
+    }
+}
+
+
+#company_name_single_page{
+    color: #1377a1;
+    margin-bottom: 5px;
+    font-size: 28px;
+    font-weight: 500;
+}
+
+.address-established .i-wrapper{
+    position: relative;
+    height: 25px;
+    width: 25px;
+    border-radius: 12.5px;
+    background-color: rgb(31, 89, 149);
+    color: white;
+    left: 15px;
+}
+
+.single-company-info-wrapper{
+    position: relative;
+    margin-top: 1px;
+}
+
+.address-established .text-wrapper{
+    position: absolute;
+    top:1px;
+    left:45px;
+    right: 110px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    /*height:30px;*/
+}
+
+.li-content-forcom-single{
+    display: inline-block;
+}
+
+.li-content-forcom-single .fa-map-marker{
+    position:absolute;
+    left:7.5px;
+    top:5.5px;
+    /*font-size: 14px;*/
+}
+
+.li-content-forcom-single .fa-users{
+    position:absolute;
+    left:5px;
+    top:7.4px;
+    font-size: 14px;
+}
+
+.li-content-forcom-single .fa-laptop{
+    position:absolute;
+    left:4.5px;
+    top:6.5px;
+    font-size: 15px;
+}
+
+.li-content-forcom-single .fa-file-o{
+    position:absolute;
+    left:6px;
+    top:6.5px;
+    font-size: 15px;
+}
+
+.li-content-forcom-single .fa-calendar{
+    position:absolute;
+    left:6.5px;
+    top:7px;
+    font-size: 12px;
+}
+
+.com-single-header{
+    margin-bottom: 5px;
+    margin-top: 10px;
+}

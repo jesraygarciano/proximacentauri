@@ -1,0 +1,93 @@
+.crop-control{
+    overflow: hidden;
+    -webkit-box-shadow: 0 0 1px 1px rgba(0, 0, 0, .3);
+    border-radius: 4px;
+}
+.crop-control .image-container{
+    position: relative;
+    height: 200px;
+    text-align: center;
+}
+
+.crop-control input{
+    display: none;
+}
+
+.crop-control .image-container img{
+    height: 100%;
+}
+
+.crop-control .image-container .hover-div{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    transition: 200ms ease all;
+    background: #b0b0b0;
+    top: 0px;
+    left: 0px;
+    opacity: 0;
+    color: white;
+    display: block;
+    cursor: pointer;
+}
+
+.crop-control .image-container .hover-div p{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform:translateY(-50%) translateX(-50%);
+}
+
+.crop-control:hover .hover-div{
+    opacity: 1;
+}
+
+
+/*COMPANY COVER PHOTO*/
+.crop-control{
+    overflow: hidden;
+    -webkit-box-shadow: 0 0 1px 1px rgba(0, 0, 0, .3);
+    border-radius: 4px;
+}
+.crop-control .image-container-cover{
+    position: relative;
+    height: 400px;
+    width: 100%;
+    text-align: center;
+}
+
+.crop-control input{
+    display: none;
+}
+
+.crop-control .image-container-cover img{
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+
+}
+
+.crop-control .image-container-cover .hover-div{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    transition: 200ms ease all;
+    background: #b0b0b0;
+    top: 0px;
+    left: 0px;
+    opacity: 0;
+    color: white;
+    display: block;
+    cursor: pointer;
+}
+
+.crop-control .image-container-cover .hover-div p{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform:translateY(-50%) translateX(-50%);
+}
+
+.crop-control:hover .hover-div{
+    opacity: 1;
+}

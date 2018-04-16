@@ -1,0 +1,66 @@
+.profile-container{
+    position: relative;
+}
+
+.profile-container .user-icon{
+    position: relative;
+    transform: translateY(-50%);
+    padding:10px;
+}
+
+.profile-container .user-icon .photo-wrapper{
+    background: white;
+    border:1px solid #cecece;
+}
+
+.cover-container{
+    position: relative;
+    overflow: hidden;
+}
+
+
+/*setting constant dimension for cover container*/
+.cover-container .d-c-img{
+    opacity: 0;
+    z-index: 0;
+    width: 100%;
+}
+
+.cover-container .on-top-img{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 100%;
+    transform: translateY(-50%) translateX(-50%);
+}
+
+.notification-panel{
+    position: relative;
+    border: 1px solid rgb(238, 238, 238);
+    box-shadow: rgba(238, 238, 238, 0.509804) 9px 9px 10px -4px;
+    -webkit-box-shadow: rgba(238, 238, 238, 0.509804) 9px 9px 10px -4px;
+    -moz-box-shadow: rgba(238, 238, 238, 0.509804) 9px 9px 10px -4px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.notification-panel .photo-wrapper{
+    background: #d5d5d5;
+}
+
+.notification-panel .footer{
+    position: absolute;
+    width: 100%;
+    text-align: right;
+    bottom: 0px;
+    padding:10px;
+}
+
+.pd-35px{
+    padding-bottom: 35px;
+}
+
+.notification-panel .footer label
+{
+    color: gray;
+}
