@@ -12,7 +12,7 @@ unickwizard = function($this,options){
 		$this.find('input,select,textarea').change(function(){
 			if($(this).parent().hasClass('parent-form-group')){
 				$(this).parent().removeClass('error-border');
-				$(this).parent().parent().find('.'+$(this).attr('name')).remove();
+				$(this).parent().parent().find('.error-label .'+$(this).attr('name')).remove();
 
 				if($(this).parent().parent().find('.error-border').length < 1){
 					$(this).parent().parent().removeClass('has-error');
@@ -93,92 +93,318 @@ unickwizard = function($this,options){
 
 			if(input.length > 0)
 			{
-				for(var x = 0; x < v.rules.length; x++){
-					switch(v.rules[x].type){
-						case 'empty':
-							if(input.val().length == 0)
-							{
-								addClassHassError(input,v.rules[x].prompt,v.identifier);
-								no_error = false;
-							}
-						break;
-						case 'lower':
-							if(input.val().length != 0)
-							{
-								if(isNaN(input.val()))
-								{
-									addClassHassError(input,'invalid',v.identifier);
-									no_error = false;
-								}
-								else
-								{
-									var c_val = parseInt(form.find('[name='+v.rules[x].c_input+']').val());
-									var val = parseInt(input.val());
+				if(v.identifier == 'educational_backgrounds')
+				{
+					// 
+					var educational_backgrounds = $('#'+v.identifier);
 
-									if(c_val <= val)
-									{
-										addClassHassError(input,v.rules[x].prompt,v.identifier);
-										no_error = false;
-									}
-								}
-							}
-							else
-							{
-								addClassHassError(input,'Field required',v.identifier);
-								no_error = false;
-							}
-						break;
-						case 'higher':
-							if(input.val().length != 0)
-							{
-								if(isNaN(input.val()))
-								{
-									addClassHassError(input,'invalid',v.identifier);
-									no_error = false;
-								}
-								else
-								{
-									var c_val = parseInt(form.find('[name='+v.rules[x].c_input+']').val());
-									var val = parseInt(input.val());
-									if(c_val >= val)
-									{
-										addClassHassError(input,v.rules[x].prompt,v.identifier);
-										no_error = false;
-									}
-								}
-							}
-							else
-							{
-								addClassHassError(input,'Field required',v.identifier);
-							}
-						break;
-						case 'email':
-							if(!ValidateEmail(input.val()))
-							{
-								addClassHassError(input,v.rules[x].prompt,v.identifier);
-								no_error = false;
-							}
-						break;
-						case 'phone':
-							if(!validatePhonenumber(input.val()))
-							{
-								addClassHassError(input,v.rules[x].prompt,v.identifier);
-								no_error = false;
-							}
-						break;
-						case 'file':
-							if(input[0].files.length == 0){
-								addClassHassError(input,v.rules[x].prompt,v.identifier);
-								no_error = false;
-							}
-						break;
-					}
+					educational_backgrounds.find('.ed-margin').each(function(){
+						var _this = $(this);
+						var university = _this.find('.ed_university');
+						var field_study = _this.find('.ed_field_of_study');
+						var program_of_study = _this.find('.ed_program_of_study');
+						var from_month = _this.find('[name=ed_from_month]');
+						var from_year = _this.find('[name=ed_from_year]');
+						var to_month = _this.find('[name=ed_to_month]');
+						var to_year = _this.find('[name=ed_to_year]');
 
-					if(!input.parent().hasClass('parent-form-group') && !input.parent().parent().parent().hasClass('input-group')){
-						if($(input).parent().find('.error-label').length < 1){
-							$(input).parent().append('<label class="error-label"></label>');
+						var has_content = false;
+
+						_this.find('input, select').each(function(){
+							if($(this).val().length > 0){
+								has_content = true;
+							}
+						});
+
+						if(has_content){
+							if(university.val().length == 0){
+								// 
+								addClassHassError(university,'Field required',university.prop('id'));
+								no_error = false;
+							}
+							if(field_study.val().length == 0){
+								// 
+								addClassHassError(field_study,'Field required',field_study.prop('id'));
+								no_error = false;
+							}
+							if(program_of_study.val().length == 0){
+								// 
+								addClassHassError(program_of_study,'Field required',program_of_study.prop('id'));
+								no_error = false;
+							}
+							if(from_month.val().length == 0){
+								// 
+								addClassHassError(from_month,'Start month required',from_month.prop('name'));
+								no_error = false;
+							}
+							if(from_year.val().length == 0){
+								// 
+								addClassHassError(from_year,'Start year required',from_year.prop('name'));
+								no_error = false;
+							}
+							if(to_month.val().length == 0){
+								// 
+								addClassHassError(to_month,'End month required',to_month.prop('name'));
+								no_error = false;
+							}
+							if(to_year.val().length == 0){
+								// 
+								addClassHassError(to_year,'End year required',to_year.prop('name'));
+								no_error = false;
+							}
+
+							if(no_error){
+								// 
+								console.log(from_month.val() + ', '+from_year.val()+' - '+to_month.val()+', '+to_year.val());
+								console.log((parseInt(from_month.val()) >= parseInt(to_month.val())))
+								if(from_year.val() > to_year.val() || (from_year.val() == to_year.val() && parseInt(from_month.val()) >= parseInt(to_month.val())))
+								{
+									//
+									no_error = false;
+									$(_this).find('.ed_from_month').parent().addClass('has-error');
+									if($(_this).find('.ed_from_month').parent().find('.error-label').length < 1){
+										$(_this).find('.ed_from_month').parent().append('<label class="error-label">Start Date should be lesser than End Date</label>');
+									}
+									$(_this).find('.ed_from_month').parent().find('.error-label').html('Start Date should be lesser than End Date.');
+
+									window.scrollTo(0, 0);
+	        						swal('Please fill in required data', 'Missing data...', 'warning');
+								}
+							}
 						}
-						$(input).parent().find('.error-label').html(v.rules[x].prompt);
+					});
+
+					if(no_error){
+						// 
+						var edu_back = $('[name=educational_backgrounds]');
+						var arr = [];
+						educational_backgrounds.find('.ed-margin').each(function(){
+							var _this = $(this);
+							var university = _this.find('.ed_university');
+							var field_study = _this.find('.ed_field_of_study');
+							var program_of_study = _this.find('.ed_program_of_study');
+							var from_month = _this.find('[name=ed_from_month]');
+							var from_year = _this.find('[name=ed_from_year]');
+							var to_month = _this.find('[name=ed_to_month]');
+							var to_year = _this.find('[name=ed_to_year]');
+							var edu_id = _this.find('[name=edu_id]');
+							if(university.val().length != 0){
+								arr.push({
+									ed_university:university.val(),
+									ed_program_of_study:program_of_study.val(),
+									ed_field_of_study:field_study.val(),
+									ed_from_year:from_year.val(),
+									ed_from_month:from_month.val(),
+									ed_to_year:to_year.val(),
+									ed_to_month:to_month.val(),
+									id:edu_id.val(),
+								});
+							}
+						});
+
+						edu_back.val(JSON.stringify(arr));
+					}
+				}
+				else if(v.identifier == 'experiences'){
+					// 
+					var educational_backgrounds = $('#'+v.identifier);
+
+					educational_backgrounds.find('.ex-margin').each(function(){
+						var _this = $(this);
+						var ex_company = _this.find('.ex_company');
+						var ex_position = _this.find('.ex_position');
+						var ex_explanation = _this.find('.ex_explanation');
+						var ex_from_month = _this.find('[name=ex_from_month]');
+						var ex_from_year = _this.find('[name=ex_from_year]');
+						var ex_to_month = _this.find('[name=ex_to_month]');
+						var ex_to_year = _this.find('[name=ex_to_year]');
+
+						var has_content = false;
+
+						_this.find('input, select').each(function(){
+							if($(this).val().length > 0){
+								has_content = true;
+							}
+						});
+
+						if(has_content){
+							if(ex_company.val().length == 0){
+								// 
+								addClassHassError(ex_company,'Field required',ex_company.prop('id'));
+								no_error = false;
+							}
+							if(ex_position.val().length == 0){
+								// 
+								addClassHassError(ex_position,'Field required',ex_position.prop('id'));
+								no_error = false;
+							}
+							if(ex_explanation.val().length == 0){
+								// 
+								addClassHassError(ex_explanation,'Field required',ex_explanation.prop('id'));
+								no_error = false;
+							}
+							if(ex_from_month.val().length == 0){
+								// 
+								addClassHassError(ex_from_month,'Start month required',ex_from_month.prop('name'));
+								no_error = false;
+							}
+							if(ex_from_year.val().length == 0){
+								// 
+								addClassHassError(ex_from_year,'Start year required',ex_from_year.prop('name'));
+								no_error = false;
+							}
+							if(ex_to_month.val().length == 0){
+								// 
+								addClassHassError(ex_to_month,'End month required',ex_to_month.prop('name'));
+								no_error = false;
+							}
+							if(ex_to_year.val().length == 0){
+								// 
+								addClassHassError(ex_to_year,'End year required',ex_to_year.prop('name'));
+								no_error = false;
+							}
+
+							if(no_error){
+								// 
+								console.log(ex_from_month.val() + ', '+ex_from_year.val()+' - '+ex_to_month.val()+', '+ex_to_year.val());
+								console.log((parseInt(ex_from_month.val()) >= parseInt(ex_to_month.val())))
+								if(ex_from_year.val() > ex_to_year.val() || (ex_from_year.val() == ex_to_year.val() && parseInt(ex_from_month.val()) >= parseInt(ex_to_month.val())))
+								{
+									//
+									no_error = false;
+									$(_this).find('.ex_from_month').parent().addClass('has-error');
+									if($(_this).find('.ex_from_month').parent().find('.error-label').length < 1){
+										$(_this).find('.ex_from_month').parent().append('<label class="error-label">Start Date should be lesser than End Date</label>');
+									}
+									$(_this).find('.ex_from_month').parent().find('.error-label').html('Start Date should be lesser than End Date.');
+
+									window.scrollTo(0, 0);
+	        						swal('Please fill in required data', 'Missing data...', 'warning');
+								}
+							}
+						}
+					});
+
+					if(no_error){
+						// 
+						var edu_back = $('[name=experiences]');
+						var arr = [];
+						educational_backgrounds.find('.ex-margin').each(function(){
+							var _this = $(this);
+							var ex_company = _this.find('.ex_company');
+							var ex_position = _this.find('.ex_position');
+							var ex_explanation = _this.find('.ex_explanation');
+							var ex_from_month = _this.find('[name=ex_from_month]');
+							var ex_from_year = _this.find('[name=ex_from_year]');
+							var ex_to_month = _this.find('[name=ex_to_month]');
+							var ex_to_year = _this.find('[name=ex_to_year]');
+							var exp_id = _this.find('[name=exp_id]');
+							if(ex_company.val().length != 0){
+								arr.push({
+									ex_company:ex_company.val(),
+									ex_position:ex_position.val(),
+									ex_explanation:ex_explanation.val(),
+									ex_from_year:ex_from_year.val(),
+									ex_from_month:ex_from_month.val(),
+									ex_to_year:ex_to_year.val(),
+									ex_to_month:ex_to_month.val(),
+									id:exp_id.val(),
+								});
+							}
+						});
+
+						edu_back.val(JSON.stringify(arr));
+					}
+				}
+				else
+				{
+					for(var x = 0; x < v.rules.length; x++){
+						switch(v.rules[x].type){
+							case 'empty':
+								if(input.val().length == 0)
+								{
+									addClassHassError(input,v.rules[x].prompt,v.identifier);
+									no_error = false;
+								}
+							break;
+							case 'lower':
+								if(input.val().length != 0)
+								{
+									if(isNaN(input.val()))
+									{
+										addClassHassError(input,'invalid',v.identifier);
+										no_error = false;
+									}
+									else
+									{
+										var c_val = parseInt(form.find('[name='+v.rules[x].c_input+']').val());
+										var val = parseInt(input.val());
+
+										if(c_val <= val)
+										{
+											addClassHassError(input,v.rules[x].prompt,v.identifier);
+											no_error = false;
+										}
+									}
+								}
+								else
+								{
+									addClassHassError(input,'Field required',v.identifier);
+									no_error = false;
+								}
+							break;
+							case 'higher':
+								if(input.val().length != 0)
+								{
+									if(isNaN(input.val()))
+									{
+										addClassHassError(input,'invalid',v.identifier);
+										no_error = false;
+									}
+									else
+									{
+										var c_val = parseInt(form.find('[name='+v.rules[x].c_input+']').val());
+										var val = parseInt(input.val());
+										if(c_val >= val)
+										{
+											addClassHassError(input,v.rules[x].prompt,v.identifier);
+											no_error = false;
+										}
+									}
+								}
+								else
+								{
+									addClassHassError(input,'Field required',v.identifier);
+								}
+							break;
+							case 'email':
+								if(!ValidateEmail(input.val()))
+								{
+									addClassHassError(input,v.rules[x].prompt,v.identifier);
+									no_error = false;
+								}
+							break;
+							case 'phone':
+								if(!validatePhonenumber(input.val()))
+								{
+									addClassHassError(input,v.rules[x].prompt,v.identifier);
+									no_error = false;
+								}
+							break;
+							case 'file':
+								if(input[0].files.length == 0){
+									addClassHassError(input,v.rules[x].prompt,v.identifier);
+									no_error = false;
+								}
+							break;
+						}
+
+						if(!input.parent().hasClass('parent-form-group') && !input.parent().parent().parent().hasClass('input-group')){
+							if($(input).parent().find('.error-label').length < 1){
+								$(input).parent().append('<label class="error-label"></label>');
+							}
+							$(input).parent().find('.error-label').html(v.rules[x].prompt);
+						}
 					}
 				}
 			}
@@ -245,6 +471,7 @@ unickwizard = function($this,options){
 		}
 		else{
 			$(element).parent().addClass('has-error');
+			$(element).parent().find('.error-label').html(prompt);
 			window.scrollTo(0, 0);
 	        swal('Please fill in required data', 'Missing data...', 'warning');
 		}

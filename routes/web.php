@@ -41,7 +41,7 @@ Route::group(['prefix'=>'itp', 'middleware'=>'auth'],function(){
 
 		Route::get('profile',['as'=>'applicant_profile','uses'=>'InternshipApplicationController@profile']);
 		Route::get('edit',['as'=>'edit','uses'=>'InternshipApplicationController@edit']);
-		
+
 		// Route::get('index',['as'=>'app','uses'=>'InternshipApplicationController@create']);
 		Route::get('create',['as'=>'itp_create','uses'=>'InternshipApplicationController@create']);
 		Route::get('list/applications',['as'=>'list_itp_applications','uses'=>'InternshipApplicationController@create']);
@@ -78,7 +78,6 @@ Route::group(['prefix'=>'hiring'], function(){
 	Route::get('index',['as'=>'hiring_index', 'uses'=>'PortalController@hiring_portal']);
 });
 
-
 // this route group is for notifications functionality (scout, applications and new opening notifications)
 Route::group(['middleware'=>'auth', 'prefix'=>'user'], function(){
 	Route::get('index',['as'=>'user_profile','uses'=>'UserController@index']);
@@ -99,7 +98,6 @@ Route::get('/facebook/callback', 'SocialAuthController@callbackFacebook');
 Route::get('/github/callback', 'SocialAuthController@callbackGithub');
 Route::post('/confirm/role', 'UserController@confirm_role');
 
-
 Route::get('/', ['as' => 'portals.general_portal', 'uses' => 'PortalController@general_portal']);
 Route::get('portals/general_portal', ['as' => 'portals.general_portal', 'uses' => 'PortalController@general_portal']);
 
@@ -117,15 +115,11 @@ Route::get('management/userdata','ManagementController@userData')->name('datatab
 Route::get('management/companydata','ManagementController@companyData')->name('datatables.companies');
 Route::get('management/openingdata','ManagementController@openingData')->name('datatables.openings');
 
-
 Route::get('portals/hiring-portal', 'PortalController@hiring_portal');
-
 
 Route::get('hiring_portal/user_index', 'HiringPortalController@user_index');
 
-
 Route::get('hiring_portal/user_index_show/{id}', ['as' => 'hiring_portal.user_index_show', 'uses' => 'HiringPortalController@user_index_show']);
-
 
 Route::get('hiring_portal', ['as' => 'hiring_portal', 'uses' => 'HiringPortalController@index']);
 
@@ -168,7 +162,6 @@ Route::get('scouts/company_scout/{id}', ['as' => 'scouts.company_scout_note', 'u
 Route::get('scouts/create/{scout_user_id}', ['as' => 'scouts.create', 'uses' => 'ScoutsController@create']);
 Route::post('scouts', ['as' => 'scouts.store', 'uses' => 'ScoutsController@store']);
 
-
 Route::get('contact', 'PagesController@contact');
 Route::get('about', 'PagesController@about');
 
@@ -189,10 +182,9 @@ Route::post('edit_opening_bookmark', ['as' => 'edit_opening_bookmark', 'uses' =>
 Route::post('edit_company_follow', ['as' => 'edit_company_follow', 'uses' => 'CompaniesController@edit_company_follow']);
 Route::post('edit_save_applicant', ['as' => 'edit_save_applicant', 'uses' => 'HiringPortalController@edit_save_applicant']);
 
-
 Route::get('openings/create/{company_id?}','OpeningsController@create');
 Route::get('openings/edit/{company_id?}','OpeningsController@edit');
-Route::post('openings/{id}', ['as' => 'openings.update', 'uses' => 'OpeningsController@update']);
+Route::post('openings/update/{id}', ['as' => 'openings.update', 'uses' => 'OpeningsController@update']);
 
 Route::get('openings/{id}','OpeningsController@show');
 Route::post('openings', ['as' => 'openings.store', 'uses' => 'OpeningsController@store']);

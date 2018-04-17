@@ -1,6 +1,6 @@
 // Uelmar Ortega author
 // Feb. 14, 2018
-// this is a messaging app; implementing redis socket.io
+// this is a messaging app
 
 (function(){
 	$.fn.unickMessenging = function(options){
@@ -558,7 +558,7 @@
 
 			var html = '<div>'
 				+'<div class="message-item right">'
-				+'	<img src="'+$this.find('.message-box .r_picture').attr('src')+'">'
+				+'	<img src="'+settings.profile_pic+'">'
 				+'<span class="date_sent">'
 				+data.formated_date
 				+'</span>'

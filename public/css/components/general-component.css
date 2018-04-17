@@ -578,25 +578,29 @@
 }
 
 .noti-bell .noti-lists{
-    padding: 10px 0px;
+    padding-top:5px;
+    padding-bottom: 10px;
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
     background: white;
     top: 100%;
     min-width: 150px;
-    border: 1px solid rgb(238, 238, 238);
-    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.16),0 2px 3px 0 rgba(0,0,0,0.12)!important;
-    border-radius: 10px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, .175)!important;
+    border-radius: 0px 4px;
+    border: 1px solid rgba(0, 0, 0, .15);
     display: none;
 }
 
 .noti-bell .noti{
-    padding: 10px;
-    background: #f6f6f6;
-    border-bottom: 1px solid #ededed;
     display: block;
+    padding: 3px 20px;
     color: #4d5355;
+    text-decoration: none;
+}
+
+.noti-bell .noti:hover{
+    background: #f6f6f6;
 }
 
 .noti-bell:hover .noti-lists{
