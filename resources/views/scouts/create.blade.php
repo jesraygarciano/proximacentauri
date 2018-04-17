@@ -4,7 +4,6 @@
 
 <div class="container">
     <h1>Scouting</h1>
-    {{ $scout_user_id }}
     <hr/>
 
     {!!Form::open(['action' => 'ScoutsController@store', 'method' => 'POST']) !!}
@@ -34,7 +33,7 @@
         </div>
 
         <div class="form-group col-md-12">
-            {!!Form::submit('Scout!!!!!!', ['class' => 'btn btn-primary form-control'])!!}
+            {!!Form::submit('Scout', ['class' => 'btn btn-primary form-control'])!!}
         </div>
 
         {!! Form::hidden('user_id', $scout_user_id, ['id' => 'invisible_id']) !!}
