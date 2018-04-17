@@ -120,15 +120,27 @@ class ResumesController extends Controller
             $resume->save();
         }
 
-        if (\Input::has('ex_company')){
+        if ($request->ex_company){
             $experience = new Experience;
             $experience->resume_id = $resume->id;
             $experience->fill($input)->save();
         }
+        
+        $eds = json_decode($request->educational_backgrounds);
 
-        $education = new Education;
-        $education->resume_id = $resume->id;
-        $education->fill($input)->save();
+        foreach($eds as $ed){
+            $education = new Education;
+            $education->resume_id = $resume->id;
+            $education->ed_university = $ed->ed_university;
+            $education->ed_program_of_study = $ed->ed_program_of_study;
+            $education->ed_field_of_study = $ed->ed_field_of_study;
+            $education->ed_from_year = $ed->ed_from_year;
+            $education->ed_from_month = $ed->ed_from_month;
+            $education->ed_to_year = $ed->ed_to_year;
+            $education->ed_to_month = $ed->ed_to_month;
+
+            $education->save();
+        }
 
 
         if ($request->has('skills')) {
@@ -259,6 +271,39 @@ class ResumesController extends Controller
 
         $input = $request->except('photo', 'skills', '_token');
         $resume = Resume::findOrFail($resume_id);
+
+        // $resume->photo = $fileNameToStore;
+        $eds = json_decode($request->educational_backgrounds);
+
+        foreach($eds as $ed){
+            $education = isset($ed->id) ? Education::findOrFail($ed->id) : new Education;
+            $education->resume_id = $resume->id;
+            $education->ed_university = $ed->ed_university;
+            $education->ed_program_of_study = $ed->ed_program_of_study;
+            $education->ed_field_of_study = $ed->ed_field_of_study;
+            $education->ed_from_year = $ed->ed_from_year;
+            $education->ed_from_month = $ed->ed_from_month;
+            $education->ed_to_year = $ed->ed_to_year;
+            $education->ed_to_month = $ed->ed_to_month;
+
+            $education->save();
+        }
+
+        $exps = json_decode($request->experiences);
+
+        foreach($exps as $exp){
+            $experience = isset($exp->id) ? Experience::findOrFail($exp->id) : new Experience;
+            $experience->resume_id = $resume->id;
+            $experience->ex_company = $exp->ex_company;
+            $experience->ex_postion = $exp->ex_position;
+            $experience->ex_explanation = $exp->ex_explanation;
+            $experience->ex_from_year = $exp->ex_from_year;
+            $experience->ex_from_month = $exp->ex_from_month;
+            $experience->ex_to_year = $exp->ex_to_year;
+            $experience->ex_to_month = $exp->ex_to_month;
+
+            $experience->save();
+        }
 
         if($request->photo){
             $data = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $request->photo));

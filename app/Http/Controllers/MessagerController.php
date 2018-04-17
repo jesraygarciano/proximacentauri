@@ -27,7 +27,13 @@ class MessagerController extends Controller
     }
 
     public function json_return_chatable_users(Request $requests){
-        return ['users'=>\Auth::user()->contacts->load('contact')->load('latestMessage'), 'recieved_request'=> \Auth::user()->receivedContactRequests->load('user')];
+        $users = \Auth::user()->contacts->load('contact');
+
+        foreach($users as $key => $user){
+            $users[$key]['latest_message'] = Message::whereRaw('(( user_id = '.$user->user_id.' and reciever = '.$user->contact_id.') or ( user_id = '.$user->contact_id.' and reciever = '.$user->user_id.'))')->get();
+        }
+
+        return ['users'=>$users, 'recieved_request'=> \Auth::user()->receivedContactRequests->load('user')];
     }
 
     public function json_fetch_previews_messages(Request $requests){
@@ -71,7 +77,13 @@ class MessagerController extends Controller
         $requested = User::searchKey($requests->keyword)->whereIn('id',$requested);
         $recieved_request = User::searchKey($requests->keyword)->whereIn('id',$recieved_request);
 
-        return ['contacts'=>\Auth::user()->contacts()->searchKey($requests->keyword)->get()->load('contact')->load('latestMessage') ,'others'=>$others_users->get(), 'requested'=>$requested->get(), 'recieved_request'=>$recieved_request->get() ];
+        $contacts = Contact::whereIn('contacts.id',\Auth::user()->contacts()->pluck('id'))->searchKey($requests->keyword)->get()->load('contact');
+
+        foreach($contacts as $key => $user){
+            $contacts[$key]['latest_message'] = Message::whereRaw('(( user_id = '.$user->user_id.' and reciever = '.$user->contact_id.') or ( user_id = '.$user->contact_id.' and reciever = '.$user->user_id.'))')->get();
+        }
+
+        return ['contacts'=>$contacts ,'others'=>$others_users->get(), 'requested'=>$requested->get(), 'recieved_request'=>$recieved_request->get() ];
     }
 
     public function json_request_contact(Request $requests){
