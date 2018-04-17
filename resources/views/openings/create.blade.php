@@ -35,28 +35,27 @@
                 box-shadow:  0px 0px 0px 0px #000;
     }
 
-        legend.scheduler-border {
-            font-size: 1em !important;
-            font-weight: bold !important;
-            text-align: left !important;
-            width:auto;
-            padding:0 10px;
-            border-bottom:none;
-        }
+    legend.scheduler-border {
+        font-size: 1em !important;
+        font-weight: bold !important;
+        text-align: left !important;
+        width:auto;
+        padding:0 10px;
+        border-bottom:none;
+    }
 
-        #opening_city{
-            padding: 1.1rem 1rem;
-        }
-        #postal-code-add{
-            padding: 1.1rem 1rem;
-        }
+    #opening_city{
+        padding: 1.1rem 1rem;
+    }
+    #postal-code-add{
+        padding: 1.1rem 1rem;
+    }
 
-        #expiredate{
-            font-size: 13px;
-            font-weight: bold;
-            color: #962525;
-        }
-
+    #expiredate{
+        font-size: 13px;
+        font-weight: bold;
+        color: #962525;
+    }
 
 </style>
 

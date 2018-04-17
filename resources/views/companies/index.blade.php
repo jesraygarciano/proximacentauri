@@ -87,16 +87,15 @@
                     <input type="text" class="company-search form-control" name="company_name" value="{{$_GET['company_name'] ?? ''}}" placeholder="Search companies">
 
                     <button type="submit">Search</button>
-                    <div style="position: relative;">
+                    {{-- <div style="position: relative;">
                         <label class="with_comp-info_btn">
-                            {{-- {!!Form::checkbox('w_hiring_info', 2, null, ['class' => 'with_hiring'])!!} --}}
                             <input type="checkbox" class="with_hiring" name="w_hiring_info" value="2"
-                            <?php if(isset($_GET['w_hiring_info'])) echo "checked='checked'"; ?>
+                            <//?php if(isset($_GET['w_hiring_info'])) echo "checked='checked'"; ?>
                             />
                             <h5 class="with_hiring_text" style="cursor: pointer;">With hiring information</h5>
 
                         </label>
-                    </div>
+                    </div> --}}
                     {!!Form::close()!!}
                 </div> <!-- End company-search -->
 

@@ -112,7 +112,6 @@
 }
 
 
-
 .app-basic-info{
     margin: 2rem 2rem 0rem 2rem;
     padding: 3.5rem 0px 0 0;

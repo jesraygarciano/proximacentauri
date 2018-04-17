@@ -59,7 +59,7 @@
                         <ul class="dropdown-menu dropdown-auto-hover" role="menu" style="padding: 0px 0px 11px 0px;">
                             @if (Auth::user()->role == 0)
 
-                               @if(Session::get('lists'))
+                               @if(\Auth::user()->findFirstOrCreateResume())
 
                                     <li>
                                         <a href="{{ url('resumes/show') }}">
@@ -95,12 +95,7 @@
                                     <a href="{{ url('scouts/company_scout') }}">
                                         Scouted notification
                                     </a>
-                                </li>
-                                <li>
-                                    <a href="{{ url('itp/applicant/profile') }}">
-                                        ITP Profile
-                                    </a>
-                                </li>                                
+                                </li>                              
                             @elseif (Auth::user()->role == 1)
                                 <li>
                                     <a href="{{url('/hiring_portal')}}">Management</a>

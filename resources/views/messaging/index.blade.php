@@ -18,6 +18,7 @@
 	$('#threads').unickMessenging({
 		// socket_address:"http://5ab21ea1.ngrok.io",
 		fetch_user_messages_url:"{{route('json_return_user_messages')}}",
+		profile_pic:"{{\Auth::user()->photo}}",
 		fetch_chatables_url:"{{route('json_return_chatable_users')}}",
 		save_message_url:"{{route('json_save_sent_message')}}",
 		mark_message_seen:"{{route('json_mark_message_seen')}}",

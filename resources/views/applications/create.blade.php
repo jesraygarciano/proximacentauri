@@ -280,7 +280,6 @@
                                             <input name="gender" type="radio" checked value="male">&nbsp;&nbsp;male&nbsp;&nbsp;&nbsp;&nbsp;
                                             <input name="gender" type="radio" value="female">&nbsp;&nbsp;female&nbsp;&nbsp;&nbsp;&nbsp;
                                             <input name="gender" type="radio" value="no-answer">&nbsp;&nbsp;no answer
-
                                         </div>
                                     </div>
                                 </div>
@@ -319,8 +318,8 @@
                             <div class = "row">
                                 <div class="col-md-offset-1 col-md-11">
                                     <div class="col-md-6">
-                                        <div class="form-group">
-                                            {{-- {!!Form::file('photo')!!} --}}
+                                        {{-- <div class="form-group">
+                                            {!!Form::file('photo')!!}
                                             <div class="imagePreview"></div>
                                             <div class="input-group">
                                                 <label class="input-group-btn">
@@ -330,7 +329,22 @@
                                                 </label>
                                                 <input type="text" class="form-control" readonly="">
                                             </div>
-                                        </div>
+                                        </div> --}}
+                                        <div class="crop-control" style="height: 200px; width: 200px;">
+                                            <div class="image-container">
+                                              <img src="https://grangeprint.com/image/cache/placeholder-750x750-nofill-255255255.png">
+                                              <label for="photo" class="input-trigger hover-div">
+                                                <p>
+                                                  <i class="fa fa-file-image-o fa-5x" aria-hidden="true"></i>
+                                                  <br>
+                                                  Upload
+                                                </p>
+                                              </label>
+                                            </div>
+                                            <div class="input-container" id="photo-container">
+                                              <input type="file" id="photo" name="photo" accept="image/*" />
+                                            </div>
+                                          </div>
                                     </div>
                                 </div>
                             </div>

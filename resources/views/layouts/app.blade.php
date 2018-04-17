@@ -81,7 +81,7 @@
         <script type="text/javascript">
             (function(){
                 $.socket = io("localhost:3000");
-                // $.socket = io("http://284a30e7.ngrok.io");
+                // $.socket = io("http://48407cbe.ngrok.io");
                 $.socket.emit('client add',{{\Auth::user()->id}});
             })(jQuery)
         </script>

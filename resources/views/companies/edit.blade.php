@@ -55,7 +55,7 @@
 
         </style>
 
-        {!!Form::open(['url' => route('companies.update',$company->id), 'method' => 'PATCH', 'files' => true, 'enctype' => 'multipart/form-data', 'id' => 'form-validate']) !!}
+    {!!Form::open(['url' => route('companies.update',$company->id), 'method' => 'PATCH', 'files' => true, 'enctype' => 'multipart/form-data', 'id' => 'form-validate']) !!}
        @include('errors.form_errors')
         {!! csrf_field() !!}
         <div class="row text-center">
@@ -68,12 +68,16 @@
                             <div class="image-container-cover" style="height: 100%;">
 
                                 <img style="width: 100%;" src="{{ $company->background_photo }}" alt="{{ $company->company_name}} Cover photo" />
-                                <label for="background_photo" class="input-trigger hover-div">
-                                    <p>
-                                        <i class="fa fa-file-image-o fa-5x" aria-hidden="true"></i>
-                                        <br>
-                                        Upload Cover photo
-                                    </p>
+
+                                <label for="background_photo" class="input-trigger hover-div" style="width: initial;
+                                    left: initial;
+                                    height:initial;
+                                    right: 10px;
+                                    top: 10px;
+                                    padding: 10px;
+                                    border-radius:3px;
+                                    background:#0000008c;">
+                                    Update Cover <i class="fa fa-camera" aria-hidden="true"></i>
                                 </label>
                             </div>
                             <div class="input-container">
@@ -90,12 +94,16 @@
                                 <div class="crop-control" style="height: 200px; width: 200px;">
                                     <div class="image-container">
                                         <img src="{{ $company->company_logo }}" alt="{{ $company->company_name}}" />
-                                        <label for="company_logo" class="input-trigger hover-div">
-                                            <p>
-                                                <i class="fa fa-file-image-o fa-5x" aria-hidden="true"></i>
-                                                <br>
-                                                Upload Logo
-                                            </p>
+                                        
+                                        <label for="company_logo" class="input-trigger hover-div" style="width: initial;
+                                            left: initial;
+                                            height:initial;
+                                            left: 10px;
+                                            top: 10px;
+                                            padding: 5px;
+                                            border-radius:3px;
+                                            background:#0000008c;">
+                                            Update Profile <i class="fa fa-camera" aria-hidden="true"></i>
                                         </label>
                                     </div>
                                     <div class="input-container">
@@ -364,37 +372,37 @@
         },
         messages: {
             email: {
-                required: Please enter email address,
+                required: 'Please enter email address',
             },
             tel: {
-                required: Company contact# is required,
+                required: 'Company contact# is required',
             },
             address1: {
-                required: Please add company address,
+                required: 'Please add company address',
             },
             what: {
-                required: This field is required,
+                required: 'This field is required',
             },
             what_photo1_explanation: {
-                required: This field is required,
+                required: 'This field is required',
             },            
             established_at: {
-                required: Dates is required,
+                required: 'Dates is required',
             },
             url: {
-                required: Company URL is required,
+                required: 'Company URL is required',
             },
             company_size: {
-                required: Please provide company size,
+                required: 'Please provide company size',
             },
             city: {
-                required: Please provide address,
+                required: 'Please provide address',
             },
             country: {
-                required: Please provice country,
+                required: 'Please provice country',
             },
             spoken_language: {
-                required: Please provice country,
+                required: 'Please provice country',
             }
        }
     });
