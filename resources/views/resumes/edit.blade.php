@@ -74,6 +74,7 @@
                                 <div class="tab-pane active wizard-step" role="tabpanel" id="step1">
                                     {!! csrf_field() !!}
                                     {!! Form::hidden('user_id', Auth::id()) !!}
+                                    {!! Form::hidden('resume_id', $resume->id) !!}
 
                                     <h4 class="form-heading">Name</h4>
                                     <hr>
@@ -304,17 +305,15 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <br />
+                                    <br />
 
-                                    @for ($i=0; $i < 6; $i++)
-                                        <?php $number_ed = $i + 1 ?>
-
-                                        @if (count($educations) == 0 && $i == 0)
+                                    <input name="educational_backgrounds" type="hidden">
+                                    <div id="educational_backgrounds">
+                                    <?php $number_ed = 0; ?>
+                                    @foreach($educations as $education)
+                                        <?php $number_ed++; ?>
                                             <div id="educational{{$number_ed}}" class="ed-margin">
-                                        @elseif  ($i < count($educations))
-                                            <div id="educational{{$number_ed}}" class="ed-margin">
-                                        @else
-                                            <div id="educational{{$number_ed}}" class="ed-margin default-hide-ed">
-                                        @endif
 
                                             <h4 class="form-heading required-label">Educational Background {{$number_ed}}</h4>
                                             <hr>
@@ -322,21 +321,21 @@
                                                 <div class="col-md-offset-1 col-md-11">
                                                     <div class="col-md-4">
                                                         <div class="form-group required">
-                                                            {!!Form::label('ed_university', 'University', ['class' => 'required-label'])!!}
-                                                            {!!Form::text("ed_university_{$number_ed}", $educations[$i]->ed_university ?? '', ['class' => 'form-control'])!!}
+                                                            {!!Form::label('ed_university{$number_ed}', 'University', ['class' => 'required-label'])!!}
+                                                            {!!Form::text("ed_university{$number_ed}", $education->ed_university ?? '', ['class' => 'form-control ed_university'])!!}
                                                         </div>
                                                     </div>
 
                                                     <div class="col-md-4">
                                                         <div class="form-group">
-                                                            {!!Form::label('ed_field_of_study', 'Field of study')!!}
-                                                            {!!Form::text("ed_field_of_study_{$number_ed}", $educations[$i]->ed_field_of_study ?? '', ['class' => 'form-control'])!!}
+                                                            {!!Form::label('ed_field_of_study{$number_ed}', 'Field of study')!!}
+                                                            {!!Form::text("ed_field_of_study{$number_ed}", $education->ed_field_of_study ?? '', ['class' => 'form-control ed_field_of_study'])!!}
                                                         </div>
                                                     </div>
                                                     <div class="col-md-4">
                                                         <div class="form-group">
-                                                            {!!Form::label('ed_program_of_study', 'Program of study')!!}
-                                                            {!!Form::text("ed_program_of_study_{$number_ed}", $educations[$i]->ed_program_of_study ?? '', ['class' => 'form-control'])!!}
+                                                            {!!Form::label('ed_program_of_study{$number_ed}', 'Program of study')!!}
+                                                            {!!Form::text("ed_program_of_study{$number_ed}", $education->ed_program_of_study ?? '', ['class' => 'form-control ed_program_of_study'])!!}
                                                         </div>
                                                     </div>
                                                 </div>
@@ -347,27 +346,122 @@
                                                     <div class="col-md-8">
                                                         <div class="form-group required">
                                                             {!!Form::label('duration', 'Duration', ['class' => 'required-label'])!!}<br>
-                                                            {!!Form::select("ed_from_month_{$number_ed}", month_array(), $educations[$i]->ed_from_month ?? '', ['class' => 'ui dropdown single-select parent-form-group'])!!},
-                                                            {!!Form::select("ed_from_year_{$number_ed}", year_array(), $educations[$i]->ed_from_year ?? '', ['class' => 'ui dropdown single-select parent-form-group'])!!}
+                                                            {!!Form::select("ed_from_month", month_array(), $education->ed_from_month ?? '', ['class' => 'ed_from_month ui dropdown single-select parent-form-group'])!!},
+                                                            {!!Form::select("ed_from_year", year_array(), $education->ed_from_year ?? '', ['class' => 'ed_from_year ui dropdown single-select parent-form-group'])!!}
                                                             &nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;
-                                                            {!!Form::select("ed_to_month_{$number_ed}", month_array(), $educations[$i]->ed_to_month ?? '', ['class' => 'ui dropdown single-select parent-form-group'])!!},
-                                                            {!!Form::select("ed_to_year_{$number_ed}", year_array(), $educations[$i]->ed_to_year ?? '', ['class' => 'ui dropdown single-select parent-form-group'])!!}
+                                                            {!!Form::select("ed_to_month", month_array(), $education->ed_to_month ?? '', ['class' => 'ed_to_month ui dropdown single-select parent-form-group'])!!},
+                                                            {!!Form::select("ed_to_year", year_array(), $education->ed_to_year ?? '', ['class' => 'ed_to_year ui dropdown single-select parent-form-group'])!!}
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                            {!!Form::hidden("hidden_{$number_ed}", $educations[$i]->id ?? '')!!}
+                                            {!!Form::hidden("edu_id", $education->id ?? '')!!}
                                         </div>
-                                    @endfor
-
-                                    <div class="row">
-                                        <button type="button" id="add_ed" class="btn btn-primary pull-right">Add Educational Background</button>
+                                    @endforeach
                                     </div>
 
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <button type="button" id="add_ed_back" class="btn btn-primary pull-right">Add Educational Background</button>
+                                        </div>
+                                    </div>
+
+                                    <script>
+                                        $(document).ready(function(){
+                                            var e_b_element = $('#educational_backgrounds');
+
+                                            if(parseInt(e_b_element.find('.ed-margin').length) < 1){
+                                                add_another_education();
+                                            }
+
+                                            $('#add_ed_back').click(function(){
+                                                var num = parseInt(e_b_element.find('.ed-margin').length);
+                                                if(num < 6)
+                                                {
+                                                    add_another_education();
+                                                    if(num == 5){
+                                                        $('#add_ed_back').hide();
+                                                    }
+                                                }
+                                            });
+                                            
+                                            function add_another_education(data){
+                                                var html = '<div class="ed-margin">';
+                                                var num = (parseInt(e_b_element.find('.ed-margin').length)+1);
+                                                html += '<h4 class="form-heading required-label">Educational Background '+num+'</h4>'
+                                                +'    <hr>'
+                                                +'    <div class="row">'
+                                                +'        <div class="col-md-offset-1 col-md-11">'
+                                                +'            <div class="col-md-4">'
+                                                +'                <div class="form-group required">'
+                                                +'                    <label for="ed_university'+num+'" class="required-label">University</label>'
+                                                +'                    <input class="form-control ed_university" name="ed_university'+num+'" type="text" value="">'
+                                                +'<label class="error-label">Please enter your spoken language</label>'
+                                                +'                </div>'
+                                                +'            </div>'
+                                                +'            <div class="col-md-4">'
+                                                +'                <div class="form-group">'
+                                                +'                    <label for="ed_field_of_study'+num+'">Field of study</label>'
+                                                +'                    <input class="form-control ed_field_of_study" name="ed_field_of_study'+num+'" type="text" value="">'
+                                                +'<label class="error-label">Please enter your spoken language</label>'
+                                                +'                </div>'
+                                                +'            </div>'
+                                                +'            <div class="col-md-4">'
+                                                +'                <div class="form-group">'
+                                                +'                    <label for="ed_program_of_study'+num+'">Program of study</label>'
+                                                +'                    <input class="form-control ed_program_of_study" name="ed_program_of_study'+num+'" type="text" value="">'
+                                                +'<label class="error-label">Please enter your spoken language</label>'
+                                                +'                </div>'
+                                                +'            </div>'
+                                                +'        </div>'
+                                                +'    </div>'
+
+                                                +'    <div class="row">'
+                                                +'        <div class="col-md-offset-1 col-md-11">'
+                                                +'            <div class="col-md-8">'
+                                                +'                <div class="form-group parent-form-group required">'
+                                                +'                    <label for="duration" class="required-label">Duration</label><br>'
+                                                +'                    {!!Form::select("ed_from_month", month_array(), null, ['class' => 'ed_from_month ui dropdown single-select parent-form-group'])!!},'
+                                                +'                    {!!Form::select("ed_from_year", year_array(), null, ['class' => 'ed_from_year ui dropdown single-select parent-form-group'])!!}'
+                                                +'                    &nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;'
+                                                +'                    {!!Form::select("ed_to_month", month_array(), null, ['class' => 'ed_to_month ui dropdown single-select parent-form-group'])!!},'
+                                                +'                    {!!Form::select("ed_to_year", year_array(), null, ['class' => 'ed_to_year ui dropdown single-select parent-form-group'])!!}'
+                                                +'                </div>'
+                                                +'            </div>'
+                                                +'        </div>'
+                                                +'    </div>'
+                                                +'</div>';
+
+                                                e_b_element.append(html);
+                                                e_b_element.find('.ed-margin:last-child .single-select').dropdown();
+                                                e_b_element.find('.ed-margin:last-child').find('input,select,textarea').change(function(){
+                                                    if($(this).parent().hasClass('parent-form-group')){
+                                                        $(this).parent().removeClass('error-border');
+                                                        $(this).parent().parent().find('.error-label .'+$(this).attr('name')).remove();
+
+                                                        if($(this).parent().parent().find('.error-border').length < 1){
+                                                            $(this).parent().parent().removeClass('has-error');
+                                                        }
+                                                    }
+                                                    else if($(this).parent().parent().parent().hasClass('input-group')){
+                                                        $(this).parent().parent().parent().parent().removeClass('has-error');
+                                                    }
+                                                    else
+                                                    {
+                                                        $(this).parent().removeClass('has-error');
+                                                    }
+                                                });
+                                            }
+                                        });
+                                    </script>
+
+                                    <br>
                                     <hr>
 
                                     <div class="row">
-                                        <button type="button" class="btn btn-primary pull-right next-step">Save and continue</button>
+                                        <div class="col-md-12">
+                                            <button type="button" class="btn btn-primary pull-right next-step">Save and continue</button>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -692,72 +786,156 @@
                                         </div>
                                     </div>
 
-
-
-                                    @for ($i=0; $i < 10; $i++)
-                                        <?php $number_ex = $i + 1 ?>
-
-                                        @if (count($experiences) == 0 && $i == 0)
-                                            <div id="experience{{$number_ex}}" class="ex-margin">
-                                        @elseif  ($i < count($experiences))
-                                            <div id="experience{{$number_ex}}" class="ex-margin">
-                                        @else
-                                            <div id="experience{{$number_ex}}" class="ex-margin default-hide-ex">
-                                        @endif
-
-                                            <h4 class="form-heading">Experience {{$number_ex}}</h4>
-                                            <hr>
-                                            <div class="row">
-                                                <div class="col-md-offset-1 col-md-11">
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            {!!Form::label('ex_company', 'Company:')!!}
-                                                            {!!Form::text("ex_company_{$number_ex}", $experiences[$i]->ex_company ?? '', ['class' => 'form-control'])!!}
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            {!!Form::label('ex_position', 'Position:')!!}
-                                                            {!!Form::text("ex_position_{$number_ex}", $experiences[$i]->ex_postion ?? '', ['class' => 'form-control'])!!}
-                                                        </div>
+                                    <?php $number_ex = 0; ?>
+                                    <input name="experiences" type="hidden">
+                                    <div id="experiences">
+                                    @foreach($experiences as $experience)
+                                    <?php $number_ex++; ?>
+                                    <div class="ex-margin">
+                                        <h4 class="form-heading">Experience {{$number_ex}}</h4>
+                                        <hr>
+                                        <div class="row">
+                                            <div class="col-md-offset-1 col-md-11">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        {!!Form::label('ex_company', 'Company:')!!}
+                                                        {!!Form::text("ex_company_{$number_ex}", $experience->ex_company ?? '', ['class' => 'form-control ex_company'])!!}
                                                     </div>
                                                 </div>
-                                            </div>
 
-                                            <div class="row">
-                                                <div class="col-md-offset-1 col-md-11">
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            {!!Form::label('duration', 'Duration:')!!}<br>
-                                                            {!!Form::select("ex_from_month_{$number_ex}", month_array(), $experiences[$i]->ex_from_month ?? '', ['class' => 'ui dropdown single-select'])!!},
-                                                            {!!Form::select("ex_from_year_{$number_ex}", year_array(), $experiences[$i]->ex_from_year ?? '', ['class' => 'ui dropdown single-select'])!!}
-                                                            &nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;
-                                                            {!!Form::select("ex_to_month_{$number_ex}", month_array(), $experiences[$i]->ex_to_month ?? '', ['class' => 'ui dropdown single-select'])!!},
-                                                            {!!Form::select("ex_to_year_{$number_ex}", year_array(), $experiences[$i]->ex_to_year ?? '', ['class' => 'ui dropdown single-select'])!!}
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            {!!Form::label('ex_explanation', 'Responsibilities:')!!}
-                                                            {!!Form::textarea('ex_explanation', $experiences[$i]->ex_explanation ?? '', ['class' => 'form-control'])!!}
-                                                        </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        {!!Form::label('ex_position', 'Position:')!!}
+                                                        {!!Form::text("ex_position_{$number_ex}", $experience->ex_postion ?? '', ['class' => 'form-control ex_position'])!!}
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    @endfor
 
-                                    <div class="row">
-                                        <button type="button" id="add_ex" class="btn btn-primary pull-right">Add Experience</button>
+                                        <div class="row">
+                                            <div class="col-md-offset-1 col-md-11">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        {!!Form::label('duration', 'Duration:')!!}<br>
+                                                        {!!Form::select("ex_from_month", month_array(), $experience->ex_from_month ?? '', ['class' => 'ex_from_month ui dropdown single-select'])!!},
+                                                        {!!Form::select("ex_from_year", year_array(), $experience->ex_from_year ?? '', ['class' => 'ex_from_year ui dropdown single-select'])!!}
+                                                        &nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;
+                                                        {!!Form::select("ex_to_month", month_array(), $experience->ex_to_month ?? '', ['class' => 'ex_to_month ui dropdown single-select'])!!},
+                                                        {!!Form::select("ex_to_year", year_array(), $experience->ex_to_year ?? '', ['class' => 'ex_to_year ui dropdown single-select'])!!}
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        {!!Form::label('ex_explanation', 'Responsibilities:')!!}
+                                                        {!!Form::textarea('ex_explanation_{$number_ex}', $experience->ex_explanation ?? '', ['class' => 'form-control ex_explanation'])!!}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {!!Form::hidden("exp_id", $experience->id ?? '')!!}
+                                    </div>
+                                    @endforeach
                                     </div>
 
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <button type="button" id="add_exp" class="btn btn-primary pull-right">Add Experience</button>
+                                        </div>
+                                    </div>
+                                    <script>
+                                        $(document).ready(function(){
+                                            var e_b_element = $('#experiences');
+
+                                            if(parseInt(e_b_element.find('.ex-margin').length) < 1){
+                                                // 
+                                                add_another_education();
+                                            }
+
+                                            $('#add_exp').click(function(){
+                                                var num = parseInt(e_b_element.find('.ex-margin').length);
+                                                if(num < 6)
+                                                {
+                                                    add_another_education();
+                                                    if(num == 6){
+                                                        $('#add_exp').hide();
+                                                    }
+                                                }
+                                            });
+                                            
+                                            function add_another_education(data){
+                                                var html = '<div class="ex-margin">';
+                                                var num = (parseInt(e_b_element.find('.ex-margin').length)+1);
+                                                html += '<h4 class="form-heading">Experience '+num+'</h4>'
+                                                    +'    <hr>'
+                                                    +'    <div class="row">'
+                                                    +'        <div class="col-md-offset-1 col-md-11">'
+                                                    +'            <div class="col-md-6">'
+                                                    +'                <div class="form-group">'
+                                                    +'                    <label for="ex_company'+num+'">Company:</label>'
+                                                    +'                    <input class="form-control ex_company" id="ex_company'+num+'" type="text">'
+                                                    +'                </div>'
+                                                    +'            </div>'
+
+                                                    +'            <div class="col-md-6">'
+                                                    +'                <div class="form-group">'
+                                                    +'                    <label for="ex_position'+num+'">Position:</label>'
+                                                    +'                    <input class="form-control ex_position" id="ex_position'+num+'" type="text">'
+                                                    +'                </div>'
+                                                    +'            </div>'
+                                                    +'        </div>'
+                                                    +'    </div>'
+                                                    +'    <div class="row">'
+                                                    +'        <div class="col-md-offset-1 col-md-11">'
+                                                    +'            <div class="col-md-6">'
+                                                    +'                <div class="form-group">'
+                                                    +'                    {!!Form::label('duration', 'Duration:')!!}<br>'
+                                                    +'                    {!!Form::select("ex_from_month", month_array(), '', ['class' => 'ui dropdown single-select'])!!},'
+                                                    +'                    {!!Form::select("ex_from_year", year_array(), '', ['class' => 'ui dropdown single-select'])!!}'
+                                                    +'                    &nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;'
+                                                    +'                    {!!Form::select("ex_to_month", month_array(), '', ['class' => 'ui dropdown single-select'])!!},'
+                                                    +'                    {!!Form::select("ex_to_year", year_array(), '', ['class' => 'ui dropdown single-select'])!!}'
+                                                    +'                </div>'
+                                                    +'            </div>'
+                                                    +'            <div class="col-md-6">'
+                                                    +'                <div class="form-group">'
+                                                    +'                    <label for="ex_explanation'+num+'">Responsibilities:</label>'
+                                                    +'                    <textarea class="form-control ex_explanation" cols="50" rows="10" id="ex_explanation'+num+'"></textarea>'
+                                                    +'                </div>'
+                                                    +'            </div>'
+                                                    +'        </div>'
+                                                    +'    </div>';
+
+                                                e_b_element.append(html);
+                                                e_b_element.find('.ex-margin:last-child .single-select').dropdown();
+                                                e_b_element.find('.ex-margin:last-child').find('input,select,textarea').change(function(){
+                                                    if($(this).parent().hasClass('parent-form-group')){
+                                                        $(this).parent().removeClass('error-border');
+                                                        $(this).parent().parent().find('.error-label .'+$(this).attr('name')).remove();
+
+                                                        if($(this).parent().parent().find('.error-border').length < 1){
+                                                            $(this).parent().parent().removeClass('has-error');
+                                                        }
+                                                    }
+                                                    else if($(this).parent().parent().parent().hasClass('input-group')){
+                                                        $(this).parent().parent().parent().parent().removeClass('has-error');
+                                                    }
+                                                    else
+                                                    {
+                                                        $(this).parent().removeClass('has-error');
+                                                    }
+                                                });
+                                            }
+                                        });
+                                    </script>
+                                    <br>
                                     <hr>
 
                                     <div class="row progress-buttons">
-                                        <div class="pull-right">
-                                            <button type="button" class="btn btn-default prev-step">Previous</button>
-                                            <button type="button" class="btn btn-primary next-step">Save and continue</button>
+                                        <div class="col-md-12">
+                                            <div class="pull-right">
+                                                <button type="button" class="btn btn-default prev-step">Previous</button>
+                                                <button type="button" class="btn btn-primary next-step">Save and continue</button>
+                                            </div>
                                         </div>
                                     </div>
 
@@ -785,7 +963,7 @@
                                             <div class="col-md-12">
                                                 <div class="form-group">
                                                     {{-- {!!Form::label('objective', 'Objective:')!!} --}}
-                                                    {!!Form::textarea('seminars_attended', null, ['class' => 'form-control'])!!}
+                                                    {!!Form::textarea('seminars_attended', $resume->seminars_attended, ['class' => 'form-control'])!!}
                                                 </div>
                                             </div>
                                         </div>
@@ -799,7 +977,7 @@
                                             <div class="col-md-12">
                                                 <div class="form-group">
                                                     {{-- {!!Form::label('objective', 'Objective:')!!} --}}
-                                                    {!!Form::textarea('awards', null, ['class' => 'form-control'])!!}
+                                                    {!!Form::textarea('awards', $resume->awards, ['class' => 'form-control'])!!}
                                                 </div>
                                             </div>
                                         </div>
@@ -866,7 +1044,9 @@
                                     @endfor
 
                                     <div class="row">
-                                        <button type="button" id="add_cr" class="btn btn-primary pull-right">Add Character References</button>
+                                        <div class="col-md-12">
+                                            <button type="button" id="add_cr" class="btn btn-primary pull-right">Add Character References</button>
+                                        </div>
                                     </div>
 
                                     <hr>
@@ -875,11 +1055,15 @@
                                     {!! Form::hidden('is_active', 1) !!}
                                     {!! Form::hidden('is_master', 1) !!}
 
-                                    <ul class="list-inline pull-right">
-                                        <li><button type="button" class="btn btn-default prev-step">Previous</button></li>
-                                        <!-- <li><button type="button" class="btn btn-default next-step">Skip</button></li> -->
-                                        <li><button type="button" class="btn btn-primary btn-info-full next-step">Save and continue</button></li>
-                                    </ul>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <ul class="list-inline pull-right">
+                                                <li><button type="button" class="btn btn-default prev-step">Previous</button></li>
+                                                <!-- <li><button type="button" class="btn btn-default next-step">Skip</button></li> -->
+                                                <li><button type="button" class="btn btn-primary btn-info-full next-step">Save and continue</button></li>
+                                            </ul>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="tab-pane wizard-step text-center" role="tabpanel" id="complete">
                                     <h3>Complete</h3>
@@ -1002,55 +1186,61 @@
                             }
                         ]
                     },
-                    ed_university:{
-                        identifier:'ed_university',
-                        rules: [
-                            {
-                                type:'empty',
-                                prompt:'Please enter your university'
-                            }
-                        ]
+                    educational_backgrounds:{
+                        identifier:'educational_backgrounds',
                     },
-                    ed_from_month:{
-                        identifier:'ed_from_month',
-                        type:'semantic-group',
-                        rules: [
-                            {
-                                type:'empty',
-                                prompt:'month start'
-                            }
-                        ]
+                    experiences:{
+                        identifier:'experiences',
                     },
-                    ed_from_year:{
-                        identifier:'ed_from_year',
-                        type:'semantic-group',
-                        rules: [
-                            {
-                                type:'empty',
-                                prompt:'year start'
-                            }
-                        ]
-                    },
-                    ed_to_month:{
-                        identifier:'ed_to_month',
-                        type:'semantic-group',
-                        rules: [
-                            {
-                                type:'empty',
-                                prompt:'month end'
-                            }
-                        ]
-                    },
-                    ed_to_year:{
-                        identifier:'ed_to_year',
-                        type:'semantic-group',
-                        rules: [
-                            {
-                                type:'empty',
-                                prompt:'year end'
-                            }
-                        ]
-                    },
+                    // ed_university:{
+                    //     identifier:'ed_university',
+                    //     rules: [
+                    //         {
+                    //             type:'empty',
+                    //             prompt:'Please enter your university'
+                    //         }
+                    //     ]
+                    // },
+                    // ed_from_month:{
+                    //     identifier:'ed_from_month',
+                    //     type:'semantic-group',
+                    //     rules: [
+                    //         {
+                    //             type:'empty',
+                    //             prompt:'month start'
+                    //         }
+                    //     ]
+                    // },
+                    // ed_from_year:{
+                    //     identifier:'ed_from_year',
+                    //     type:'semantic-group',
+                    //     rules: [
+                    //         {
+                    //             type:'empty',
+                    //             prompt:'year start'
+                    //         }
+                    //     ]
+                    // },
+                    // ed_to_month:{
+                    //     identifier:'ed_to_month',
+                    //     type:'semantic-group',
+                    //     rules: [
+                    //         {
+                    //             type:'empty',
+                    //             prompt:'month end'
+                    //         }
+                    //     ]
+                    // },
+                    // ed_to_year:{
+                    //     identifier:'ed_to_year',
+                    //     type:'semantic-group',
+                    //     rules: [
+                    //         {
+                    //             type:'empty',
+                    //             prompt:'year end'
+                    //         }
+                    //     ]
+                    // },
 
 
                     // step 2 requirements
