@@ -24,6 +24,6 @@ class Contact extends Model
 
 	// scopes
     public function scopeSearchKey($query,$keyword){
-        return $query->leftJoin('users','users.id','=','contacts.user_id')->whereRaw('(concat(users.f_name," ",users.l_name) like "%'.$keyword.'%")');
+        return $query->leftJoin('users','users.id','=','contacts.contact_id')->whereRaw('(concat(users.f_name," ",users.l_name) like "%'.$keyword.'%")');
     }
 }

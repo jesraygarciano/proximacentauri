@@ -59,4 +59,31 @@ class Resume extends Model
     {
         return $this->hasMany(CharacterReferences::class);
     }
+
+    public function user(){
+        return $this->belongsTo('\App\User');
+    }
+
+    public static function boot()
+    {
+        parent::boot();
+
+        static::updating(function($model){
+
+            // detect if seen field has been updated
+            if($model->photo != $model->getOriginal('photo')){
+                $model->user()->update(['photo'=>$model->attributes['photo']]);
+            }
+
+        });
+
+        static::created(function($model){
+
+            // detect if seen field has been updated
+            if($model->photo != $model->getOriginal('photo')){
+                $model->user()->update(['photo'=>$model->attributes['photo']]);
+            }
+
+        });
+    }
 }

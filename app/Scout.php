@@ -45,7 +45,7 @@ class Scout extends Model
         static::updating(function($model){
 
             // detect if seen field has been updated
-            if($model->seen != $model->getOriginal('price')){
+            if($model->seen != $model->getOriginal('seen')){
                 event(new \App\Events\NotificationEvent(
                 [
                     'type'=>'scout',
