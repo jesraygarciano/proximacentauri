@@ -144,6 +144,7 @@
                     </script>
 
                     @if(\Auth::check())
+                    @if(!\Auth::user()->role == 2)
                     <li class="noti-bell" id="noti-bell">
                         <a href="{{route('user_notifications')}}?tab=scout_notifications">
                             <i class="fa fa-bell"></i>
@@ -172,6 +173,7 @@
                             @endif
                         </div>
                     </li>
+                    @endif
                     <?php $unseen_message= \Auth::user()->unseenMessages()->get(); ?>
                     <li class="noti-bell" id="message-noti">
                         <a href="{{url('messaging/index')}}?tab=scout_notifications">
