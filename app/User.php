@@ -116,7 +116,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     }
 
     public function getPhotoAttribute(){
-        if(!file_exists('storage/'.$this->attributes['photo']) || str_replace(' ','',$this->attributes['photo']) == ''){
+        if(!@file_exists('storage/'.$this->attributes['photo']) || @str_replace(' ','',$this->attributes['photo']) == ''){
             return asset('img/member-placeholder.png');
         }
 

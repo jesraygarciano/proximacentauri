@@ -40,7 +40,7 @@ class Company extends Model
     }
 
     public function getPopulationAttribute(){
-        switch ($this->attributes['company_size']) {
+        switch (@$this->attributes['company_size']) {
             case 1:
                 return '1 ~ 10 employees';
                 break;

@@ -33,7 +33,7 @@ class Resume extends Model
     // }
 
     public function getPhotoAttribute(){
-        if(!file_exists('storage/'.$this->attributes['photo']) || str_replace(' ','',$this->attributes['photo']) == ''){
+        if(!@file_exists('storage/'.$this->attributes['photo']) || @str_replace(' ','',$this->attributes['photo']) == ''){
             return asset('img/member-placeholder.png');
         }
         return asset('storage/'.$this->attributes['photo']);
@@ -80,8 +80,8 @@ class Resume extends Model
         static::created(function($model){
 
             // detect if seen field has been updated
-            if($model->photo != $model->getOriginal('photo')){
-                $model->user()->update(['photo'=>$model->attributes['photo']]);
+            if($model->photo != @$model->getOriginal('photo')){
+                $model->user()->update(['photo'=>@$model->attributes['photo']]);
             }
 
         });

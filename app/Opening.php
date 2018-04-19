@@ -69,7 +69,10 @@ class Opening extends Model
     }
 
     public function getSalaryRangeWordsAttribute(){
-        return salary_ranges()[$this->attributes['salary_range']];
+        if(@$this->attributes['salary_range'])
+        {
+            return salary_ranges()[@$this->attributes['salary_range']];
+        }
     }
 
     public function getBookmarkCountAttribute(){
