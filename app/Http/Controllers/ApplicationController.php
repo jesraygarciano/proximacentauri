@@ -42,6 +42,9 @@ class ApplicationController extends Controller
     public function create($opening_id)
     {
 
+        $provinces = \DB::table('provinces')->get();
+        $countries = \DB::table('countries')->get();
+
         $user = \Auth::user();
         $resume = Common::get_master_resume();
         $opening = Opening::findOrFail($opening_id);
@@ -59,7 +62,7 @@ class ApplicationController extends Controller
             $languages_ids = array();
         }
 
-        return view('applications.create', compact('user', 'resume', 'languages_ids', 'opening', 'company', 'skills', 'educations'));
+        return view('applications.create', compact('user', 'resume', 'languages_ids', 'opening', 'company', 'skills', 'educations','provinces','countries'));
 
     }
 
@@ -79,16 +82,16 @@ class ApplicationController extends Controller
         // dd($resume);
 
         $resume = new Resume;
+        // dd($resume);
         // $input = $request->except('skills', '_token');
         $resume->user_id = \Auth::id();
-        $resume->fill($request->all())->save();
-        if ($request->has('skills')) {
-            $resume_skill_ids = $request->input('skills');
-            foreach($resume_skill_ids as $resume_skill_id) {
-                $resume->has_skill()->attach($resume_skill_id);
-            }
-        }
-
+        // $resume->fill($request->all())->save();
+        // if ($request->has('skills')) {
+        //     $resume_skill_ids = $request->input('skills');
+        //     foreach($resume_skill_ids as $resume_skill_id) {
+        //         $resume->has_skill()->attach($resume_skill_id);
+        //     }
+        // }
 
         $applications = new Application;
         $applications->description = $request->input('description');
@@ -104,7 +107,6 @@ class ApplicationController extends Controller
 
         return redirect()->route('applications.applied_index')->with('success', 'Application Submmited');
 
-
     }
 
     /**
@@ -118,7 +120,6 @@ class ApplicationController extends Controller
     public function show($id)
     {
 
-        // return Application::All();
 
         $application = Application::findOrFail($id);
         $resume = Resume::findOrFail($application->resume_id);
@@ -170,8 +171,6 @@ class ApplicationController extends Controller
         //getting application data and opening data that is linked with the application datas
         // $applied_application_openings = Application::applied_application_openings(\Auth::id());
         $applied_application_openings = \Auth::user()->openings()->orderBy('pivot_created_at', 'desc')->get();
-        // dd($applied_application_openings);
-
         // dd($applied_application_openings);
 
 

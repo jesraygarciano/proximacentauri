@@ -206,8 +206,14 @@ class InternshipApplicationController extends Controller
             "school",
             "course"
         ]))
-        ->filterColumn('applicant_name', 'whereRaw', "CONCAT(users.f_name,' ',users.l_name) like ? ", ["$1"])
-        ->filterColumn('training_batch_name', 'whereRaw', "training_batches.name like ? ", ["$1"])
+        ->filterColumn('applicant_name', function($query, $keyword){
+            $sql = "CONCAT(users.f_name,' ',users.l_name) like ? ";
+            $query->whereRaw($sql, ["%{$keyword}%"]);
+        })
+        ->filterColumn('training_batch_name', function($query, $keyword){
+            $sql = "training_batches.name like ? ";
+            $query->whereRaw($sql, ["%{$keyword}%"]);
+        })
         ->editColumn('photo', function($data) {
             if(!file_exists('storage/'.$data->photo) || str_replace(' ','',$data->photo) == ''){
                 return asset('img/member-placeholder.png');

@@ -67,7 +67,7 @@ class ManagementController extends Controller
     public function openingData()
     {
 
-        $openings = Opening::select(['id', 'title','details','requirements', 'address', 'created_at', 'is_active'])->get();
+        $openings = Opening::select(['id', 'title','details','requirements', 'address1', 'created_at', 'is_active'])->get();
 
         // return Datatables::of($openings)->make(true);
         return Datatables::of($openings)
