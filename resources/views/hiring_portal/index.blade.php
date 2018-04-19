@@ -48,7 +48,7 @@
                 <a href="{{url('openings/create', $companies_show->id)}}" class="ui blue button massive" >Create New Hiring Information</a>
                 <hr>
                 <div class="row">
-                @include('hiring_portal.index_parts.current_hiring')
+                    @include('hiring_portal.index_parts.current_hiring')
                 </div>
             </div>
 

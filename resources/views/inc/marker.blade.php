@@ -23,7 +23,7 @@
 					else
 					{
 						// opening unbookmarked
-						$this.css({'color':''});
+						$this.css({'color':'white'});
 						$this.find('._text').html('Follow');
 					}
 				}
