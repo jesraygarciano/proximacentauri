@@ -627,7 +627,7 @@ body #body-container .manage-portal .nav-pills {
 }
 /* line 663, ../../resources/assets/sass/app.scss */
 body #body-container .manage-portal .tab-content {
-  border: 1px solid #1377a1;
+  /* border: 1px solid #1377a1; */
   border-top-color: transparent;
   padding: 2em;
 }

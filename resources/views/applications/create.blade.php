@@ -2,6 +2,34 @@
 
 @section('content')
 
+    <style type="text/css">
+
+    .cover-info .picture img{
+        width: 100%;
+    }
+    
+    .cover-info{
+    }
+    
+    .cover-info img{
+        border:none!important;
+    }
+    
+    .info{
+        font-size: 15px;
+        padding-bottom: 20px;
+        overflow-wrap: break-word;
+    }
+    
+    .ui.form{
+        font-size: 12px;
+    }
+    
+    .page-header .fa{
+        color: #0f739b;
+    }
+    </style>
+    
 <div class="container tall single-page">
     <ul class="nav nav-tabs" role="tablist">
         <li role="presentation" class="active">
@@ -24,15 +52,17 @@
     </ul>
 
     <div class="tab-content">
-{{--
- ####  #####  #####    ###### ####  #####  ##   ##
-##  ## ##  ## ##  ##   ##    ##  ## ##  ## ### ###
-##  ## ##  ## ##  ##   ##    ##  ## ##  ## #######
-###### #####  #####    ##### ##  ## #####  ## # ##
-##  ## ##     ##       ##    ##  ## ## ##  ## # ##
-##  ## ##     ##       ##    ##  ## ##  ## ##   ##
-##  ## ##     ##       ##     ####  ##  ## ##   ##
---}}
+
+        {{--
+        ####  #####  #####    ###### ####  #####  ##   ##
+        ##  ## ##  ## ##  ##   ##    ##  ## ##  ## ### ###
+        ##  ## ##  ## ##  ##   ##    ##  ## ##  ## #######
+        ###### #####  #####    ##### ##  ## #####  ## # ##
+        ##  ## ##     ##       ##    ##  ## ## ##  ## # ##
+        ##  ## ##     ##       ##    ##  ## ##  ## ##   ##
+        ##  ## ##     ##       ##     ####  ##  ## ##   ##
+        --}}
+
         <div role="tabpanel" class="tab-pane active" id="application_form">
             @include('inc.message')
             <div class="row">
@@ -40,7 +70,6 @@
                     <div class="wizard-inner">
                         <div class="connecting-line"></div>
                         <ul class="nav progress-nav-tabs" role="tablist">
-
                             <li role="presentation" class="active application">
                                 <a href="#step0" data-toggle="tab" aria-controls="step0" role="tab" title="Step 0">
                                     <span class="round-tab">
@@ -85,7 +114,7 @@
 
                     {!!Form::open(['action' => 'ApplicationController@store', 'method' => 'POST', 'files' => true]) !!}
                     <div class="tab-content">
-{{--
+                        {{--
                          #### ###### ###### #####           ####
                         ##  ##  ##   ##     ##  ##         ##  ##
                         ##      ##   ##     ##  ##         ## ###
@@ -93,7 +122,7 @@
                             ##  ##   ##     ##             ### ##
                         ##  ##  ##   ##     ##             ##  ##
                           ###   ##   ###### ##              ####
- --}}
+                        --}}
                         <div class="tab-pane active wizard-step" role="tabpanel" id="step0">
                             <h3>step0</h3>
 
@@ -146,7 +175,7 @@
 
                             <button type="submit" class="btn btn-primary btn-info-full next-step">Submit</button>
                         </div>
-{{--
+                        {{--
                          #### ###### ###### #####          ##
                         ##  ##  ##   ##     ##  ##        ###
                         ##      ##   ##     ##  ##         ##
@@ -154,7 +183,7 @@
                             ##  ##   ##     ##             ##
                         ##  ##  ##   ##     ##             ##
                           ###   ##   ###### ##           ######
- --}}
+                        --}}
                         <div class="tab-pane wizard-step" role="tabpanel" id="step1">
                             {!! csrf_field() !!}
                             {!! Form::hidden('user_id', Auth::id()) !!}
@@ -332,7 +361,7 @@
                                         </div> --}}
                                         <div class="crop-control" style="height: 200px; width: 200px;">
                                             <div class="image-container">
-                                              <img src="https://grangeprint.com/image/cache/placeholder-750x750-nofill-255255255.png">
+                                              <img src="{{ $resume->photo }}">
                                               <label for="photo" class="input-trigger hover-div">
                                                 <p>
                                                   <i class="fa fa-file-image-o fa-5x" aria-hidden="true"></i>
@@ -1000,104 +1029,173 @@
 --}}
 
         <div role="tabpanel" class="tab-pane" id="jobinfo">
-            <h3>Opening Information</h3>
-            <div class="container" id="show_opening"> {{-- START OF SHOW OPENING --}}
-                <div class="row text-center">
-                    <div class="col-md-12">
-                        <img src="{{ asset('img/opening_banner.png') }}" />
+            <div class="row">
+                <div class="col-sm-12">
+                    <h2>Job Information</h2>
+                </div>
+            </div>
+            @if(\Auth::user() ? \Auth::user()->canEdit($opening) : false)
+                <a class="ui blue button massive" href="{{url('openings/edit').'/?opening_id='.$opening->id}}"> Edit </a>
+            @endif
+            <div class="row" style="margin-top: 5px;">
+                <div class="col-md-6">
+                    <h4 class="page-header"><i class="fa fa-file-text" aria-hidden="true"></i> Basic Job Info</h4>
+                    <div class="ui form">
+                        <label>Job Title</label>
+                        <div class="info">{{$opening->title}}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="ui form">
+                                <label>Salary Range</label>
+                                <div class="info">{!! salary_ranges()[$opening->salary_range] !!}</div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="ui form">
+                                <label>Hiring Type</label>
+                                <div class="info">
+                                    @if($opening->hiring_type == 0)
+                                        Intern
+                                    @elseif($opening->hiring_type == 1)
+                                        Regular
+                                    @elseif($opening->hiring_type == 2)
+                                        Temporary
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="ui form">
+                        <label>Date posted:</label>
+                        <div class="info">
+                                 {{ date(' M. j, Y ',strtotime($opening->created_at)) }}
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="ui form">
+                                <label>Primary address:</label>
+                                <div class="info">
+                                    {{$opening->address1}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="ui form">
+                                <label>Secondary address:</label>
+                                <div class="info">
+                                    {{$opening->address2}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="ui form">
+                        <label>City/Province:</label>
+                        <div class="info">
+                            @foreach($provinces as $province)
+                                {{$province->iso_code === $opening->province_code ? $province->name : ''}}
+                            @endforeach
+                            {{ $opening->city }}
+                        </div>
+                    </div>
+
+                    <div class="ui form">
+                        <label>Postal:</label>
+                        <div class="info">
+                            {{$opening->postal}}
+                        </div>
+                    </div>
+
+                    <div class="ui form">
+                        <label>Country:</label>
+                        <div class="info">
+                            @foreach($countries as $country)
+                                {{$country->iso_alpha3 === $opening->country_code ? $country->name : ''}}
+                            @endforeach
+                        </div>
+                    </div>
+
+                    <div class="ui form">
+                        <label>Details</label>
+                        <div class="info">{!! $opening->details != '' ? $opening->details : '<span style="color:gray;">No info.</span>' !!}</div>
+                    </div>
+
+
+                    <div class="ui form">
+                        <label>Requirements</label>
+                        <div class="info">{!! $opening->requirements != '' ? $opening->requirements :  '<span style="color:gray;">No info.</span>' !!}</div>
                     </div>
                 </div>
-                <div class="row" id="openings-title">
-                    <div class="col-md-2">
-                        <span class="contain" style="background-image: url('{{ $opening->company->company_logo }}');  position: absolute; left:35px; top: -40px;"></span>
-                    </div>
-                    <div class="col-md-10">
-                        <h1 style="word-wrap: break-word;">{{ $opening->title }}</h1>
-                        <h4>
-                            <a href="{{ url('companies', $company->id) }}">
-                                {{ $company->company_name }}
-                                <br>
-                            </a>
-                        </h4>
+                <div class="col-md-6">
+                    <h4 class="page-header">
+                        <i class="fa fa-graduation-cap" aria-hidden="true"></i>
+                        Skill Requirements
+                        <span style="color:#a94442;"></span>
+                    </h4>
+                    <div class="row" id="skill_required">
+                        <div class="col-md-4">
+                        </div>
+                        <div class="col-md-4">
+                        </div>
+                        <div class="col-md-4">
+                        </div>
+                        <script type="text/javascript">
+                        $(function(){
+                            var skill_requirements = JSON.parse("{{json_encode($opening->skill_requirements)}}".replace(/&quot;/g,'"'));
+
+                            var skills_container = $('#skill_required');
+                            var language_added = [];
+                            var x = 0;
+
+                            for(var i = 0; i < skill_requirements.length; i++){
+                                if(x > 2){
+                                    x = 0;
+                                }
+
+                                var lang = skill_requirements[i].language.toLowerCase() == 'c++' ? 'cplus2' : (skill_requirements[i].language.toLowerCase() == "c#" ? 'csharp' : (skill_requirements[i].language.toLowerCase() == 'node.js' ? 'node-js' : skill_requirements[i].language.toLowerCase()) );
+
+                                if(language_added.includes(lang)){
+                                    skills_container.find('.'+lang).parent().find('.body').append('<div class="ellipsis">'+skill_requirements[i].category+'</div>');
+                                }
+                                else
+                                {
+                                    skills_container.find('.col-md-4').eq(x).append(
+                                        '<div class="job-card">'
+                                        +'    <div class="header ellipsis '+lang+'">'+skill_requirements[i].language+'</div>'
+                                        +'    <div class="body"><div class="ellipsis">'+skill_requirements[i].category+'</div> </div>'
+                                        +'</div>'
+                                    );
+                                    language_added.push(lang)
+                                    x++;
+                                }
+                            }
+
+                            if(skill_requirements.length < 1){
+                                skill_requirements.html('<div class="col-md-4" style="color:gray;">No skill requirements.</div>');
+                            }
+                        });
+                        </script>
                     </div>
                 </div>
-                <div class="row" id="openings-body">
-                    <div class="col-md-7">
-                        <div class="job-description">
-                            <h4>
-                                <i class="fa fa-file-text" aria-hidden="true"></i>
-                                Job description:
-                            </h4>
-                            <hr class="hr-desc" />
-                            {{ $opening->details }}
-                        </div>
-                        <div class="job-qualify">
-                            <h4>
-                                <i class="fa fa-graduation-cap" aria-hidden="true"></i>
-                                Job Qualifications:
-                            </h4>
-                            <hr />
-                            <h5>{{ $opening->requirements }}</h5>
-                        </div>
-
-                    </div>
-
-                    <div class="col-md-5">
-                        <h4>
-                            <i class="fa fa-briefcase" aria-hidden="true"></i>
-                            Company Profile:
-                        </h4>
-                        <hr>
-
+                @if (!Auth::guest())
+                    @if (Auth::user()->role == 0)
                         <div class="row">
-                            <div class="col-xs-6">
-                                Company size:
-                                <h5>
-                                    <b>
-                                        {{ $company->number_of_employee }}
-                                    </b>
-                                    Employees
-                                </h5>
-                                Telephone no.
-                                <h5>
-                                    <b>
-                                        {{ $company->tel }}
-                                    </b>
-                                </h5>
-                                Country
-                                <h5>
-                                    <b>
-                                        {{ $company->country }}
-                                    </b>
-                                </h5>
-                            </div>
-                            <div class="col-xs-6">
-                                Postal no.
-                                <h5>
-                                    <b>
-                                        {{ $company->postal }}
-                                    </b>
-                                </h5>
-                                CEO:
-                                <h5>
-                                    <b>
-                                        {{ $company->ceo_name }}
-                                    </b>
-                                </h5>
-                                Bill company name:
-                                <h5>
-                                    <b>
-                                        {{ $company->bill_company_name }}
-                                    </b>
-                                </h5>
+                            <div class="col-md-12">
+                                <a href="{{action('ApplicationController@create', $opening->id)}}" class="ui button red big" >
+                                    Apply to this Job
+                                </a>
                             </div>
                         </div>
-                    </div>
-                </div>
-                {{-- <hr>
-                {!! link_to(action('ApplicationController@create', [$opening->id]), 'Application Form', ['class' => 'btn btn-danger']) !!} --}}
+                    @endif
+                @endif
             </div>
         </div>
+
 
         <script type="text/javascript">
             $(document).ready(function(){
@@ -1143,204 +1241,6 @@
                                 }
                             ]
                         },
-                        f_name:{
-                            identifier:'f_name',
-                            rules: [
-                                {
-                                    type:'empty',
-                                    prompt:'Please enter your first name'
-                                }
-                            ]
-                        },
-                        l_name:{
-                            identifier:'l_name',
-                            rules: [
-                                {
-                                    type:'empty',
-                                    prompt:'Please enter your last name'
-                                }
-                            ]
-                        },
-                        phone_number:{
-                            identifier:'phone_number',
-                            rules: [
-                                {
-                                    type:'empty',
-                                    prompt:'Please enter your phone number'
-                                }
-                            ]
-                        },
-                        email:{
-                            identifier:'email',
-                            rules: [
-                                {
-                                    type:'empty',
-                                    prompt:'Please enter your email'
-                                }
-                            ]
-                        },
-                        birth_date:{
-                            identifier:'birth_date',
-                            rules: [
-                                {
-                                    type:'empty',
-                                    prompt:'Please enter your birthdate'
-                                }
-                            ]
-                        },
-                        address1:{
-                            identifier:'address1',
-                            rules: [
-                                {
-                                    type:'empty',
-                                    prompt:'Please enter your address1'
-                                }
-                            ]
-                        },
-                        address2:{
-                            identifier:'address2',
-                            rules: [
-                                {
-                                    type:'empty',
-                                    prompt:'Please enter your address2'
-                                }
-                            ]
-                        },
-                        city:{
-                            identifier:'city',
-                            rules: [
-                                {
-                                    type:'empty',
-                                    prompt:'Please enter your city'
-                                }
-                            ]
-                        },
-                        country:{
-                            identifier:'country',
-                            rules: [
-                                {
-                                    type:'empty',
-                                    prompt:'Please enter your country'
-                                }
-                            ]
-                        },
-                        postal:{
-                            identifier:'postal',
-                            rules: [
-                                {
-                                    type:'empty',
-                                    prompt:'Please enter your postal'
-                                }
-                            ]
-                        },
-                        spoken_language:{
-                            identifier:'spoken_language',
-                            rules: [
-                                {
-                                    type:'empty',
-                                    prompt:'Please enter your spoken language'
-                                }
-                            ]
-                        },
-                        ed_university:{
-                            identifier:'ed_university',
-                            rules: [
-                                {
-                                    type:'empty',
-                                    prompt:'Please enter your university'
-                                }
-                            ]
-                        },
-                        ed_from_month:{
-                            identifier:'ed_from_month',
-                            type:'semantic-group',
-                            rules: [
-                                {
-                                    type:'empty',
-                                    prompt:'month start'
-                                }
-                            ]
-                        },
-                        ed_from_year:{
-                            identifier:'ed_from_year',
-                            type:'semantic-group',
-                            rules: [
-                                {
-                                    type:'empty',
-                                    prompt:'year start'
-                                }
-                            ]
-                        },
-                        ed_to_month:{
-                            identifier:'ed_to_month',
-                            type:'semantic-group',
-                            rules: [
-                                {
-                                    type:'empty',
-                                    prompt:'month end'
-                                }
-                            ]
-                        },
-                        ed_to_year:{
-                            identifier:'ed_to_year',
-                            type:'semantic-group',
-                            rules: [
-                                {
-                                    type:'empty',
-                                    prompt:'year end'
-                                }
-                            ]
-                        },
-
-
-                        // step 2 requirements
-                        summary:{
-                            identifier:'summary',
-                            rules:[
-                                {
-                                    type:'empty',
-                                    prompt:'Skill/Experience Summary required'
-                                }
-                            ]
-                        },
-
-                        // step 3 requirements
-                        objective:{
-                            identifier:'objective',
-                            rules:[
-                                {
-                                    type:'empty',
-                                    prompt:'Objective required'
-                                }
-                            ]
-                        },
-                        cr_company:{
-                            identifier:'cr_company',
-                            rules:[
-                                {
-                                    type:'empty',
-                                    prompt:'Company / University name required'
-                                }
-                            ]
-                        },
-                        cr_name:{
-                            identifier:'cr_name',
-                            rules:[
-                                {
-                                    type:'empty',
-                                    prompt:'Company personnel name required'
-                                }
-                            ]
-                        },
-                        cr_phone_number:{
-                            identifier:'cr_phone_number',
-                            rules:[
-                                {
-                                    type:'empty',
-                                    prompt:'Company personnel number required'
-                                }
-                            ]
-                        },
                     }
                 }
             );
@@ -1357,151 +1257,235 @@
 ##  ## ##  ## ##   ## ##     ##  ## ##  ##   ##
 ####   ####  ##   ## ##     ##  ## ##  ##   ##
 --}}
-        <div role="tabpanel" class="tab-pane" id="companyinfo">
-            <div class="row">
-                <div class="col-sm-12">
-                    <h2>Company Information</h2>
+<div role="tabpanel" class="tab-pane" id="companyinfo">
+<div class="row">
+    <div class="col-sm-12">
+        <h2>Company Information</h2>
+    </div>
+</div>
+<style type="text/css">
+
+</style>
+<div class="row">
+    <div class="col-md-12 cover-info">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="cover-image">
+                    <img src="{{ $company->background_photo }}" alt="{{ $company->company_name}} Cover photo" />
                 </div>
             </div>
-            <style type="text/css">
-            .cover-image{
-                position: relative;
-                height: 300px;
-                background: #c8c8c8;
-                overflow: hidden;
-                border: 1px solid #cecece;
-            }
-
-            .cover-image img{
-                position: absolute;
-                top: 50%;
-                transform:translateY(-50%);
-                width: 100%;
-                left: 0px;
-            }
-
-            .cover-info .picture{
-                padding: 5px;
-                background: white;
-                border: 1px solid #cecece;
-                position: relative;
-            }
-
-            .cover-info .picture img{
-                width: 100%;
-            }
-
-            .cover-info{
-            }
-
-            .cover-info img{
-                border:none!important;
-            }
-            </style>
-
-            <div class="row text-center">
-                <div class="col-md-12 cover-info">
-                    <div class="cover-image">
-                        <img src="{{ $company->company_logo }}" alt="{{ $company->company_name}}" />
-                    </div>
-                    <div class="row cover-info" id="openings-title" style="margin:0px; margin-top:-100px;">
-                        <div class="col-sm-2">
-                            <div class="picture">
-                                <div class="photo-wrapper">
-                                    <img src="{{asset('img/bg-img.png')}}" class="bg-img">
-                                    <img class="_image" src="{{ $company->company_logo }}">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-12">
-                            <div class="row" style="text-align:left;">
-                                <div class="col-sm-6">
-                                    <h1>
-                                        <a href="{{ url('companies', $company['id']) }}">
-                                            {{ $company->company_name }}
-                                            <br>
-                                        </a>
-                                    </h1>
-                                </div>
-                                <div class="col-sm-6">
-                                    <h5>
-                                        <i class="fa fa-map-marker fa-lg" aria-hidden="true"></i>
-                                        &nbsp; {{ $company->city }}, {{ $company->country }}
-                                    </h5>
-                                    <h5>
-                                        <i class="fa fa-calendar fa-lg" aria-hidden="true"></i>
-                                        &nbsp; {{ $company->created_at }}
-                                    </h5>
-                                </div>
+        </div>
+        <div class="row cover-info">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-sm-2 col-xs-4">
+                        <div class="picture">
+                            <div class="photo-wrapper">
+                                <img src="{{asset('img/bg-img.png')}}" class="bg-img">
+                                <img class="_image" src="{{ $company->company_logo }}">
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-
-            <hr>
-            <div class="row">
-                <div class="col-md-8">
-                    <h3>About us:</h3>
-                    {{ $company->what }}
+                <div class="row under-photo">
+                    <div class="col-md-7 col-sm-12 col-xs-12">
+                        <div id="company_name_single_page">
+                            <a href="{{ url('companies', $company['id']) }}">
+                                {{ $company->company_name }}
+                                <br>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-5 col-sm-12 col-xs-12 address-established">
+                        <div class="single-company-info-wrapper">
+                            <div class="li-content-forcom-single i-wrapper">
+                                <i class="fa fa-map-marker fa-lg" aria-hidden="true"></i>
+                            </div>
+                            <div class="li-content-forcom-single text-wrapper">
+                                &nbsp; {{ $company->address1 }}, {{ $company->city }}, {{ $company->country }}
+                            </div>
+                        </div>
+                        <div class="single-company-info-wrapper">
+                            <div class="li-content-forcom-single i-wrapper">
+                                <i class="fa fa-users fa-lg" aria-hidden="true"></i>
+                            </div>
+                            <div class="li-content-forcom-single text-wrapper">
+                                &nbsp; {{ $company->population }}
+                            </div>
+                        </div>
+                        <div class="single-company-info-wrapper">
+                            <div class="li-content-forcom-single i-wrapper">
+                                <i class="fa fa-laptop fa-lg" aria-hidden="true"></i>
+                            </div>
+                            <div class="li-content-forcom-single text-wrapper">
+                                &nbsp;
+                                <a href="{{ $company->url }}">
+                                    {{ $company->url }}
+                                </a>
+                            </div>
+                        </div>
+                        <div class="single-company-info-wrapper">
+                            <div class="li-content-forcom-single i-wrapper">
+                                <i class="fa fa-file-o fa-lg" aria-hidden="true"></i>
+                            </div>
+                            <div class="li-content-forcom-single text-wrapper">
+                                &nbsp;
+                                <a href="{{ url('companies', $company->id) }}">
+                                    {{ $company->openings->count() }} Current hiring
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-md-4">
-                    <h3>Company details:</h3>
-                    <ul class="company-list-info">
-                        <li>
-                            <div class="field-name">Email</div>
-                            <div class="field-value">{{ $company->email }}</div>
-                        </li>
-                        <li>
-                            <div class="field-name">CEO</div>
-                            <div class="field-value">{{ $company->ceo_name }}</div>
-                        </li>
-                        <li>
-                            <div class="field-name">COO</div>
-                            <div class="field-value">{{ $company->in_charge }}</div>
-                        </li>
-                        <li>
-                            <div class="field-name">Address(s)</div>
-                            <div class="field-value">{{ $company->address1 }}</div>
-                            <div class="field-value">{{ $company->address2 }}</div>
-                        </li>
-                        <li>
-                            <div class="field-name">City</div>
-                            <div class="field-value">{{ $company->city }}</div>
-                        </li>
-                        <li>
-                            <div class="field-name">Country</div>
-                            <div class="field-value">{{ $company->country }}</div>
-                        </li>
-                        <li>
-                            <div class="field-name">Website</div>
-                            <div class="field-value">{{ $company->url }}</div>
-                        </li>
-                        <li>
-                            <div class="field-name">Contact</div>
-                            <div class="field-value">{{ $company->tel }} (Tel)</div>
-                        </li>
-                        <li>
-                            <div class="field-name">Employees</div>
-                            <div class="field-value">{{ $company->number_of_employee }}</div>
-                        </li>
-                    </ul>
-                </div>
             </div>
+        </div>
+    </div>
+</div>
+<hr style="margin-top:12px; margin-bottom:5px;">
+<div class="row">
+    <div class="col-md-7 col-sm-12 col-xs-12">
 
-            @if (!Auth::guest())
-                @if (Auth::user()->role == 1)
-                    @if (in_array(Auth::user()->id, $companies_ids))
-                        <br/>
-                        {!! link_to(action('CompaniesController@edit', [$company->id]), '編集', ['class' => 'btn btn-primary']) !!}
-                        <br/>
-                        {!! Form::open(['method' => 'DELETE', 'url' => ['companies', $company->id]]) !!}
-                        {!! Form::submit('削除', ['class' => 'btn btn-danger']) !!}
-                        {!! Form::close() !!}
-                    @endif
-                @endif
-            @endif
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12 com-single-header">
+                <h3 class="">About us:</h3>
+            </div>
+        </div>
+
+        <div class="row">
+            <p class="col-md-11 col-md-offset-1 col-sm-11 col-sm-offset-1 col-xs-11 col-xs-offset-1">
+                {{ $company->what }}
+            </p>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12 com-single-header">
+                <h3 class="">Why join us?:</h3>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-11 col-md-offset-1 col-sm-11 col-sm-offset-1 col-xs-11 col-xs-offset-1">
+                <img style="height:100%;width:100%;" src="{{ $company->what_photo1 }}" alt="{{ $company->company_name}} Cover photo" />
+                <p style="">
+                    {{ $company->what_photo1_explanation }}
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-5 col-sm-12 col-xs-12 com-single-header">
+        <h3>Company details:</h3>
+        <ul class="company-list-info">
+
+            <li>
+                <div class="row">
+                    <div class="field-name col-sm-11 col-sm-offset-1 col-xs-11 col-xs-offset-1">
+                        CEO:
+                    </div>
+                    <div class="field-value col-sm-11 col-sm-offset-1 col-xs-11 col-xs-offset-1">
+                        {{ $company->ceo_name }}
+                    </div>
+                <div>
+            </li>
+
+            <li>
+                <div class="row">
+                    <div class="field-name col-sm-11 col-sm-offset-1 col-xs-11 col-xs-offset-1">
+                        Established at:
+                    </div>
+                    <div class="field-value col-sm-11 col-sm-offset-1 col-xs-11 col-xs-offset-1">
+                        {{ $company->established_at }}
+                    </div>
+                <div>
+            </li>
+
+            <li>
+                <div class="row">
+                    <div class="field-name col-sm-11 col-sm-offset-1 col-xs-11 col-xs-offset-1">
+                        Company website URL:
+                    </div>
+                    <div class="field-value col-sm-11 col-sm-offset-1 col-xs-11 col-xs-offset-1">
+                        {{ $company->url }}
+                    </div>
+                </div>
+            </li>
+
+            <li>
+                <div class="row">
+                    <div class="field-name col-sm-11 col-sm-offset-1 col-xs-11 col-xs-offset-1">
+                        Company size:
+                    </div>
+                    <div class="field-value col-sm-11 col-sm-offset-1 col-xs-11 col-xs-offset-1">
+                        {{ $company->company_size }}
+                    </div>
+                </div>
+            </li>
+
+            <li>
+                <div class="row">
+                    <div class="field-name col-sm-11 col-sm-offset-1 col-xs-11 col-xs-offset-1">
+                        Email:
+                    </div>
+                    <div class="field-value col-sm-11 col-sm-offset-1 col-xs-11 col-xs-offset-1">
+                        {{ $company->email }}
+                    </div>
+                </div>
+            </li>
+
+            <li>
+                <div class="row">
+                    <div class="field-name col-sm-11 col-sm-offset-1 col-xs-11 col-xs-offset-1">
+                        Company address:
+                    </div>
+                    <div class="field-value col-sm-11 col-sm-offset-1 col-xs-11 col-xs-offset-1">
+                        {{ $company->address1 }}, {{ $company->city }}, {{ $company->country }}
+                    </div>
+                </div>
+            </li>
+
+            <li>
+                <div class="row">
+                    <div class="field-name col-sm-11 col-sm-offset-1 col-xs-11 col-xs-offset-1">
+                        Company Tel:
+                    </div>
+                    <div class="field-value col-sm-11 col-sm-offset-1 col-xs-11 col-xs-offset-1">
+                        {{ $company->tel }}
+                    </div>
+                </div>
+            </li>
+
+            <li>
+                <div class="row">
+                    <div class="field-name col-sm-11 col-sm-offset-1 col-xs-11 col-xs-offset-1">
+                        Language spoken:
+                    </div>
+                    <div class="field-value col-sm-11 col-sm-offset-1 col-xs-11 col-xs-offset-1">
+                        {{ $company->spoken_language }}
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+
+@if(!empty($company->address1))
+    <div class="container text-center" style="height:500px;width:100%; margin-top:50px;">
+            {!! Mapper::render() !!}
+    </div>
+@endif
+@if (!Auth::guest())
+    @if (Auth::user()->role == 1)
+        @if (in_array(Auth::user()->id, $companies_ids))
+            <br/>
+            {!! link_to(action('CompaniesController@edit', [$company->id]), '編集', ['class' => 'btn btn-primary']) !!}
+            <br/>
+            {!! Form::open(['method' => 'DELETE', 'url' => ['companies', $company->id]]) !!}
+            {!! Form::submit('削除', ['class' => 'btn btn-danger']) !!}
+            {!! Form::close() !!}
+        @endif
+    @endif
+@endif
+
         </div>
     </div>
 </div>
