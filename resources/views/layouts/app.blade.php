@@ -6,8 +6,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Beagle</title>
 
-
-
         @if( Request::path() == 'resumes/create' || Request::path() == 'openings' || Request::url('/resumes/{id}/edit'))
 
         {{--@if( Request::path() == 'resumes/create' || Request::path() == 'openings' || Request::path() == 'portals/general_portal')--}}
@@ -43,7 +41,11 @@
         <link rel="stylesheet" href="{{ asset('css/croppie.css') }}">
         <link rel="stylesheet" href="{{ asset('css/media-query.css') }}">
 
+        {{-- <link rel="stylesheet" href="{{ asset('css/components/user_application_profile.css') }}"> --}}
+
+
         <!-- LP -->
+        <link rel="stylesheet" href="{{ asset('css/components/itp_landingpage.css') }}">
         <link rel="stylesheet" href="{{ asset('css/components/itp_landingpage.css') }}">
 
 
