@@ -59,7 +59,6 @@
                         </div>
                         </div>
                     @endforeach
-                    {{-- {!! $companies->render() !!} --}}
                 @else
                     <h4>
                         You haven't received any scouts.
