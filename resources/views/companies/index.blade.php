@@ -4,7 +4,6 @@
 
 <script type="text/javascript">
     $(document).ready(function(){
-        // mark opening link active
         $('.company_nav').addClass('active');
     });
 </script>
@@ -87,15 +86,6 @@
                     <input type="text" class="company-search form-control" name="company_name" value="{{$_GET['company_name'] ?? ''}}" placeholder="Search companies">
 
                     <button type="submit">Search</button>
-                    {{-- <div style="position: relative;">
-                        <label class="with_comp-info_btn">
-                            <input type="checkbox" class="with_hiring" name="w_hiring_info" value="2"
-                            <//?php if(isset($_GET['w_hiring_info'])) echo "checked='checked'"; ?>
-                            />
-                            <h5 class="with_hiring_text" style="cursor: pointer;">With hiring information</h5>
-
-                        </label>
-                    </div> --}}
                     {!!Form::close()!!}
                 </div> <!-- End company-search -->
 

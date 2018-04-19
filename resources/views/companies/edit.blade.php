@@ -117,7 +117,7 @@
                     <div class="col-sm-12">
                         <div class="row" style="text-align:left;">
                             <div class="col-sm-7">
-                                <h2 style="padding-top: 1rem;font-weight: 600;">
+                                <h2 style="padding: 5rem;font-weight: 600;">
                                     <a href="{{ url('companies', $company['id']) }}">
                                         {{ $company->company_name ?? old('company_name') }}
                                         <br>
@@ -178,7 +178,9 @@
                                     <div class="crop-control" style="height: 100%;" data-width="1200" data-height="400" data-dim="true">
                                         <div class="image-container-cover" style="height: 100%;">
                                             @if(!empty($company->what_photo1))
-                                                <img style="width: 100%;" src="/storage/{{ $company->what_photo1 }}" alt="{{ $company->company_name}} Why choose us" />
+                                                {{-- <img style="width: 100%;" src="{{ $company->what_photo1 }}" alt="{{ $company->company_name}} Why choose us" /> --}}
+                                                <img style="width: 100%;" src="http://www.pek-cy.com/sites/default/files/default-image.png" class="bg-img">
+
                                             @else
                                                 <img style="width: 100%;" src="http://www.pek-cy.com/sites/default/files/default-image.png" class="bg-img">
                                             @endif
