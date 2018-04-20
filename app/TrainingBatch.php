@@ -9,7 +9,6 @@ class TrainingBatch extends Model
 {
 	protected $fillable = ['name', 'start_date', 'end_date', 'regitration_deadline', 'schedule', 'description', 'author_id'];
 
-
     //related to application
     public function user()
     {

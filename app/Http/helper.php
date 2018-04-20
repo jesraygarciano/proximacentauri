@@ -7,51 +7,6 @@ function test()
 
 function resume_skill_array($language){
 
-    // $skill_id_array = App\Resume_skill::where('language', $language)->get()->pluck('id')->toArray();
-    // // $skill_array_value = array_values($skill_array);
-    // // $skill_array_value = array_column($skill_array, 'id', 'language');
-
-    // $skill_category_array = App\Resume_skill::where('language', $language)->get()->pluck('category')->toArray();
-    // // $skill_category_array = array_values($skill_category_array);
-
-    // // dd($skill_id_array);
-    // // dd($skill_collection);
-    // $skill_array = array_combine($skill_id_array, $skill_category_array);
-
-    // $a = 0;
-    // $skill_array = array();
-    // for ($i=0; $i < count($skill_collection) ; $i++) {
-        // if ($i == 0) {
-        //     $skill_array = array($skill_collection[$i]->language => $skill_collection[$i]->category);
-
-        // }else{
-        //     // $skill_array += array($skill_collection[$i]->language => $skill_collection[$i]->category);
-        //     // dd($skill_array);
-        //     $skill_array = array_merge($skill_array, array($skill_collection[$i]->language => $skill_collection[$i]->category));
-        // }
-        // $skill_array = $skill_array + array($skill->language => $skill->category);
-        // if ($i == 0) {
-        //     $skill_array = array($skill_collection[$i]->language => $skill_collection[$i]->category);
-        // }else{
-        //     $skill_array[$skill_collection[$i]->language] = $skill_collection[$i]->category;
-        // }
-        // $a += 1;
-        //
-        // $skill_add = array($skill_collection[$i]->language => $skill_collection[$i]->category);
-        // $skill_array = array_merge($skill_add, $skill_array);
-        //
-        // $skill_add[$skill_collection[$i]->language] = $skill_collection[$i]->category;
-        // $skill_array = array_merge($skill_array, $skill_add);
-    // }
-    // dd(count($skill_array));
-    // dd($skill_array);
-    // dd($skill_collection['3']);
-    //
-    // dd($skill_array);
-    // $a = array(3, 5, 6);
-    // dd($a);
-    //
-
     $skill_array = App\Resume_skill::where('language', $language)->get();
 
     return $skill_array;
@@ -141,8 +96,6 @@ function year_array() {
             $a -= 1;
          }
     }
-    // $year_array = array_reverse($year_array);
-    // dd($year_array);
 
     return $year_array;
 }
@@ -180,7 +133,6 @@ function get_language_ids($language){
 function return_category($id){
 
     $category = App\Resume_skill::findOrFail($id)->category;
-    // dd($category);
     return $category;
 }
 
@@ -231,35 +183,6 @@ function date_convert($date_time){
     return $converted_date;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 function delete_form($urlParams, $label)
 {
     $form = Form::open(['method' => 'DELETE', 'route' => $urlParams]);
@@ -287,10 +210,8 @@ function getStatus($user) {
     $status = '';
     if ($user->join_courses->toArray()) {
         $join_courses = $user->join_courses->toArray();
-        // dd($join_courses);
         $start_date = Carbon\Carbon::parse($join_courses[0]['start_date']);
         $end_date = Carbon\Carbon::parse($join_courses[0]['end_date']);
-        // dd($today->gte($start_date));
         if ($today->lte($start_date)) { // 今日 < 受講コースstart_date
             $status = '入学前';
         } elseif ($today->gte($start_date) && $today->lte($end_date)) { // 受講コースstart_date < 今日 < 受講コースend_date
@@ -322,7 +243,6 @@ function getlastLoginDiffInDays($user) {
 
 function isLog() {
     $latest_time = App\Time::latest('created_at')->first();
-    // end_dateが存在すればtrueを返す
     if ($latest_time->end_date) {
         return true;
     }
@@ -348,7 +268,6 @@ function getExamAvg($user) {
 
 
 function isAdmin($role) {
-    // return isAdmin(App\Http\UsersController::isAdmin($role));
     if ($role == 5) {
         return true;
     }
@@ -372,7 +291,6 @@ function isSelected($exam_id, $question_id) {
 function isCurrent($str) {
     $uri = Request::path();
     $uri = explode('/', $uri);
-    // dd($uri);
     if ($uri[0] == $str) {
         return 'active';
     } elseif ($uri[0] == 'curriculums' && $str == 'units') {
@@ -387,7 +305,6 @@ function formatYmdHi($datetime_str) {
     }
     $d = explode(" ", $datetime_str);
     $t = explode(":", $d[1]);
-    // dd($d[0]);
     $h = $t[0];
     if (isset($t[1])) {
         $m = $t[1];

@@ -9,11 +9,8 @@ class Opening extends Model
 
     protected $fillable = ['title', 'company_id', 'address', 'picture', 'icon', 'details', 'requirements', 'term', 'other', 'created_at', 'updated_at'];
 
-   // protected $dates = ['created_at', 'updated_at', 'deleted_at','from_post','until_post','start_at','end_at'];
-
     protected $appends = ['salary_range_words'];
 
-    // protected $hidden = ['password'];
     public function company()
     {
         return $this->belongsTo(Company::class);
@@ -35,7 +32,6 @@ class Opening extends Model
         return $this->users_that_bookmarked()->count();
     }
 
-    //$opening_skill_ids should be array
     public function register_skill($opening_skill_ids)
     {
         $existing_skills = $this->skill_requirements()->pluck('opening_skills.id')->toArray();
@@ -89,8 +85,6 @@ class Opening extends Model
     public function notifySubscribedApplicants(){
         $follower_ids = \DB::table('follow_companies')->where('company_id',$this->company->id)->pluck('user_id');
 
-        // dd($follower_ids);
-
         foreach ($follower_ids as $id) {
             $notification = \App\OpeningNotification::create([
                 //
@@ -136,12 +130,6 @@ class Opening extends Model
                         'user_id'=>$id
                     ]
                 ));
-                //↑これは、notifier.jsの下記のプログラムにcatchされる
-                //$.socket.on('notification-channel:App\\Events\\NotificationEvent',function(data){
-                //↑のfunction(data)のdataが下記
-                // 'type'=>'new opening',
-                // 'event'=>'created',
-                // 'user_id'=>$id
             }
         });
     }

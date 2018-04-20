@@ -27,10 +27,10 @@ class Resume extends Model
         return $this->belongsToMany('App\Resume_skill', 'joining_resume_skills', 'resume_id', 'resume_skill_id');
     }
 
-    // public function skill_requirements()
-    // {
-    //     return $this->belongsToMany(Resume_skill::class, 'joining_resume_skills', 'resume_id', 'resume_skill_id');
-    // }
+    public function skills()
+    {
+        return $this->belongsToMany('App\Resume_skill', 'joining_resume_skills', 'resume_id', 'resume_skill_id');
+    }
 
     public function getPhotoAttribute(){
         if(!@file_exists('storage/'.$this->attributes['photo']) || @str_replace(' ','',$this->attributes['photo']) == ''){
