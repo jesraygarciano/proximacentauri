@@ -54,7 +54,6 @@ class ScoutsController extends Controller
         // dd($request);
         $this->validate($request, [
             'description' => 'required'
-            // ,'otherinfo' => 'required'
             ]);
 
         $scout = new Scout;
@@ -68,10 +67,7 @@ class ScoutsController extends Controller
 
     public function company_scout(){
 
-        // $applicant = Scout::latest('created_at')->where('is_active', 1)->where('user_id', Auth::user()->id)->first();
-
         $companies = Auth::user()->companies_that_scout_users()->get();
-        // dd($companies);
 
         return view('scouts.company_scout')->with('companies', $companies);
     }

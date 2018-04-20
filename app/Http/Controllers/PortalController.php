@@ -36,8 +36,6 @@ class PortalController extends Controller
             return redirect('portals/general_portal');
         } elseif (Auth::user()->role == 1) {    //hiring side
             $company = Company::where('user_id',Auth::user()->id)->where('is_active', 1)->get();
-            // dd($company);
-            // dd(count($company));
             if(count($company)>0){
                 return redirect('hiring_portal');
             }else{
@@ -63,17 +61,27 @@ class PortalController extends Controller
 
         $openings = Opening::latest('created_at')->where('is_active', 1)->take(4)->get();
 
-        // $companies_1 = Company::where('id', $openings->company_id)->get();
-
         // fetch province names and province hiring count
-        $provinces = \DB::table('provinces')->leftJoin('openings','provinces.iso_code','=','openings.province_code')->select('name','division',\DB::raw('count(openings.id) as hirings'),'iso_code')->where('openings.is_active',1)->groupBy('provinces.id')->get();
+        // ->leftJoin('openings','provinces.iso_code','=','openings.province_code')
+        $provinces = \DB::table('provinces')->select('name','division','iso_code')->get();
+
+        foreach($provinces as $key => $province){
+            $provinces[$key]->hirings = Opening::where('province_code',$province->iso_code)->where('is_active',1)
+            ->where('until_post','>',date('Y-m-d H:i:s'))
+            ->count();
+        }
 
         // fetch country names and country hiring count
-        $countries = \DB::table('countries')->leftJoin('openings','countries.iso_alpha3','=','openings.country_code')->select('name',\DB::raw('count(openings.id) as hirings'),'iso_alpha3')->where('openings.is_active',1)->groupBy('countries.id')->get();
-        $raw_countries = \DB::table('countries')->get();
+        // ->leftJoin('openings','countries.iso_alpha3','=','openings.country_code')
+        $countries = \DB::table('countries')->select('name','iso_alpha3')->get();
+
+        foreach($countries as $key => $country){
+            $countries[$key]->hirings = Opening::where('country_code',$country->iso_alpha3)->where('is_active',1)
+            ->where('until_post','>',date('Y-m-d H:i:s'))
+            ->count();
+        }
 
         return view('portals/general_portal', compact('raw_countries', 'companies', 'featured_openings', 'openings','provinces','countries'));
-        // return view('portals/general_portal', compact('companies','openings','companies_1'));
     }
 
 

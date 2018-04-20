@@ -55,7 +55,6 @@ class ResumesController extends Controller
     public function store(Request $request)
     {
 
-        // dd($request->skills);
         $this->validate($request, [
             'f_name' => 'required',
             'l_name' => 'required',
@@ -69,17 +68,11 @@ class ResumesController extends Controller
             'country' => 'required',
             'postal' => 'required',
             'spoken_language' => 'required',
-            // 'ed_university' => 'required',
-            // 'ed_from_month' => 'required',
-            // 'ed_from_year' => 'required',
-            // 'ed_to_month' => 'required',
-            // 'ed_to_year' => 'required',
             'summary' => 'required',
             'objective' => 'required',
             'cr_company' => 'required',
             'cr_name' => 'required',
             'cr_phone_number' => 'required',
-            // 'picture' => 'required',
         ],
         [
             'f_name.required' => 'Please enter your first name',
@@ -94,11 +87,6 @@ class ResumesController extends Controller
             'country.required' => 'Please enter your country',
             'postal.required' => 'Please enter your postal',
             'spoken_language.required' => 'Please enter your spoken language',
-            // 'ed_university.required' => 'Please enter your university',
-            // 'ed_from_month.required' => 'month start',
-            // 'ed_from_year.required' => 'year start',
-            // 'ed_to_month.required' => 'month end',
-            // 'ed_to_year.required' => 'year end',
             'summary.required' => 'Skill/Experience Summary required',
             'objective.required' => 'Objective required',
             'cr_company.required' => 'Company / University name required',
@@ -113,7 +101,6 @@ class ResumesController extends Controller
 
         if($request->photo){
             $data = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $request->photo));
-            // $fileNameToStore = time().'.png';
             $fileNameToStore = Common::resume_photo_name($resume->id);
             file_put_contents(public_path('/storage/').$fileNameToStore, $data);
             $resume->photo = $fileNameToStore;
@@ -161,14 +148,10 @@ class ResumesController extends Controller
     public function show()
     {
         $user = \Auth::user();
-        $resume = Resume::where('user_id', \Auth::id())->where('is_active', 1)->where('is_master', 1)->get()->first();
-        $skill_ids = array();
-        // if ($resume->has_skill() != null) {
-        $skill_ids = Common::resume_skill_ids_get($resume);
-        // }
+        $resume = $user->findFirstOrCreateResume();
+        $skill_ids = $resume->skills()->pluck('resume_skill_id');
 
         $skills = $resume->has_skill()->get();
-        // $skills = $resume->has_skill()->get()->where('language', 'PHP')->get();
 
         $age = Common::cal_age($resume->birth_date);
         $birth_date = Common::month_converted_date($resume->birth_date);
@@ -186,21 +169,13 @@ class ResumesController extends Controller
     // public function edit($resume_id)
     public function edit($id)
     {
-        /*$resume = Resume::findOrFail($resume_id);
-        $languages_ids = $resume->has_skill()->get()->pluck('id')->toArray();
-        return view('resumes.edit', compact('resume', 'languages_ids'));
-        */
         $user = \Auth::user();
-        // $user = Resume::findOrFail($id);
-        // dd($user);
         $skills = Resume_skill::all();
         $resume = Common::get_master_resume();
         $educations = $resume->educations()->get();
         $experiences = $resume->experiences()->get();
         $cr = $resume->character_references()->get();
-        // dd($educations);
         if($resume){
-            // $resume = Resume::where('user_id', $user->id)->where('is_active', 1)->where('is_master', 1)->get()->first();
             $languages_ids = $resume->has_skill()->get()->pluck('id')->toArray();
         }else{
             $resume = new Resume;
@@ -311,8 +286,6 @@ class ResumesController extends Controller
             file_put_contents(public_path('/storage/').$fileNameToStore, $data);
             $resume->photo = $fileNameToStore;
         }
-
-        // $resume->photo = $fileNameToStore;
 
         $resume->fill($input)->save();
 

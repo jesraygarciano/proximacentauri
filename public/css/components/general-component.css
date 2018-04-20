@@ -249,6 +249,8 @@
     height: 65%;
     width: 65%;
     -webkit-transform: translate(-32px,-27px);
+    transform: translate(-32px,-27px);
+
 }
 
 .html{
@@ -265,6 +267,8 @@
 
 .swift-round{
     -webkit-transform: translate(-2px,48px);
+    transform: translate(-2px,48px);
+
 }
 
 .csharp{
@@ -353,6 +357,8 @@
     left: 50%;
     width: 700px;
     -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+    
 }
 
 .landing-search-tab{
@@ -411,6 +417,7 @@
     left: 50%;
     width: 700px;
     -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
 }
 
 .general_heading h2{
@@ -594,7 +601,7 @@
 
 .noti-bell .noti{
     display: block;
-    padding: 3px 20px;
+    padding: 5px 20px;
     color: #4d5355;
     text-decoration: none;
 }
@@ -606,7 +613,6 @@
 .noti-bell:hover .noti-lists{
     display: block;
 }
-
 
 .message-alert{
     position: fixed;
