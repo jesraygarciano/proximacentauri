@@ -27,7 +27,6 @@
 
     <div class="col-md-10">
         <div class="row">
-        {{-- {{ $applied_application_openings }} --}}
         @if (count($applied_application_openings) > 0)
             @foreach ($applied_application_openings as $opening)
             <div class="col-md-6">
@@ -101,10 +100,9 @@
                             </div>
                             <div class="pull-right">
                                 <div class="foggy-text">
-                                    <!-- <div style="position: relative;bottom: 100px;"> -->
-                                        <div class="ribbon">
-                                            @include('openings.opening_bookmark.bookmark_button', ['opening' => $opening])
-                                        </div>                                    
+                                    <div class="ribbon">
+                                        @include('openings.opening_bookmark.bookmark_button', ['opening' => $opening])
+                                    </div>                                    
                                 </div>
                             </div>
                         </div>

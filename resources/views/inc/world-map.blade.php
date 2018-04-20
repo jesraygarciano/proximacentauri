@@ -1299,19 +1299,11 @@
 
 		// parse countries json data
 		var countries = JSON.parse('{{json_encode($countries)}}'.replace(/&quot;/g,'"'));
-		var raw_countries = JSON.parse('{{json_encode($raw_countries)}}'.replace(/&quot;/g,'"'));
 
 		$('#worldmap-m').find('path').each(function(){
 
 			// get path country code
 			var country_code = $(this).parent().attr('class').replace('country ','');
-			
-			for(var i = 0; i < raw_countries.length; i++){
-				if(raw_countries[i].iso_alpha3 == country_code){
-					console.log(raw_countries[i].name);
-					$(this).attr('title',raw_countries[i].name);
-				}
-			}
 
 			$(this).attr('id',country_code);
 
@@ -1320,6 +1312,7 @@
 			$.grep(countries,function(value,key){
 				if(value.iso_alpha3 == $this.attr('id')){
 					$this.attr('data-hirings',value.hirings);
+					$this.attr('title',value.name);
 				}
 			});
 		});

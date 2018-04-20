@@ -3,7 +3,6 @@
 @section('content')
 
     <hr>
-
     <article>
         <h3>
         	<h1>Welcome</h1>

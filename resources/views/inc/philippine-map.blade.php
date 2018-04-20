@@ -158,7 +158,7 @@
 		});
 
 		$('#philippines-m').mapEventPlacer({
-			goToUrl:"{{url('portals/search_ph_region/')}}/"
+			goToUrl:"{{url('openings?show_advance_search=open&province=')}}"
 		});
 	});
 </script>

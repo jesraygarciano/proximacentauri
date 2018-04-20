@@ -61,7 +61,7 @@
         ##  ## ##     ##       ##    ##  ## ## ##  ## # ##
         ##  ## ##     ##       ##    ##  ## ##  ## ##   ##
         ##  ## ##     ##       ##     ####  ##  ## ##   ##
-        --}}
+        --}}    
 
         <div role="tabpanel" class="tab-pane active" id="application_form">
             @include('inc.message')
