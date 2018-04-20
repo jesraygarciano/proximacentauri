@@ -36,13 +36,6 @@ class CompaniesController extends Controller
         if(!empty($searchData)){
             if(!empty($w_hiring_info)){
 
-                // $companies = Company::where('company_name', 'LIKE', '%'. $searchData . '%')->paginate(10);
-                // dd($companies);
-                        // paginate(10);
-                // User::find($request->applicant_saved_id)->scouters->count()
-
-                // User::find($request->applicant_saved_id)->scouters->count()
-
                 $companies = Company::where('company_name', 'LIKE', '%'. $searchData . '%')->paginate(10);
 
             }
@@ -52,14 +45,12 @@ class CompaniesController extends Controller
         }elseif(!empty($w_hiring_info)){
 
                 $companies = Company::where('company_name', 'LIKE', '%'. $searchData . '%')->paginate(10);
-            // dd($companies);
         }
         else{
             $companies = Company::latest('created_at')->where('is_active', "1")->paginate(10);
         }
 
         return view('companies.index', compact('companies','companies_filter'));
-        // return view('companies.index', compact('companies','opening_count'));
     }
     
     /**
@@ -81,8 +72,6 @@ class CompaniesController extends Controller
 
     public function store(Request $request) {
 
-        // $request->user_id = Auth::user()->id;
-
         if($request->company_logo){
             $data = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $request->company_logo));
             $fileNameToStore = time().'.png';
@@ -90,7 +79,6 @@ class CompaniesController extends Controller
         }
 
         $this->validate($request, [
-            // ②
             'company_name' => 'required',
             'email' => 'required|email|unique:companies',
             'company_logo' => 'required',
@@ -106,17 +94,14 @@ class CompaniesController extends Controller
             'tel.required' => 'Company contact# is required',
             'established_at.required' => 'Provide company established date',
 
-        ]);  // ③
+        ]);
 
 
-        // Company::create($request->all());
         $request->user()->companies()->create([
             'company_name' => $request->company_name,
             'email' => $request->email,
             'is_active' => '1',
-            // 'url' => $request->url,
             'company_logo' => $fileNameToStore,
-            // 'background_photo' => $fileNameToStoreCover,
             'tel' => $request->tel,
             'established_at' => $request->established_at,
 
@@ -124,7 +109,6 @@ class CompaniesController extends Controller
 
         \Session::flash('flash_message', 'created company information');
 
-        // return redirect('companies');
         return redirect('/hiring_portal');
     }
 
@@ -221,102 +205,9 @@ class CompaniesController extends Controller
      */
     public function update(Request $request)
     {
-
-        // $this->validate($request, [
-        //     'what' => 'required',
-        //     'url' => 'required',
-        //     'tel' => 'required',
-        //     'address1' => 'required',
-        // ]);
-
-        // $input = $request->except('photo', 'skills', '_token');
-
-        // $company = Company::findOrFail($id);
-        //
-        // $company->update($request->all());
-
-        // \Session::flash('flash_message', 'edited company information' );
-
-        // return redirect(url('companies', [$company->id]));
-        // return redirect()->route('companies.show', [$company->id]);
-        // return redirect('companies/show')->with('success', 'Updated your resume');
-
-        // dd($request);
-
-        // $rules = [
-        //     'company_name' => 'required',
-        //     'email' => 'required|unique:companies',
-        //     'company_logo' => 'required',
-        //     'tel' => 'required',
-        // ];
-
-        // $company = new Company;
-
-        // if($request->company_logo){
-        //     $data = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $request->company_logo));
-        //     $fileNameToStoreLogo = time().'.png';
-        //     file_put_contents(public_path('/storage/').$fileNameToStoreLogo, $data);
-        //     $company->company_logo = $fileNameToStoreLogo;
-        // }
-
-        // if($request->background_photo){
-        //     $data = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $request->background_photo));
-        //     $fileNameToStorePhoto = time().'.png';
-        //     file_put_contents(public_path('/storage/').$fileNameToStorePhoto, $data);
-        //     $company->background_photo = $fileNameToStorePhoto;
-        // }
-
-        // if($request->what_photo1){
-        //     $data = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $request->what_photo1));
-        //     $fileNameToStorePhoto1 = time().'.png';
-        //     file_put_contents(public_path('/storage/').$fileNameToStorePhoto1, $data);
-        //     $company->what_photo1 = $fileNameToStorePhoto1;
-        // }
-
-        // $company->company_name = $request->company_name;
-        // $company->address1 = $request->address1;
-        // $company->established_at = $request->established_at;
-        // $company->what = $request->what;
-        // $company->what_photo1_explanation = $request->what_photo1_explanation;
-        // $company->email = $request->email;
-        // $company->ceo_name = $request->ceo_name;
-        // $company->url = $request->url;
-        // $company->company_size = $request->company_size;
-        // $company->tel = $request->tel;
-        // $company->city = $request->city;
-        // $company->country = $request->country;
-        // $company->spoken_language = $request->spoken_language;
-
-        // $company->save();
-
-        // $this->validate($request, $rules);
-
-        // Company::create($request->all());
-        // $request->user()->companies()->update([
-        //     'company_name' => $request->company_name,
-        //     'email' => $request->email,
-        //     'ceo_name' => $request->ceo_name,
-        //     'is_active' => '1',
-        //     'company_logo' => $fileNameToStore,
-        //     'tel' => $request->tel,
-        // ]);
-
-        // \Session::flash('flash_message', 'created company information');
-
-        // return redirect('companies');
-        // return redirect('/');
-        // $request->user_id = Auth::user()->id;
-
-
-        $this->validate($request, [    
-            // ②
-            // 'company_name' => 'required',
-            // 'email' => 'required|unique:companies',
+        $this->validate($request, [
             'email' => 'required',
             'url' => 'required',
-            // 'company_logo' => 'required',
-            // 'background_photo' => 'required',
-            // 'what_photo1' => 'required',
             'company_size' => 'required',
             'tel' => 'required',
 
@@ -324,12 +215,9 @@ class CompaniesController extends Controller
         [
             'email.required' => 'Please input email address',
             'url.required' => 'Company URL is required',
-            // 'company_logo.required' => 'Company logo is required',
-            // 'background_photo.required' => 'Company cover photo is required',
-            // 'what_photo1.required' => 'Photo is required',
             'company_size.required' => 'Please provide company size',
             'tel.req' => 'Company contact# is required',
-        ]);  // ③
+        ]);
 
         if($request->company_logo){
             $data = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $request->company_logo));
@@ -349,18 +237,12 @@ class CompaniesController extends Controller
 
         $company = $request->user()->companies()->first();
 
-        // Company::create($request->all());
         $company->update([
-            // 'company_name' => $request->company_name,
             'email' => $request->email,
             'is_active' => '1',
-            // 'url' => $request->url,
-
             'company_logo' => isset($fileNameToStore) ? $fileNameToStore : $company->getOriginal('company_logo'),
             'background_photo' => isset($fileNameToStoreCover) ? $fileNameToStoreCover : $company->getOriginal('background_photo'),
             'what_photo1' => isset($fileNameToStoreWhat) ? $fileNameToStoreWhat : $company->getOriginal('what_photo1'),
-
-           // 'background_photo' => $fileNameToStoreCover,
             'tel' => $request->tel,
             'address1' => $request->address1,
             'established_at' => $request->established_at,
@@ -376,7 +258,6 @@ class CompaniesController extends Controller
 
         \Session::flash('flash_message', 'Updated company information');
 
-        // return redirect('companies');
         return redirect('/hiring_portal');
     }
 

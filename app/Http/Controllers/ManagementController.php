@@ -47,7 +47,6 @@ class ManagementController extends Controller
 
         $users = User::select(['id', 'f_name','m_name','l_name', 'email', 'role', 'city', 'phone_number', 'country', 'is_active', 'created_at'])->get();
  
-        // return Datatables::of($users)->make(true);
         return Datatables::of($users)
             ->make(true);
 
@@ -58,7 +57,6 @@ class ManagementController extends Controller
 
         $companies = Company::select(['id', 'company_name','is_active','ceo_name', 'address1', 'email', 'number_of_employee', 'established_at', 'country'])->get();
 
-        // return Datatables::of($companies)->make(true);
         return Datatables::of($companies)
             ->make(true);
 
@@ -69,7 +67,6 @@ class ManagementController extends Controller
 
         $openings = Opening::select(['id', 'title','details','requirements', 'address1', 'created_at', 'is_active'])->get();
 
-        // return Datatables::of($openings)->make(true);
         return Datatables::of($openings)
             ->make(true);
 

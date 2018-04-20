@@ -48,14 +48,11 @@ class ApplicationController extends Controller
         $user = \Auth::user();
         $resume = Common::get_master_resume();
         $opening = Opening::findOrFail($opening_id);
-        // $company = $opening->company()->get()->first();
         $company = $opening->company()->first();
-        // dd($company);
         $skills = Resume_skill::all();
         $educations = $resume->educations()->get();
 
         if($resume){
-            // $resume = Resume::where('user_id', $user->id)->where('is_active', 1)->where('is_master', 1)->get()->first();
             $languages_ids = $resume->has_skill()->get()->pluck('id')->toArray();
         }else{
             $resume = new Resume;
@@ -76,14 +73,8 @@ class ApplicationController extends Controller
     public function store(Request $request)
     {
 
-        // dd($request);
-        // $resume = Resume::where('user_id', Auth::user()->id)->where('is_master', 1)->where('is_active', 1)->get()->first();
-
-        // dd($resume);
-
         $resume = new Resume;
-        // dd($resume);
-        // $input = $request->except('skills', '_token');
+
         $resume->user_id = \Auth::id();
         // $resume->fill($request->all())->save();
         // if ($request->has('skills')) {
@@ -168,10 +159,7 @@ class ApplicationController extends Controller
 
     public function applied_index()
     {
-        //getting application data and opening data that is linked with the application datas
-        // $applied_application_openings = Application::applied_application_openings(\Auth::id());
         $applied_application_openings = \Auth::user()->openings()->orderBy('pivot_created_at', 'desc')->get();
-        // dd($applied_application_openings);
 
 
         return view('applications/applied_index', compact('applied_application_openings'));

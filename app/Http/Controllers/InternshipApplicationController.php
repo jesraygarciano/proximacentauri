@@ -98,31 +98,20 @@ class InternshipApplicationController extends Controller
             $requests->skills = "";
         }
 
-        // dd($requests->student_id);
-
         $this->validate($requests,[
             'skills' => 'required',
             'objective' => 'required',
             'school' => 'required',
             'course' => 'required',
-            // 'preffered_training_date' => 'required',
         ]);
 
-        // $application = InternshipApplication::update([
-        // $application = InternshipApplication::whereId($requests)->update([        
         $requests->user()->intershipApplication()->update([
             'user_id'=>\Auth::user()->id,
             'objectives'=>$requests->objective,
             'school'=>$requests->school,
             'course'=>$requests->course
-            // 'preffered_training_date'=>$requests->preffered_training_date
         ]);
 
-        // dd($application);
-
-        // foreach ($requests->skills as $skill) {
-        //     $application->skills()->attach($skill);
-        // }
         return redirect()->route('applicant_profile');
 
     }

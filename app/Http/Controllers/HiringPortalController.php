@@ -58,8 +58,6 @@ class HiringPortalController extends Controller
             $applicants = User::wherein('id', $applicant_ids)->get();
 
         } else {
-            // $companies_show = array();
-            // $companies = array();
             $openings = array();
             $applications = array();
             $applicants = array();
@@ -73,13 +71,10 @@ class HiringPortalController extends Controller
         $application = Application::findOrFail($id);
         $resume = Resume::findOrFail($application->resume_id);
         $companies = Opening::findOrFail($application->opening_id)->company()->get();
-        // dd($company_id);
         $company_id = "";
         foreach ($companies as $company) {
             $company_id = $company->id;
         }
-
-        // dd($company_id);
 
         return view('hiring_portal.application_detail', compact('application', 'resume', 'company_id'));
     }
@@ -121,7 +116,7 @@ class HiringPortalController extends Controller
     {
 
         //the users that will shown on the applicants list
-        $applicants = User::query()->where('is_active', 1)->orderBy('created_at','desc');
+        $applicants = User::where('is_active', 1)->orderBy('created_at','desc');
 
         $provinces = \DB::table('provinces')->get();
 
@@ -151,10 +146,6 @@ class HiringPortalController extends Controller
 
         if($requests->gender){
             $applicants->where('gender',$requests->gender);
-
-            /*$resume_gender = Resume::where('gender',$requests->gender)->pluck('id');
-            $applicants->whereIn('gender',$resume_gender);*/
-
         }
 
         $applicants = $applicants->paginate(6);
@@ -173,18 +164,14 @@ class HiringPortalController extends Controller
                     $companies_array[] = $scout_companies[$j];
                 }
             }
-            // dd($companies_array);
             if ($i == 0) {
                 $companies_scouted_array = array($applicants[$i]->id => $companies_array);
             } else {
                 $companies_scouted_array += array($applicants[$i]->id => $companies_array);
             }
-            // dd($scout_companies_screened);
-            // dd($scout_companies);
         }
 
         return view('hiring_portal.user_index', compact('applicants','provinces','companies_scouted_array'));
-        // return view('hiring_portal.user_index', compact('applicants'));
     }
 
 
@@ -275,8 +262,6 @@ class HiringPortalController extends Controller
         for ($i=0; $i < count($applications) ; $i++) {
             $applicant_ids[] = $applications[$i]->user_id;
         }
-
-        // $applicant_ids = $applications->list('user_id');
 
         $applicants = User::wherein('id', $applicant_ids)->get();
 
