@@ -2,16 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Education;
+use App\Experience;
+use App\Http\Requests;
+use App\Libs\Common;
 use App\Resume;
 use App\Resume_skill;
-use App\User;
-use App\Experience;
-use App\Education;
-use App\Libs\Common;
 use Illuminate\Http\Request;
-
-use App\Http\Requests;
-use App\Http\Controllers\Controller;
 
 class ResumesController extends Controller
 {
@@ -22,6 +19,7 @@ class ResumesController extends Controller
         $this->middleware('onlyapplicant', ['except' => ['index', 'show']]);
         $this->middleware('navbar');
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -49,7 +47,7 @@ class ResumesController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -74,48 +72,48 @@ class ResumesController extends Controller
             'cr_name' => 'required',
             'cr_phone_number' => 'required',
         ],
-        [
-            'f_name.required' => 'Please enter your first name',
-            'l_name.required' => 'Please enter your last name',
-            'phone_number.required' => 'Please enter your valid phone number',
-            'email.required' => 'Please enter valid email address',
-            'birth_date.required' => 'Please enter your birthdate',
-            'photo.required' => 'Photo required',
-            'address1.required' => 'Please enter your first address',
-            'address2.required' => 'Please enter your secondary address',
-            'city.required' => 'Please enter your city',
-            'country.required' => 'Please enter your country',
-            'postal.required' => 'Please enter your postal',
-            'spoken_language.required' => 'Please enter your spoken language',
-            'summary.required' => 'Skill/Experience Summary required',
-            'objective.required' => 'Objective required',
-            'cr_company.required' => 'Company / University name required',
-            'cr_name.required' => 'Company personnel name required',
-            'cr_phone_number.required' => 'Company personnel number required',
-        ]);
+            [
+                'f_name.required' => 'Please enter your first name',
+                'l_name.required' => 'Please enter your last name',
+                'phone_number.required' => 'Please enter your valid phone number',
+                'email.required' => 'Please enter valid email address',
+                'birth_date.required' => 'Please enter your birthdate',
+                'photo.required' => 'Photo required',
+                'address1.required' => 'Please enter your first address',
+                'address2.required' => 'Please enter your secondary address',
+                'city.required' => 'Please enter your city',
+                'country.required' => 'Please enter your country',
+                'postal.required' => 'Please enter your postal',
+                'spoken_language.required' => 'Please enter your spoken language',
+                'summary.required' => 'Skill/Experience Summary required',
+                'objective.required' => 'Objective required',
+                'cr_company.required' => 'Company / University name required',
+                'cr_name.required' => 'Company personnel name required',
+                'cr_phone_number.required' => 'Company personnel number required',
+            ]);
 
 
-        $input = $request->except('photo','skills', '_token');
-        $resume = Resume::where('user_id',\Auth::user()->id)->first() ?? new Resume;
+        $input = $request->except('photo', 'skills', '_token');
+        $resume = Resume::where('user_id', \Auth::user()->id)->first() ?? new Resume;
         $resume->fill($input)->save();
 
-        if($request->photo){
+        if ($request->photo) {
             $data = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $request->photo));
             $fileNameToStore = Common::resume_photo_name($resume->id);
-            file_put_contents(public_path('/storage/').$fileNameToStore, $data);
+            file_put_contents(public_path('/storage/') . $fileNameToStore, $data);
             $resume->photo = $fileNameToStore;
             $resume->save();
         }
 
-        if ($request->ex_company){
+        if ($request->ex_company) {
             $experience = new Experience;
             $experience->resume_id = $resume->id;
             $experience->fill($input)->save();
         }
-        
+
         $eds = json_decode($request->educational_backgrounds);
 
-        foreach($eds as $ed){
+        foreach ($eds as $ed) {
             $education = new Education;
             $education->resume_id = $resume->id;
             $education->ed_university = $ed->ed_university;
@@ -132,7 +130,7 @@ class ResumesController extends Controller
 
         if ($request->has('skills')) {
             $resume_skill_ids = $request->input('skills');
-            foreach($resume_skill_ids as $resume_skill_id) {
+            foreach ($resume_skill_ids as $resume_skill_id) {
                 $resume->has_skill()->attach($resume_skill_id);
             }
         }
@@ -142,7 +140,7 @@ class ResumesController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show()
@@ -162,7 +160,7 @@ class ResumesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
 
@@ -172,14 +170,17 @@ class ResumesController extends Controller
         $user = \Auth::user();
         $skills = Resume_skill::all();
         $resume = Common::get_master_resume();
-        $educations = $resume->educations()->get();
-        $experiences = $resume->experiences()->get();
-        $cr = $resume->character_references()->get();
-        if($resume){
+        if ($resume) {
             $languages_ids = $resume->has_skill()->get()->pluck('id')->toArray();
-        }else{
+            $educations = $resume->educations()->get();
+            $experiences = $resume->experiences()->get();
+            $cr = $resume->character_references()->get();
+        } else {
             $resume = new Resume;
             $languages_ids = array();
+            $educations = array();
+            $experiences = array();
+            $cr = array();
         }
 
         return view('resumes.edit', compact('user', 'skills', 'resume', 'languages_ids', 'educations', 'experiences', 'cr'));
@@ -189,8 +190,8 @@ class ResumesController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $resume_id)
@@ -220,29 +221,29 @@ class ResumesController extends Controller
             // 'cr_phone_number' => 'required',
             // 'picture' => 'required',
         ],
-        [
-            'f_name.required' => 'Please enter your first name',
-            'l_name.required' => 'Please enter your last name',
-            'phone_number.required' => 'Please enter your valid phone number',
-            'email.required' => 'Please enter valid email address',
-            'birth_date.required' => 'Please enter your birthdate',
-            'address1.required' => 'Please enter your first address',
-            'address2.required' => 'Please enter your secondary address',
-            'city.required' => 'Please enter your city',
-            'country.required' => 'Please enter your country',
-            'postal.required' => 'Please enter your postal',
-            'spoken_language.required' => 'Please enter your spoken language',
-            // 'ed_university.required' => 'Please enter your university',
-            // 'ed_from_month.required' => 'month start',
-            // 'ed_from_year.required' => 'year start',
-            // 'ed_to_month.required' => 'month end',
-            // 'ed_to_year.required' => 'year end',
-            'summary.required' => 'Skill/Experience Summary required',
-            'objective.required' => 'Objective required',
-            // 'cr_company.required' => 'Company / University name required',
-            // 'cr_name.required' => 'Company personnel name required',
-            // 'cr_phone_number.required' => 'Company personnel number required',
-        ]);
+            [
+                'f_name.required' => 'Please enter your first name',
+                'l_name.required' => 'Please enter your last name',
+                'phone_number.required' => 'Please enter your valid phone number',
+                'email.required' => 'Please enter valid email address',
+                'birth_date.required' => 'Please enter your birthdate',
+                'address1.required' => 'Please enter your first address',
+                'address2.required' => 'Please enter your secondary address',
+                'city.required' => 'Please enter your city',
+                'country.required' => 'Please enter your country',
+                'postal.required' => 'Please enter your postal',
+                'spoken_language.required' => 'Please enter your spoken language',
+                // 'ed_university.required' => 'Please enter your university',
+                // 'ed_from_month.required' => 'month start',
+                // 'ed_from_year.required' => 'year start',
+                // 'ed_to_month.required' => 'month end',
+                // 'ed_to_year.required' => 'year end',
+                'summary.required' => 'Skill/Experience Summary required',
+                'objective.required' => 'Objective required',
+                // 'cr_company.required' => 'Company / University name required',
+                // 'cr_name.required' => 'Company personnel name required',
+                // 'cr_phone_number.required' => 'Company personnel number required',
+            ]);
 
         $input = $request->except('photo', 'skills', '_token');
         $resume = Resume::findOrFail($resume_id);
@@ -250,7 +251,7 @@ class ResumesController extends Controller
         // $resume->photo = $fileNameToStore;
         $eds = json_decode($request->educational_backgrounds);
 
-        foreach($eds as $ed){
+        foreach ($eds as $ed) {
             $education = isset($ed->id) ? Education::findOrFail($ed->id) : new Education;
             $education->resume_id = $resume->id;
             $education->ed_university = $ed->ed_university;
@@ -266,7 +267,7 @@ class ResumesController extends Controller
 
         $exps = json_decode($request->experiences);
 
-        foreach($exps as $exp){
+        foreach ($exps as $exp) {
             $experience = isset($exp->id) ? Experience::findOrFail($exp->id) : new Experience;
             $experience->resume_id = $resume->id;
             $experience->ex_company = $exp->ex_company;
@@ -280,10 +281,10 @@ class ResumesController extends Controller
             $experience->save();
         }
 
-        if($request->photo){
+        if ($request->photo) {
             $data = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $request->photo));
             $fileNameToStore = Common::resume_photo_name($resume->id);
-            file_put_contents(public_path('/storage/').$fileNameToStore, $data);
+            file_put_contents(public_path('/storage/') . $fileNameToStore, $data);
             $resume->photo = $fileNameToStore;
         }
 
@@ -291,7 +292,7 @@ class ResumesController extends Controller
 
         $resume->has_skill()->detach();
         $resume_skill_ids = $request->input('skills');
-        foreach($resume_skill_ids as $resume_skill_id){
+        foreach ($resume_skill_ids as $resume_skill_id) {
             $resume->has_skill()->attach($resume_skill_id);
         }
 
@@ -301,7 +302,7 @@ class ResumesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
