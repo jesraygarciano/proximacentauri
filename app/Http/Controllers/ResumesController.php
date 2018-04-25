@@ -182,7 +182,9 @@ class ResumesController extends Controller
             $languages_ids = array();
         }
 
-        return view('resumes.edit', compact('user', 'skills', 'resume', 'languages_ids', 'educations', 'experiences', 'cr'));
+        $provinces = \DB::table('provinces')->select('name','division','iso_code')->get();
+
+        return view('resumes.edit', compact('provinces', 'user', 'skills', 'resume', 'languages_ids', 'educations', 'experiences', 'cr'));
 
     }
 
@@ -203,7 +205,8 @@ class ResumesController extends Controller
             'email' => 'required',
             'birth_date' => 'required',
             'address1' => 'required',
-            'address2' => 'required',
+            // 'address2' => 'required',
+            'province' => 'required',
             'city' => 'required',
             'country' => 'required',
             'postal' => 'required',
