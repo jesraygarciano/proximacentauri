@@ -49,6 +49,44 @@ $app = require_once __DIR__.'/../bootstrap/app.php';
 |
 */
 
+$actual_link = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+
+// echo $actual_link;
+
+function authenticate()
+{
+    $auth_users = [
+        [
+        'username'=>'admin',
+        'password'=>'admin',
+        ],
+        [
+            'username'=>'admin2',
+            'password'=>'admin2',
+        ],
+    ];
+
+    foreach($auth_users as $user){
+        if(@$_SERVER['PHP_AUTH_USER'] === $user['username'] && @$_SERVER['PHP_AUTH_USER'] === $user['password']){
+            return true;
+        }
+    }
+
+    return false;
+}
+
+if(!authenticate())
+{
+    header('WWW-Authenticate: Basic realm="thetutlage"');
+    header('HTTP\ 1.0 401 Unauthorized');
+
+    echo 'You are not authorized to access content!';
+    exit;
+}
+
+// setcookie('name', 'value', time() + (86400), "/");// 86400 = 1 day
+
+
 $kernel = $app->make(Illuminate\Contracts\Http\Kernel::class);
 
 $response = $kernel->handle(
