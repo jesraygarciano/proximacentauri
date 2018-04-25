@@ -59,7 +59,7 @@
                                         <option value="" checked>Select Province</option>
 
                                         @foreach($provinces as $province)
-                                        <option value="{{$province->iso_code}}">{{$province->name}}</option>
+                                        <option value="{{$province->name}}">{{$province->name}}</option>
                                         @endforeach
 
                                     </select>
@@ -128,178 +128,176 @@
                     </div>
                 </div>
         </div>
-        <!-- #f4b400 -->
         <div class="col-md-7">
-            {{ count($applicants) ? ' ' : 'Sorry, No applicant result.'}}            
-            @if (count($applicants) > 0)
-                
-                @foreach ($applicants as $applicant)
+        <style>
+            ul.content-list{
+            /**/
+            }
 
+            .content-list>li{
+            position:relative;
+            padding-left: 0px !important;
+            padding-top: .5rem;
+            }
 
-<style>
-    ul.content-list{
-    /**/
-    }
+            .content-list>li>div>.fa-file-text{
+            position:absolute;
+            left:6px;
+            top:4.3px;
+            font-size: 10px;
+            }
 
-    .content-list>li{
-      position:relative;
-      padding-left: 0px !important;
-      padding-top: .5rem;
-    }
+            .content-list>li>div>.fa-map-marker{
+            position:absolute;
+            left:6.5px;
+            top:4.3px;
+            font-size: 12px;
+            }
 
-    .content-list>li>div>.fa-file-text{
-      position:absolute;
-      left:6px;
-      top:4.3px;
-      font-size: 10px;
-    }
+            .content-list>li>div>.fa-dollar{
+            position:absolute;
+            left:6.8px;
+            top:4.2px;
+            font-size: 12px;
+            }
 
-    .content-list>li>div>.fa-map-marker{
-      position:absolute;
-      left:6.5px;
-      top:4.3px;
-      font-size: 12px;
-    }
+            .content-list>li>div>.fa-code{
+            position:absolute;
+            left:3.5px;
+            top:4px;
+            font-size: 12px;
+            }
 
-    .content-list>li>div>.fa-dollar{
-      position:absolute;
-      left:6.8px;
-      top:4.2px;
-      font-size: 12px;
-    }
+            .content-list>li>.li-content{
+            display: inline-block;
+            }
 
-    .content-list>li>div>.fa-code{
-      position:absolute;
-      left:3.5px;
-      top:4px;
-      font-size: 12px;
-    }
+            .content-list>li>.i-wrapper{
+            position: relative;
+            height: 20px;
+            width: 20px;
+            border-radius: 10px;
+            left: 5px;
+            background-color: rgb(31, 89, 149);
+            color: white;
+            }
 
-    .content-list>li>.li-content{
-      display: inline-block;
-    }
+            .content-list>li>.text-wrapper{
+            position: absolute;
+            /*top:-1px;*/
+            left:30px;
+            width: 400px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            /*height:30px;*/
+            }
+        </style>
+        {{ count($applicants) ? ' ' : 'Sorry, No applicant result.'}}            
+        @if (count($applicants) > 0)
+            
+            @foreach ($applicants as $applicant)
+            <div class="applicant-tile">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <div class="applicant-image">
+                            <img src="{{asset('img/bg-img.png')}}" class="bg-img">
+                                @if(!empty($applicant->photo)) <!-- Should be !empty -->
+                                    <img class="_image" src="{{ $applicant->photo }}" alt="{{ $applicant->f_name }}" />
+                                @else
+                                    <img class="_image" src="{{asset('img/member-placeholder.png')}}">
+                                @endif
 
-    .content-list>li>.i-wrapper{
-      position: relative;
-      height: 20px;
-      width: 20px;
-      border-radius: 10px;
-      left: 5px;
-      background-color: rgb(31, 89, 149);
-      color: white;
-    }
-
-    .content-list>li>.text-wrapper{
-      position: absolute;
-      /*top:-1px;*/
-      left:30px;
-      width: 400px;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      /*height:30px;*/
-    }
-</style>
-                    <div class="applicant-tile">
-                        <div class="row">
-                            <div class="col-xs-3">
-                                <div class="applicant-image">
-                                    <img src="{{asset('img/bg-img.png')}}" class="bg-img">
-                                      @if(!empty($applicant->photo)) <!-- Should be !empty -->
-                                           <img class="_image" src="{{ $applicant->photo }}" alt="{{ $applicant->f_name }}" />
-                                      @else
-                                          <img class="_image" src="{{asset('img/member-placeholder.png')}}">
-                                      @endif
-
-                                </div>
-                            </div>
-                            <div class="col-xs-9">
-                                <!-- <div class="applicant-name"> -->
-                                <ul class="feature-info-list content-list">
-                                    <li class="ellipsis padding-right-110">
-                                        <div class="li-content i-wrapper">
-                                            <i class="fa fa-id-card" aria-hidden="true" style="padding:3px;"></i>
-                                        </div>
-
-                                        <div class="li-content text-wrapper">
-                                            <a href="{{ url('hiring_portal/user_index_show', $applicant->id) }}">{{$applicant->f_name.' '.$applicant->l_name}}
-                                            </a>
-                                        </div>
-                                    </li>
-                                <!-- </div> -->
-                                    <li class="ellipsis padding-right-110">
-                                        <div class="li-content i-wrapper">
-                                            <i class="fa fa-map-marker" aria-hidden="true"></i>
-                                        </div>
-
-                                        <div class="li-content text-wrapper">
-                                             {{$applicant->country.', '.$applicant->city}}
-                                        </div>
-
-                                     </li>
-                                    <li class="ellipsis padding-right-110">
-                                        <div class="li-content i-wrapper">
-                                            <i class="fa fa-intersex" aria-hidden="true" style="padding:5px;"></i>
-                                        </div>
-
-                                        <div class="li-content text-wrapper">
-                                             {{$applicant->gender.', '.$applicant->gender}}
-                                        </div>
-
-                                    </li>
-                                         <li class="ellipsis padding-right-110">
-
-                                            <div class="li-content i-wrapper">
-                                                <i class="fa fa-code" aria-hidden="true"></i>
-                                            </div>
-
-                                            <div class="li-content text-wrapper">
-                                                @foreach(main_languages() as $main_language)
-                                                    @if (return_master_resume($applicant))
-
-                                                        @if($match_array = array_intersect(return_master_resume($applicant)->has_skill->pluck('id')->toArray(), get_language_ids($main_language)))
-                                                            {{-- @if($x < 3) --}}
-                                                                {{-- have to take away original key from $match_array --}}
-                                                                <?php $match_array = array_values($match_array); ?>
-                                                                @for($j=0; $j < count($match_array) ; $j++)
-                                                                    @if($j == 0)
-                                                                        <a href="#!" role="button" class="btn label label-warning {{main_languages_class_convert()[$main_language]}}" data-toggle="tooltip" data-placement="bottom" data-html="true" title="
-                                                                        <div>{{return_category($match_array[$j])}}</div>
-                                                                    @else
-                                                                        <div>{{return_category($match_array[$j])}}</div>
-                                                                    @endif
-
-                                                                    @if($j == count($match_array) - 1)
-                                                                        ">
-                                                                        {{$main_language}}<span class="caret"></span>
-                                                                    @endif
-                                                                    </a>
-                                                                @endfor
-                                                            {{-- @endif --}}
-
-                                                        @endif
-                                                    @endif
-                                                @endforeach
-                                            </div>
-                                        </li>
-                                    </ul>
-                            </div>
-                        </div>
-                        <hr class="opening-top-date-hr" style="margin-top: 7px; margin-bottom: 7px;">
-                        <div class="footer">
-                            <div class="pull-left">
-                                <div class="foggy-text"><b>Date registered</b>: {{ date(' M. j, Y ',strtotime($applicant->created_at)) }} </div>
-                            </div>
-                            <div class="pull-right">
-                                <div class="foggy-text">
-                                @include('hiring_portal.saved_applicants.save_applicant_bttn', ['applicants' => $applicants])
-                                </div>
-                            </div>
                         </div>
                     </div>
-                @endforeach
-                    @include('layouts.pagination', ['paginator' => $applicants->appends($_GET)])
-            @endif
+                    <div class="col-xs-9">
+                        <!-- <div class="applicant-name"> -->
+                        <ul class="feature-info-list content-list">
+                            <li class="ellipsis padding-right-110">
+                                <div class="li-content i-wrapper">
+                                    <i class="fa fa-id-card" aria-hidden="true" style="padding:3px;"></i>
+                                </div>
+
+                                <div class="li-content text-wrapper">
+                                    <a href="{{ url('hiring_portal/user_index_show', $applicant->id) }}">{{$applicant->f_name.' '.$applicant->l_name}}
+                                    </a>
+                                </div>
+                            </li>
+                        <!-- </div> -->
+                            <li class="ellipsis padding-right-110">
+                                <div class="li-content i-wrapper">
+                                    <i class="fa fa-map-marker" aria-hidden="true"></i>
+                                </div>
+
+                                <div class="li-content text-wrapper">
+                                    <?php $_resume = $applicant->findFirstOrCreateResume(); ?>
+                                        {{$_resume->province.', '.$_resume->city.', '.$_resume->country}}
+                                </div>
+
+                                </li>
+                            <li class="ellipsis padding-right-110">
+                                <div class="li-content i-wrapper">
+                                    <i class="fa fa-intersex" aria-hidden="true" style="padding:5px;"></i>
+                                </div>
+
+                                <div class="li-content text-wrapper">
+                                        {{$_resume->gender}}
+                                </div>
+
+                            </li>
+                                    <li class="ellipsis padding-right-110">
+
+                                    <div class="li-content i-wrapper">
+                                        <i class="fa fa-code" aria-hidden="true"></i>
+                                    </div>
+
+                                    <div class="li-content text-wrapper">
+                                        @foreach(main_languages() as $main_language)
+                                            @if (return_master_resume($applicant))
+
+                                                @if($match_array = array_intersect(return_master_resume($applicant)->has_skill->pluck('id')->toArray(), get_language_ids($main_language)))
+                                                    {{-- @if($x < 3) --}}
+                                                        {{-- have to take away original key from $match_array --}}
+                                                        <?php $match_array = array_values($match_array); ?>
+                                                        @for($j=0; $j < count($match_array) ; $j++)
+                                                            @if($j == 0)
+                                                                <a href="#!" role="button" class="btn label label-warning {{main_languages_class_convert()[$main_language]}}" data-toggle="tooltip" data-placement="bottom" data-html="true" title="
+                                                                <div>{{return_category($match_array[$j])}}</div>
+                                                            @else
+                                                                <div>{{return_category($match_array[$j])}}</div>
+                                                            @endif
+
+                                                            @if($j == count($match_array) - 1)
+                                                                ">
+                                                                {{$main_language}}<span class="caret"></span>
+                                                            @endif
+                                                            </a>
+                                                        @endfor
+                                                    {{-- @endif --}}
+
+                                                @endif
+                                            @endif
+                                        @endforeach
+                                    </div>
+                                </li>
+                            </ul>
+                    </div>
+                </div>
+                <hr class="opening-top-date-hr" style="margin-top: 7px; margin-bottom: 7px;">
+                <div class="footer">
+                    <div class="pull-left">
+                        <div class="foggy-text"><b>Date registered</b>: {{ date(' M. j, Y ',strtotime($applicant->created_at)) }} </div>
+                    </div>
+                    <div class="pull-right">
+                        <div class="foggy-text">
+                        @include('hiring_portal.saved_applicants.save_applicant_bttn', ['applicants' => $applicants])
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @endforeach
+                @include('layouts.pagination', ['paginator' => $applicants->appends($_GET)])
+        @endif
 
         </div>
         <div class="col-md-2 well">
