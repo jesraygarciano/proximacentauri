@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Resume extends Model
 {
-    protected $fillable = ['f_name', 'm_name', 'l_name', 'email', 'objective', 'nationality', 'birth_date', 'marital_status', 'spoken_language', 'experience', 'university', 'graduate_flag', 'program_of_study', 'field_of_study', 'gender', 'postal', 'address1', 'address2', 'city', 'country', 'phone_number', 'photo', 'is_master', 'is_active', 'user_id','spoken_language', 'religion', 'summary', 'other_skills', 'websites', 'seminars_attended', 'awards', 'job_title'];
+    protected $fillable = ['f_name', 'm_name', 'l_name', 'email', 'objective', 'nationality', 'birth_date', 'marital_status', 'spoken_language', 'experience', 'university', 'graduate_flag', 'program_of_study', 'field_of_study', 'gender', 'postal', 'address1', 'province', 'city', 'country', 'phone_number', 'photo', 'is_master', 'is_active', 'user_id','spoken_language', 'religion', 'summary', 'other_skills', 'websites', 'seminars_attended', 'awards', 'job_title'];
 
     // $resume_skill_ids should be array
     public function register_skill($resume_skill_ids)
