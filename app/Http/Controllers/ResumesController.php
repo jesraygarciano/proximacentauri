@@ -171,7 +171,7 @@ class ResumesController extends Controller
     {
         $user = \Auth::user();
         $skills = Resume_skill::all();
-        $resume = Common::get_master_resume();
+        $resume = $user->findFirstOrCreateResume();
         $educations = $resume->educations()->get();
         $experiences = $resume->experiences()->get();
         $cr = $resume->character_references()->get();
