@@ -30,6 +30,32 @@ $(document).ready(function(){
 	var img_height;
 	var img_width;
 
+	var isAdvancedUpload = function()
+	{
+		var div = document.createElement( 'div' );
+		return ( ( 'draggable' in div ) || ( 'ondragstart' in div && 'ondrop' in div ) ) && 'FormData' in window && 'FileReader' in window;
+	}();
+
+	if(isAdvancedUpload){
+		[ 'dragover', 'dragenter' ].forEach( function( event )
+		{
+			document.body.addEventListener( event, function()
+			{
+				console.log('enter');
+				$('.crop-control').addClass( 'document-dragging' );
+			});
+		});
+		[ 'dragleave', 'dragend', 'drop' ].forEach( function( event )
+		{
+			console.log('leave');
+			
+			document.body.addEventListener( event, function()
+			{
+				$('.crop-control').removeClass( 'document-dragging' );
+			});
+		});
+	}
+
 	$('.crop-control').each(function(){
 		var $this = $(this);
 
@@ -38,6 +64,9 @@ $(document).ready(function(){
 		$this.append('<input type="hidden" name="'+input_name+'"/>');
 		// rename original file so that the new file input will be passed to server with intended name
 		$this.find('input[type=file]').prop('name','old_'+input_name);
+
+		$this.find('.image-container,.image-container-cover').append('<div class="drag-element"'
+		+'	"> <svg class="box__icon" xmlns="http://www.w3.\'org/2000/svg" width="50" height="43" viewBox="0 0 50 43"><path d="M48.4 26.5c-.9 0-1.7.7-1.7 1.7v11.6h-43.3v-11.6c0-.9-.7-1.7-1.7-1.7s-1.7.7-1.7 1.7v13.2c0 .9.7 1.7 1.7 1.7h46.7c.9 0 1.7-.7 1.7-1.7v-13.2c0-1-.7-1.7-1.7-1.7zm-24.5 6.1c.3.3.8.5 1.2.5.4 0 .9-.2 1.2-.5l10-11.6c.7-.7.7-1.7 0-2.4s-1.7-.7-2.4 0l-7.1 8.3v-25.3c0-.9-.7-1.7-1.7-1.7s-1.7.7-1.7 1.7v25.3l-7.1-8.3c-.7-.7-1.7-.7-2.4 0s-.7 1.7 0 2.4l10 11.6z"></path></svg> <div></div></div>');
 
 		// set event for file input change detection and processing
 		setInputEvent($this);
@@ -59,10 +88,65 @@ $(document).ready(function(){
 			border_height = (img_height / img_width) * border_width;
 		}
 
+		if( isAdvancedUpload )
+		{
+			var form = elm[0];
+			form.classList.add( 'has-advanced-upload' ); // letting the CSS part to know drag&drop is supported by the browser
+
+			[ 'drag', 'dragstart', 'dragend', 'dragover', 'dragenter', 'dragleave', 'drop' ].forEach( function( event )
+			{
+				form.addEventListener( event, function( e )
+				{
+					// preventing the unwanted behaviours
+					e.preventDefault();
+					e.stopPropagation();
+				});
+			});
+			[ 'dragover', 'dragenter' ].forEach( function( event )
+			{
+				form.addEventListener( event, function()
+				{
+					console.log('enter');
+					form.classList.add( 'is-dragover' );
+				});
+			});
+			[ 'dragleave', 'dragend', 'drop' ].forEach( function( event )
+			{
+				console.log('leave');
+				
+				form.addEventListener( event, function()
+				{
+					form.classList.remove( 'is-dragover' );
+				});
+			});
+			form.addEventListener( 'drop', function( e )
+			{
+				console.log('drop');
+				
+				droppedFiles = e.dataTransfer.files; // the files that were dropped
+				processFile(droppedFiles);
+
+			});
+		}
+
 		elm.find('[type=file]').change(function(evt){
 			current_elm = elm;
 			var tgt = evt.target || window.event.srcElement,
 			    files = tgt.files;
+
+			// FileReader support
+			processFile(files);
+		});
+
+		function processFile(files){
+			var imageTypes = ['image/png','image/x-icon','image/jpeg', 'image/gif', 'image/bmp', 'image/jpg'];
+
+			var fileType = files[0].type;
+
+			if (!imageTypes.includes(fileType)) {
+				alert('dropped file is not an image');
+				return false;
+			}
 
 			// FileReader support
 			if (FileReader && files && files.length) {
@@ -74,12 +158,12 @@ $(document).ready(function(){
 
 				// initialize new cropie
 				basic = $('#crop-modal .cropper-container').croppie({
-				  viewport: {
-				      width: border_width,
-				      height: border_height,
-				      type: 'square'
-				  },
-				  boundary: { width: border_width, height: border_height },
+				viewport: {
+					width: border_width,
+					height: border_height,
+					type: 'square'
+				},
+				boundary: { width: border_width, height: border_height },
 				});
 
 				basic.croppie('result', 'html').then(function(html) {
@@ -90,13 +174,13 @@ $(document).ready(function(){
 				});
 
 				current_elm = elm;
-			    var fr = new FileReader();
-			    fr.onload = function () {
-			    	result_image = fr.result;
-			    }
-			    fr.readAsDataURL(files[0]);
+				var fr = new FileReader();
+				fr.onload = function () {
+					result_image = fr.result;
+				}
+				fr.readAsDataURL(files[0]);
 			}
-		});
+		}
 	}
 
 	// crop modal show hide events
