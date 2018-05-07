@@ -1,15 +1,26 @@
 // Uelmar Ortega Auth
 // Feb. 14, 2018
+process.env.TZ = 'Asia/Manila';
 console.log(new Date().getHours());
 // vars
 var app = require('express')();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var Redis = require('ioredis');
+var cmd = require('node-cmd');
 var redis = new Redis();
 var clients = [];
 
 var Message = require('./node_mysql/message');
+
+//detect if node server stops because of error
+process.on('uncaughtException', function(error) {
+    //rerun node server on nohup
+    console.log(new Date)
+    console.log(error)
+    console.log('Rerun Command')
+    cmd.run('nohup node socket &');
+});
 
 
 app.get('/', function(req, res){
