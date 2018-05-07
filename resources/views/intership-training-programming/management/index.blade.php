@@ -218,7 +218,8 @@
                     "orderable": false,
                     "render": function ( data, type, row ) {
                         return '<select class="form-control" name="status">'
-                        +'<option value="under_consideration">Under Consideration</option>'
+                        +'<option value="application_submitted">Application Submitted</option>'
+                        +'<option value="under_review">Under Review</option>'
                         +'<option value="approved">Approved</option>'
                         +'<option value="declined">Declined</option>'
                         +'</select>';
@@ -243,22 +244,66 @@
 
                 $(row).find('[name=status]').find('option[value='+data.status+']').prop('selected',true);
 
-                $(row).find('[name=status]').change(function(){
-                    $.ajax({
-                        url:"{{route('json_update_application_status')}}",
-                        type:"POST",
-                        data:{
-                            id:data.id,
-                            status:$(row).find('[name=status]').val()
-                        },
-                        headers: { 'X-CSRF-TOKEN': '{{ csrf_token() }}' },
-                        success:function(data){}
+                $(row).find('[name=status]').change(function(ev){
+                    var status_select = $(this);
+                    swal({
+                        input:'textarea',
+                        title: 'Remark',
+                        text:'Fill up',
+                        preConfirm: swalRequired,
+                    }).then((result)=>{
+                        if(result.value){
+                            swal({
+                                title: 'Saving',
+                                text: 'Please wait...',
+                                onOpen: () => {
+                                    swal.showLoading()
+                                },
+                                allowOutsideClick: () => !swal.isLoading()
+                            })
+                            $.ajax({
+                                url:"{{route('json_update_application_status')}}",
+                                type:"POST",
+                                data:{
+                                    id:data.id,
+                                    remark:result.value,
+                                    status:$(row).find('[name=status]').val()
+                                },
+                                headers: { 'X-CSRF-TOKEN': '{{ csrf_token() }}' },
+                                success:function(data){
+                                    swal({
+                                        title: 'All done!',
+                                        type:'success',
+                                        html:
+                                            '',
+                                        confirmButtonText: 'Ok'
+                                    }).then(()=>{
+                                        // $('#awards-cert').html(data.resume.awards);
+                                    });
+                                    data.status = status_select.val();
+                                }
+                            });
+                        }
+                        else
+                        {
+                            status_select.val(data.status);
+                        }
                     });
                 });
             },
             order: [[ 2, 'desc' ]]
         });
     });
+
+    function swalRequired(inputValue){
+        return new Promise((resolve) => {
+            if (inputValue === false) return false;
+            if (inputValue === "") {
+                swal.showValidationError("You need to write something!");
+            }
+            resolve()
+        })
+    }
 
     function view_applicant(data){
         $('body').append('<div class="front-drop" style="position:fixed; z-index:1000; width:100%; height:100%; top:0px; left:0px;"></div>');
