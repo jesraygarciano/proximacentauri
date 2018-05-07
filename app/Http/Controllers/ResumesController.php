@@ -294,8 +294,11 @@ class ResumesController extends Controller
 
         $resume->has_skill()->detach();
         $resume_skill_ids = $request->input('skills');
-        foreach($resume_skill_ids as $resume_skill_id){
-            $resume->has_skill()->attach($resume_skill_id);
+        if($resume_skill_ids)
+        {
+            foreach($resume_skill_ids as $resume_skill_id){
+                $resume->has_skill()->attach($resume_skill_id);
+            }
         }
 
         return redirect('resumes/show')->with('success', 'Updated you resume');
