@@ -6,6 +6,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Beagle</title>
 
+        <link rel="shortcut icon" href="http://www.iconj.com/ico/k/3/k3pxjoimd1.ico" type="image/x-icon" />
+        
         @if( Request::path() == 'resumes/create' || Request::path() == 'openings' || Request::url('/resumes/{id}/edit'))
 
         {{--@if( Request::path() == 'resumes/create' || Request::path() == 'openings' || Request::path() == 'portals/general_portal')--}}
@@ -82,7 +84,7 @@
         @if(\Auth::check())
         <script type="text/javascript">
             (function(){
-                $.socket = io("localhost:3000");
+                $.socket = io("{{url('/')}}:3000");
                 // $.socket = io("http://48407cbe.ngrok.io");
                 $.socket.emit('client add',{{\Auth::user()->id}});
             })(jQuery)

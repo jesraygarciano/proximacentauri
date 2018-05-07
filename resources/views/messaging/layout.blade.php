@@ -5,7 +5,8 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Beagle</title>
-
+        <link rel="shortcut icon" href="http://www.iconj.com/ico/k/3/k3pxjoimd1.ico" type="image/x-icon" />
+        
         <!-- Bootstrap -->
         <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
 
@@ -43,7 +44,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
         <script type="text/javascript">
             (function(){
-                $.socket = io("localhost:3000");
+                $.socket = io("{{url('/')}}:3000");
                 // $.socket = io("http://48407cbe.ngrok.io");
                 $.socket.emit('client add',{{\Auth::user()->id}});
             })(jQuery)
