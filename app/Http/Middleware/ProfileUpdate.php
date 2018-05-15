@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Support\Facades\Auth;
 
-class RedirectIfAuthenticated
+class ProfileUpdate
 {
     /**
      * Handle an incoming request.
@@ -17,10 +17,15 @@ class RedirectIfAuthenticated
      */
     public function handle($request, Closure $next, $guard = null)
     {
-        if (Auth::guard($guard)->check()) {
-            return redirect('/itp/applicant/profile');
+        $response = $next($request);
+
+        if($response->headers->get('content-type') == 'application/json')
+        {
+            $collection = $response->original;
+            $collection['profile_progess'] = \Auth::user()->profileProgress();
+            $response->setContent(collect($collection));
         }
 
-        return $next($request);
+        return $response;
     }
 }

@@ -56,10 +56,8 @@ class Kernel extends HttpKernel
         'bindings' => \Illuminate\Routing\Middleware\SubstituteBindings::class,
         'can' => \Illuminate\Auth\Middleware\Authorize::class,
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
+        'applicant_only' => \App\Http\Middleware\ApplicantOnly::class,
+        'profile' => \App\Http\Middleware\ProfileUpdate::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
-        'onlyhiring' => \App\Http\Middleware\OnlyHiring::class,
-        'onlyapplicant' => \App\Http\Middleware\OnlyApplicant::class,
-        'onlymanagement' => \App\Http\Middleware\OnlyManagement::class,
-        'navbar' => \App\Http\Middleware\NavBar::class,
     ];
 }
