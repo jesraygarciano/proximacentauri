@@ -148,7 +148,7 @@ class Common
 
     public static function resume_skill_ids_get($resume) {
 
-        $skill_id = $resume->has_skill()->orderBy('resume_skill_id', 'asc')->pluck('resume_skill_id');
+        $skill_id = $resume->has_skill()->orderBy('resume_skill_id', 'asc')->lists('resume_skill_id');
         // dd($skill_id);
 
         return $skill_id;
@@ -167,7 +167,7 @@ class Common
 
         $user_id = \Auth::id();
         $company = array();
-        $company = Company::where('user_id', $user_id)->where('is_active', 1)->pluck('id')->toArray();
+        $company = Company::where('user_id', $user_id)->where('is_active', 1)->lists('id')->toArray();
 
         return $company;
         //return value is array
