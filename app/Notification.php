@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\DB;
 
 class Notification extends Model
 {
-    protected $fillable = ['author_id','recipient_id','status','explanation','meta_data'];
+    // protected $fillable = ['user_id','objectives','school','course','training_batch_id'];
 
     public function recipient(){
         return $this->belongsTo('App\User','recipient_id');
