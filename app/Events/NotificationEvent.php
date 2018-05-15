@@ -6,8 +6,6 @@ use App\Events\Event;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
-//QUESTION_DETECT : なんでここにクラスがないの？ララ帳（https://laravel10.wordpress.com/2015/05/25/events/）みたいに。
-
 class NotificationEvent extends Event implements ShouldBroadcast
 {
     use SerializesModels;
@@ -22,8 +20,13 @@ class NotificationEvent extends Event implements ShouldBroadcast
     public function broadcastOn()
     {
         return ['notification-channel'];
-        //QUESTION_DETECT : ララ帳だとここは空なんだけど。。。
     }
-}
 
-//QUESTION_DETECT : listener側は？
+    // event(new \App\Events\NotificationEvent(
+    //     [
+    //         'type'=>'new opening',
+    //         'event'=>'created',
+    //         'user_id'=>$id
+    //     ]
+    // ));
+}
