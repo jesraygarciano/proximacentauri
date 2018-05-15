@@ -74,7 +74,7 @@
                     <textarea type="text" name="objective">{{ $student->objectives ?? old('objectives') }}</textarea>
                 </div>
 
-                <br />
+                <!-- <br />
 
                 <div class="ui form">
                     <label>School</label>
@@ -91,15 +91,9 @@
                         <option value="BSCS" {{$student ? ($student->course == 'BSCS' ? 'selected' : '') : ''}}>BSCS</option>
                         <option value="ACT" {{$student ? ($student->course == 'ACT' ? 'selected' : '') : ''}}>ACT</option>
                     </select>
-                </div>
+                </div> -->
 
                 <br />
-
-                {{--@if(empty($student->from_post)) --}}
-<!--                 <div class="ui form">
-                    <label>Preffered Training Date</label>
-                    <input style="font-size: 1.1em;" type="date" min="{{ date('Y-m-d') }}" name="preffered_training_date" value="{{ date('Y-m-d',strtotime($student->preffered_training_date)) }}">
-                </div> -->
 
                 <div class="ui form">
                         <label>I wan't to sign-up for batch:</label>
@@ -371,12 +365,12 @@
                 objective: {
                     required: true
                 },
-                school: {
-                    required: true
-                },
-                course: {
-                    required: true
-                },
+                // school: {
+                //     required: true
+                // },
+                // course: {
+                //     required: true
+                // },
                 preffered_training_date:{
                     required: true
                 }
@@ -385,12 +379,12 @@
                 objective: {
                   required: "Please input your objective."
                 },
-                school: {
-                  required: "Please input your school."
-                },
-                course: {
-                  required: "Please input your school."
-                },
+                // school: {
+                //   required: "Please input your school."
+                // },
+                // course: {
+                //   required: "Please input your school."
+                // },
                 preffered_training_date: {
                   required: "Please input your preffered training date."
                 }

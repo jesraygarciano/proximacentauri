@@ -1,0 +1,211 @@
+/* USER PROFILE PAGE */
+.card {
+    /*margin-top: 20px;*/
+    padding: 30px;
+    background-color: rgba(214, 224, 226, 0.2);
+    -webkit-border-top-left-radius:5px;
+    -moz-border-top-left-radius:5px;
+    border-top-left-radius:5px;
+    -webkit-border-top-right-radius:5px;
+    -moz-border-top-right-radius:5px;
+    border-top-right-radius:5px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.card.hovercard {
+    position: relative;
+    /*padding-top: 0;*/
+    overflow: hidden;
+    text-align: center;
+    background-color: #fff;
+    background-color: rgba(255, 255, 255, 1);
+}
+.card.hovercard .card-background {
+    height: 130px;
+}
+.card-background img {
+    -webkit-filter: blur(7px);
+    -moz-filter: blur(7px);
+    -o-filter: blur(7px);
+    -ms-filter: blur(7px);
+    filter: blur(7px);
+    margin-left: -100px;
+    margin-top: -200px;
+    min-width: 130%;
+}
+.card.hovercard .useravatar {
+    position: absolute;
+    top: 45px;
+    left: 0;
+    right: 0;
+}
+.card.hovercard .useravatar img {
+    width: 100px;
+    height: 100px;
+    max-width: 100px;
+    max-height: 100px;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    border: 5px solid rgba(255, 255, 255, 0.5);
+}
+.card.hovercard .card-info {
+    position: absolute;
+    bottom: 14px;
+    left: 0;
+    right: 0;
+}
+.card.hovercard .card-info .card-title {
+    padding:0 5px;
+    font-size: 20px;
+    line-height: 1;
+    color: #d8d8d8;
+    background-color: rgba(255, 255, 255, 0.1);
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+}
+.card.hovercard .card-info {
+    overflow: hidden;
+    font-size: 12px;
+    line-height: 20px;
+    color: #737373;
+    text-overflow: ellipsis;
+}
+.card.hovercard .bottom {
+    padding: 0 20px;
+    margin-bottom: 17px;
+}
+.btn-pref .btn {
+    -webkit-border-radius:0 !important;
+}
+
+#batch-cont{
+    /*margin: 2rem;*/
+    padding: 3.5rem 0rem;
+    background: #fff;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.16),0 2px 3px 0 rgba(0,0,0,0.12)!important;
+    border: 1px solid #dddddd;
+    position: relative;    
+}
+
+
+#batch-cont .edit-bttn{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 0px;
+    overflow: hidden;
+    display: block;
+    transition: 200ms ease all;
+}
+
+#batch-cont:hover .edit-bttn{
+    opacity: 1;
+    width: 30px;
+}
+
+
+
+.app-basic-info{
+    margin: 2rem 2rem 0rem 2rem;
+    padding: 3.5rem 0px 0 0;
+    background: #fff;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.16),0 2px 3px 0 rgba(0,0,0,0.12)!important;
+    border: 1px solid #dddddd;
+    position: relative;    
+}
+
+#app-batch-number{
+    padding: .5rem 2rem;
+    position: absolute;
+    background: #1679a3;
+    top: 0;
+    left: -1px;
+    color: #fff;
+}
+.app-objt-p{
+    padding: 1rem;
+}
+#app-batch-border-left{
+    background: #1679a3;
+    height: 100%;
+    width: 9px;
+    position: absolute;
+    top: 0;
+    right: 0;    
+}
+.app-basic-info-2{
+    height: 100px;
+}
+
+.sidebar .sidebar-nav{
+    padding:10px;
+    position: relative;
+    font-size: 15px;
+    color: gray;
+}
+
+.sidebar .active{
+    color: #595959;
+    background: #f0f0f0;
+    font-weight: bold;
+}
+
+.profile-info-container{
+    min-height: 500px;
+    border-left: 1px solid #eaeaea;
+    padding: 15px;
+    padding-right: initial;
+}
+
+.unick-info-e{
+    position: relative;
+    padding:15px;
+    border-bottom:1px solid #e5e5e5;
+}
+
+.unick-info-e .options{
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    padding: 15px;
+    display: none;
+}
+
+.unick-info-e:hover .options{
+    display: block;
+}
+
+.unick-info-e .options .edit{
+    color: blue;
+    cursor: pointer;
+}
+
+.unick-info-e .edit-panel{
+    display: none;
+}
+
+.editing .edit-panel{
+    display: block;
+}
+
+.editing .info-panel{
+    display: none;
+}
+
+.unick-info-e .info{
+    font-weight: bold;
+}
+
+.unick-info-e .lbl{
+    color: #90949c;
+}
+
+.profile-info-container .title{
+    color: #90949c;
+    font-weight: bold;
+    border-bottom: 1px solid #e5e5e5;
+    padding: 5px 0;
+}

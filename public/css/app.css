@@ -34,11 +34,10 @@ body .navbar .container .navbar-header a img {
   width: 100%;
 }
 /* line 40, ../../resources/assets/sass/app.scss */
-body .navbar .container .navbar-collapse > ul > li {
+body .navbar .container .navbar-collapse ul li {
 /*  font-family: "Raleway", sans-serif;
   font-weight: 600;*/
   font-size: 1.1em;
-  height: 50px;
 }
 /* line 45, ../../resources/assets/sass/app.scss */
 body .navbar .container .navbar-collapse ul li a:hover {
@@ -627,7 +626,7 @@ body #body-container .manage-portal .nav-pills {
 }
 /* line 663, ../../resources/assets/sass/app.scss */
 body #body-container .manage-portal .tab-content {
-  /* border: 1px solid #1377a1; */
+  border: 1px solid #1377a1;
   border-top-color: transparent;
   padding: 2em;
 }

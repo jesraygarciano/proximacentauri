@@ -1,6 +1,3 @@
-
-
-
 body {
     /*background:#d9c8c8;*/
     font-size:13px;
@@ -8,6 +5,7 @@ body {
     font-family:"Montserrat", Arial, sans-serif;
     color:#4d5355;
     -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
 }
 
 a:hover{
@@ -17,7 +15,6 @@ a:hover{
 #footer a{
   color: white;
 }
-
 /*vertical tabs*/
 /**/
 .nav-tabs-ver {
@@ -94,9 +91,9 @@ a:hover{
   border-bottom: none;
   padding-top: 2px;
 }
-.tabs-left {
-  /*border-right: 1px solid #ddd;*/
-}
+/* .tabs-left {
+  border-right: 1px solid #ddd;
+} */
 .tabs-right {
   border-left: 1px solid #ddd;
 }
@@ -244,6 +241,7 @@ padding:10px;
     background-position: center center;
     background-size: cover;
     -webkit-box-shadow: 0 0 1px 1px rgba(0, 0, 0, .3);
+    box-shadow: 0 0 1px 1px rgba(0, 0, 0, .3);
     display: inline-block;
     border-radius: 4px;
 }
@@ -278,8 +276,8 @@ padding:10px;
   text-decoration: none;
   color: #fff;
 }
-.label-warning + .tooltip > .tooltip-arrow {
-}
+/* .label-warning + .tooltip > .tooltip-arrow {
+} */
 /*Opening programming tooltip tags*/
 
 /**/
@@ -464,9 +462,194 @@ padding:10px;
     text-align: center;
     font-size: 33px;
 }
-
 .round-tab-company i{
     color:#1377a1;
+}
+
+
+/* Navigation Bar Notification */
+
+#notification_li{
+      position:relative
+}
+#notificationLink{
+  font-size: 1.45rem;
+}
+#notificationContainer {
+      background-color: #fff;
+      border: 1px solid rgba(100, 100, 100, .4);
+      -webkit-box-shadow: 0 3px 8px rgba(0, 0, 0, .25);
+      box-shadow: 0 3px 8px rgba(0, 0, 0, .25);
+      overflow: visible;
+      position: absolute;
+      /* top: 30px; */
+      top: 51px;      
+      margin-left: -359px;
+      width: 400px;
+      z-index: -1;
+      display: none;
+}
+#notificationContainer:before {
+      content: '';
+      display: block;
+      position: absolute;
+      width: 0;
+      height: 0;
+      color: red;
+      border: 10px solid red;
+      border-color: transparent transparent #989898;
+      margin-top: -20px;
+      margin-left: 375px;
+}
+#notificationTitle {
+      font-weight: bold;
+      padding: 8px;
+      font-size: 13px;
+      background-color: #ffffff;
+      /* position: fixed; */
+      z-index: 1000;
+      width: 384px;
+      border-bottom: 1px solid #dddddd;
+}
+#notificationsBody {
+      padding: 0px !important;
+}
+#notificationFooter{
+      background-color: #e9eaed;
+      text-align: center;
+      font-weight: bold;
+      padding: 8px;
+      font-size: 12px;
+      border-top: 1px solid #dddddd;
+}
+
+#notification_count {
+      padding: 0px 7px 3px 7px;
+      background: #cc0000;
+      color: #ffffff;
+      font-weight: bold;
+      border-radius: 9px;
+      -moz-border-radius: 9px; 
+      -webkit-border-radius: 9px;
+      position: absolute;
+      top: 14px;
+      left: 18px;
+      margin-top: -11px;
+      font-size: 11px;
+}
+
+/* .progress-navbar{
+  margin: 1rem;
+} */
+
+#basic-info-noti{
+  background-image: url('../img/basic-info-icon.png');
+  /* background-attachment: fixed; */
+  background-repeat: no-repeat;
+  background-size: 50%;
+  background-position: left 6.5em top 7px;
+}
+
+#education-noti{
+  background-image: url('../img/education-icon.png');
+  /* background-attachment: fixed; */
+  background-repeat: no-repeat;
+  background-size: 56%;
+  background-position: left 6.7em top 11px;
+}
+
+#experiences-noti{
+  background-image: url('../img/exprience-noti.png');
+  /* background-attachment: fixed; */
+  background-repeat: no-repeat;
+  background-size: 45%;
+  background-position: left 6.7em top 11px;
+}
+
+#awards-noti{
+  background-image: url('../img/awards-noti.png');
+  /* background-attachment: fixed; */
+  background-repeat: no-repeat;
+  background-size: 51%;
+  background-position: left 6em top 17px;
+}
+
+#portfolio-noti{
+  background-image: url('../img/porfolio-noti.png');
+  /* background-attachment: fixed; */
+  background-repeat: no-repeat;
+  background-size: 51%;
+  background-position: left 6.8em top 12px;
+}
+
+#objective-noti{
+  background-image: url('../img/objective-noti.png');
+  /* background-attachment: fixed; */
+  background-repeat: no-repeat;
+  background-size: 51%;
+  background-position: left 6em top 15px;
+}
+
+#otherskills-noti{
+  background-image: url('../img/other-skill-noti.png');
+  /* background-attachment: fixed; */
+  background-repeat: no-repeat;
+  background-size: 40%;
+  background-position: left 6.8em top 20px;
+}
+
+#seminars-noti{
+  background-image: url('../img/seminar-noti.png');
+  /* background-attachment: fixed; */
+  background-repeat: no-repeat;
+  background-size: 61%;
+  background-position: left 5.3em top 9px;
+}
+
+
+.noti-content{
+  margin: 1rem;
+}
+
+.noti-flex{
+  background-image: url('../img/brain-icon.png');
+  background-position: right 1px center;  
+  border: 1px solid #ada1a1;
+  height: 5rem;
+  margin: .5rem .5rem .5rem 1rem;
+  position: relative;
+  transition-duration: 0.3s;  
+}
+.noti-flex:hover{
+  border: 1px solid #00598e;
+  height: 5rem;
+  margin: .5rem .5rem .5rem 1rem;
+  position: relative;
+  cursor: pointer;
+  color:  #00598e;
+  -webkit-transform: scale(1.1);
+  -ms-transform: scale(1.1);
+  transform: scale(1.1);
+  /* -webkit-transition: width 1.5s, height 1.5s; Safari */
+  /* transition: width 1.5s, height 2s; */
+}
+
+.noti-flex:hover span i {
+  color:  #00598e;
+}
+
+.noti-flex-sp{
+position: absolute;
+bottom: 16px;
+font-weight: 700;
+}
+
+.noti-flex-icon{
+  position: absolute;
+  top: 6px;
+  right: 4px;
+  font-size: 2.1rem;
+  color: #757575;
 }
 
 /*pagination*/

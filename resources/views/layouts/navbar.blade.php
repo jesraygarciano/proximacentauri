@@ -1,271 +1,333 @@
-<nav id="navigation-bar" class="navbar navbar-default" style="z-index: 2;">
+<style>
+    .notification-list{
+        list-style:none;
+        padding:0px;
+    }
+    .notification-list li{
+        margin-bottom:5px;
+    }
+    .notification-list li .fa-check-square-o{
+        color:#4cae4c;
+    }
+</style>
+<nav class="navbar navbar-default navbar-static-top">
     <div class="container">
         <div class="navbar-header">
-            <!-- スマホやタブレットで表示した時のメニューボタン -->
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                Menu
+
+            <!-- Collapsed Hamburger -->
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse" aria-expanded="false">
+                <span class="sr-only">Toggle Navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
             </button>
 
-            <!-- ブランド表示 -->
-            <a class="navbar-brand" href="/">
-                <img style="transform: translateY(-5px);" src="{{ asset('img/logo_brand.png') }}" />
+            <!-- Branding Image -->
+            <a class="navbar-brand" href="{{ url('/') }}">
+                <img src="{{ asset('img/logo_brand.png') }}" />
             </a>
         </div>
 
-        <!-- メニュー -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        @if(\Auth::check())
+            <ul class="nav navbar-nav navbar-right" style="margin: initial;">
+                <li class="notification_li" id="notification_li">
+                    <a href="#" id="notificationLink">
+                        <i class="fa fa-bell"></i>
+                    </a>
+                    <div id="notification_count">
+                        1
+                    </div>
+                    <div id="notificationContainer">
+                        <div id="notificationTitle">Updates and notifications</div>
+                            <div id="notificationsBody" class="notifications">
+                                <div class="noti-content">
+                                    {{--  <h4>Updates</h4>  --}}
+                                    <div>
+                                        <ul class="notification-list">
+                                            <li style="padding: 10px;background: ghostwhite;">
+                                                <h4 style="border-bottom: 1px solid #cecece;padding-bottom: 10px;">
+                                                    <i class="fa fa-check-square-o" aria-hidden="true"></i> Application Approved
+                                                    <div>
+                                                    <small class="form-text text-muted">May 4, 2018 8:30am</small>
+                                                    </div>
+                                                </h4>
+                                                After considering your skills, we are happy to let you know that you are qualified to
+                                                undergo our training program.
+                                                <hr>
+                                                <label>Batch : </label> Batch 1
+                                                <br>
+                                                <label> Schedule : </label> July 18, 2018
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div id="notificationFooter"><a href="#">See All</a></div>
+                                    @if(\Auth::user()->profileProgress() < 100)
+                                        <div class="progress progress-navbar">
+                                            <div class="progress-bar progress-bar-striped active profile-progress" role="progressbar" style="width: {{\Auth::user()->profileProgress()}}%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"><span class="val">{{\Auth::user()->profileProgress()}}</span>% profile complete</div>
+                                        </div>
 
-            <!-- 左寄せメニュー -->
-            <ul class="nav navbar-nav">
-                <li class="company_nav"><a href="{{route('companies.index')}}"> Companies </a></li>
-                <li class="openings_nav"><a href="{{route('openings.index')}}"> Search Jobs </a></li>
+                                        <div class="text-primary"><center>The more information you provide for us, the higher is your chance to be qualified.</center></div>
+                                    @endif
+                                </div>
+                            </div>
+                    </div>
+                </li>
             </ul>
+        @endif
 
-            <!-- 右寄せメニュー -->
-            <ul class="nav navbar-nav navbar-right">
-
-                @if (Auth::guest())
-                    {{-- ログインしていない時 --}}
+        <div class="collapse navbar-collapse" id="app-navbar-collapse">
+            <!-- Right Side Of Navbar -->
+            <ul class="nav navbar-nav navbar-right" style="margin: initial;">
+                <!-- Authentication Links -->
+                @guest
                     <li><a href="{{ route('login') }}">Login</a></li>
-                    {{-- <li><a href={{route('auth.student_view')}}>Student Register</a></li> --}}
-                    <li><a href="{{ url('/auth/register/student') }}">Student Register</a></li>
-                    <li><a href="{{url('/auth/register/hiring')}}">Hiring Register</a></li>
+                    <li><a href="{{ route('register') }}">Register</a></li>
                 @else
 
-                    {{-- ログインしている時 --}}
+                    {{-- @if(\Auth::check() && \Auth::user()->profileProgress() < 100)
 
-                    <!-- ドロップダウンメニュー -->
-
-                    <li class="dropdown dropdown-auto-hover" id="navigator-list">
-                        @if (Auth::user()->role == 1)
-                           {{-- @if(Session::get('company')) --}}
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                {{-- {{ Session::get($company->email) }} --}}
-                                <div class="name ellipsis"> 
-                                    {{ Auth::user()->email }}
-                                </div>
-                                <span class="caret"></span>
-                            </a>
-                            {{-- @endif --}}
-                        @else
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                <div class="name ellipsis"> 
-                                    {{ Auth::user()->name }} 
-                                </div>
-                                <span class="caret"></span>
-                            </a>
-                        @endif
-
-                        <ul class="dropdown-menu dropdown-auto-hover" role="menu" style="padding: 0px 0px 11px 0px;">
-                            @if (Auth::user()->role == 0)
-
-                               @if(\Auth::user()->findFirstOrCreateResume())
-
-                                    <li>
-                                        <a href="{{ url('resumes/show') }}">
-                                           See Resume
-                                        </a>
-                                    </li>
-                                @else
-                                    <li>
-                                        <a href="{{ url('resumes/create') }}">
-                                            Create Your Resume
-                                        </a>
-                                    </li>
-
-                               @endif
-                                <li>
-                                    <a href="{{ url('applications/applied_index') }}">
-                                        Applied List
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="{{ url('bookmarked/list') }}">
-                                        {{ Session::get('bookmark_opening_count') }}
-                                        bookmark lists
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="{{ url('followed/list') }}">
-                                        {{ Auth::user()->followings->count() }}
-                                        Followed companies
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="{{ url('scouts/company_scout') }}">
-                                        Scouted notification
-                                    </a>
-                                </li>                              
-                            @elseif (Auth::user()->role == 1)
-                                <li>
-                                    <a href="{{url('/hiring_portal')}}">Management</a>
-                                </li>
-                                <li>
-                                    <a href="{{url('/hiring_portal/user_index')}}">List of Applicants</a>
-                                </li>
-                                <li>
-                                    <a href="{{url('/saved/applicants/list')}}">
-                                        {{--{{ Session::get('save_applicants_count') }}--}}
-                                        List of Saved Applicants
-                                    </a>
-                                </li>
-                            @elseif (Auth::user()->role == 2)
-                                <li>
-                                    <a href="{{url('/management/users')}}">Manage User </a>
-                                </li>
-                                <li>
-                                    <a href="{{url('/management/companies')}}">Manage Companies </a>
-                                </li>
-                                <li>
-                                    <a href="{{url('/management/openings')}}">Manage Openings </a>
-                                </li>
-                                <li>
-                                    <a href="{{route('itp_management_index')}}">Manage Nexseed Training Program </a>
-                                </li>
-                            @endif
-                        </ul>
-                    </li>
-
-                    <!-- uelmar's inline js code -->
-                    <script type="text/javascript">
-                        $(document).ready(function(){
-                            $('.dropdown-auto-hover').mouseover(function(){
-                                if(!$(this).hasClass('open')){
-                                    $(this).addClass('open')
-                                }
-                            });
-
-                            $('.dropdown-auto-hover').mouseout(function(){
-                                if($(this).hasClass('open')){
-                                    $(this).removeClass('open')
-                                }
-                            });
-                        });
-                    </script>
-
-                    @if(\Auth::check())
-                    @if(!\Auth::user()->role == 2)
-                    <li class="noti-bell" id="noti-bell">
-                        <a href="{{route('user_notifications')}}?tab=scout_notifications">
+                    <li class="notification_li" id="notification_li">
+                        <a href="#" id="notificationLink">
                             <i class="fa fa-bell"></i>
                         </a>
-                        <div class="num-icon" style="display: none;">
-                            <div>1</div>
+                        <div id="notification_count">
+                            1
                         </div>
-                        <div class="noti-lists">
-                            @if(\Auth::user()->role == 1)
-                            <a class="noti" href="{{route('user_notifications')}}?tab=application_nofications">
-                                <span class="label label-danger applications" style="display: none;">1</span>
-                                Applications
-                            </a>
-                            @endif
-                            @if(\Auth::user()->role == 0)
-                            <a class="noti" href="{{route('user_notifications')}}?tab=scout_notifications">
-                                <span class="label label-danger scouts" style="display: none;">1</span>
-                                Scouts
-                            </a>
-                            @endif
-                            @if(\Auth::user()->role == 0)
-                            <a class="noti" href="{{route('user_notifications')}}?tab=opening_notifications">
-                                <span class="label label-danger new_openings" style="display: none;">1</span>
-                                New Openings
-                            </a>
-                            @endif
+                        <div id="notificationContainer">
+                            <div id="notificationTitle">Updates and notifications</div>
+                                <div id="notificationsBody" class="notifications">
+                                    <div class="noti-content">
+                                         <h4>Updates</h4> 
+                                        <h5>Profile progress:</h5>
+                                        <div class="progress progress-navbar">
+                                            <div class="progress-bar progress-bar-striped active profile-progress" role="progressbar" style="width: {{\Auth::user()->profileProgress()}}%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"><span class="val">{{\Auth::user()->profileProgress()}}</span>% profile complete</div>
+                                        </div>
+
+                                        <div class="text-primary"><center>The more information you provide for us, the higher is your chance to be qualified.</center></div>
+                                    </div>
+                                </div>
+                                <div id="notificationFooter"><a href="{{ route('itp_applicant_profile') }}">See All</a></div>
                         </div>
                     </li>
-                    @endif
-                    <?php $unseen_message= \Auth::user()->unseenMessages()->get(); ?>
-                    <li class="noti-bell" id="message-noti">
-                        <a href="{{url('messaging/index')}}?tab=scout_notifications">
-                            <i class="fa fa-envelope"></i>
-                        </a>
-                        <div class="num-icon" style="display: {{$unseen_message->count() > 0 ? '':'none'}};">
-                            <div>{{$unseen_message->count()}}</div>
-                        </div>
-                    </li>
-                    @endif
-                    <li>
-                        <a href="{{ route('logout') }}"
-                            onclick="event.preventDefault();
-                                        document.getElementById('logout-form').submit();">
-                            Logout
+                    @endif --}}
+
+                <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
+                            {{ Auth::user()->name }} <span class="caret"></span>
                         </a>
 
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                            {{ csrf_field() }}
-                        </form>
+                        <ul class="dropdown-menu">
+                            <li><a href="{{ route('itp_applicant_profile') }}">IT Profile</a></li>
+                            <!-- @if(\Auth::user()->resume()->first())
+                            <li><a href="{{ route('user_profile') }}">See Resume</a></li>
+                            @else
+                            <li><a href="{{ route('resume_create') }}">Create Resume</a></li>
+                            @endif -->
+                            <li>
+                                
+                                <a href="{{ route('logout') }}"
+                                    onclick="event.preventDefault();
+                                             document.getElementById('logout-form').submit();">
+                                    Logout
+                                </a>
+
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    {{ csrf_field() }}
+                                </form>
+                            </li>
+                        </ul>
                     </li>
-                @endif
+                @endguest
             </ul>
-            @if(\Auth::check())
-            <script type="text/javascript">
-
-                $(document).ready(function(){
-                    $('#message-noti').messageNotifier({
-                        auth_id:{{\Auth::user()->id}},
-                        unseen_messages:JSON.parse('{{json_encode($unseen_message)}}'.replace(/&quot;/g,'"'))
-                    });
-                    $('#noti-bell').bellNotifier({
-                        auth_id:{{\Auth::user()->id}},
-                        fetch_not_stats:"{{route('json_get_stat_notification')}}",
-                        company_id:{{\Auth::user()->companies()->latest('companies.created_at')->where('companies.is_active', 1)->first()->id ?? 0}}
-                    });
-                });
-            </script>
-            @endif
-        </div><!-- /.navbar-collapse -->
-    </div><!-- /.container-fluid -->
-</nav>
-
-@if(Session::has('no_role'))
-    <div class="ui modal" style="height: fill-content;" id="confirm_role">
-        
-          <div class="header">Role Confirmation</div>
-          <div class="content">
-            <form id="confirm_role_form" action="{{url('/confirm/role')}}" method="post">
-                {!! csrf_field() !!}
-                <div class="well">
-                    We have set your role as applicant by default.
-                    But we need to know if you are an hiring user or if you are really an applicant.
-                    <p>
-                        Please confirm your role.
-                    </p>
-                </div>
-                <div class="row">
-                    <div class="col-sm-6">
-                        <center>
-                            <label>
-                                <i class="fa fa-user fa-5x"></i>
-                                <br>
-                                Applicant
-                                <br>
-                                <input type="radio" checked value="0" name="role">
-                            </label>
-                        </center>
-                    </div>
-                    <div class="col-sm-6">
-                        <center>
-                            <label>
-                                <i class="fa fa-building fa-5x"></i>
-                                <br>
-                                Hiring user
-                                <br>
-                                <input type="radio" value="1" name="role">
-                            </label>
-                        </center>
-                    </div>
-                </div>
-            </form>
-          </div>
-          <div class="actions">
-            <button type="button" onclick="$('#confirm_role_form').submit()" class="btn btn-primary save">Confirm</button>
-            <button type="button" class="btn deny btn-secondary" data-dismiss="modal">Close</button>
-          </div>
+        </div>
     </div>
-@endif
-
-<script type="text/javascript">
+</nav>
+<div class="ui modal" id="notifications_modal">
+    <div class="header">
+        Notifications
+    </div>
+    <div class="content">
+        <div class="list" style="height:250px; overflow:auto;">
+            <ul class="notification-list">
+                <li style="padding: 10px;background: ghostwhite;">
+                    <h4 style="border-bottom: 1px solid #cecece;padding-bottom: 10px;">
+                        <i class="fa fa-check-square-o" aria-hidden="true"></i> Application Approved
+                        <div>
+                        <small class="form-text text-muted">May 4, 2018 8:30am</small>
+                        </div>
+                    </h4>
+                    After considering your skills, we are happy to let you know that you are qualified to
+                    undergo our training program.
+                    <hr>
+                    <label>Batch : </label> Batch 1
+                    <br>
+                    <label> Schedule : </label> July 18, 2018
+                </li>
+                <li style="padding: 10px;background: ghostwhite;">
+                    <h4 style="border-bottom: 1px solid #cecece;padding-bottom: 10px;">
+                        <i class="fa fa-check-square-o" aria-hidden="true"></i> Application Approved
+                        <div>
+                        <small class="form-text text-muted">May 4, 2018 8:30am</small>
+                        </div>
+                    </h4>
+                    After considering your skills, we are happy to let you know that you are qualified to
+                    undergo our training program.
+                    <hr>
+                    <label>Batch : </label> Batch 1
+                    <br>
+                    <label> Schedule : </label> July 18, 2018
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="actions">
+      <div class="ui black button deny">Close</div>
+    </div>
+</div>
+<script>
     $(document).ready(function(){
-        $('#confirm_role').modal('show')
+        $(document).ajaxSuccess(function(ev,req) {
+            if(req.responseJSON.profile_progess){
+                console.log('profile updated')
+                $('.profile-progress').css('width',req.responseJSON.profile_progess+'%');
+                $('.profile-progress .val').html(req.responseJSON.profile_progess);
+            }
+        });
+        $('.info-tip .header .info-close').click(function(){
+            $(this).closest('.info-tip').remove();
+        });
+    });
+
+    $(document).ready(function(){
+        $('#notificationContainer').unickNotifier({
+            fetch_url:"{{route('fetch_latest_notifications')}}",
+            auth_id:{{\Auth::user()->id}}
+        }, function(data){
+            // 
+            $('#notificationContainer .notification-list').append('<li style="padding: 10px;background: ghostwhite;">'
+                +'    <h4 style="border-bottom: 1px solid #cecece;padding-bottom: 10px;">'
+                +'        <i class="fa fa-check-square-o" aria-hidden="true"></i> Application Approved'
+                +'        <div>'
+                +'        <small class="form-text text-muted">'+data.created_at+'</small>'
+                +'        </div>'
+                +'    </h4>'
+                +data.explanation
+                +'    <hr>'
+                +'    <label>Batch : </label>'
+                +data.internshipApplication.training_batch.name
+                +'    <br>'
+                +'    <label> Start Date : </label> '
+                +data.internshipApplication.training_batch.start_date
+                +'<br><label>Time Schedule : </label> '+data.internshipApplication.training_batch.schedule
+                +'</li>'
+            );
+        }, null, function(){
+            $('#notificationContainer .notification-list').html('');
+        });
+        // $("#notificationLink").click(function(){
+            @if(\Auth::check() && \Auth::user()->profileProgress() < 26)
+                $("#notificationLink").css({"color" : "red"});
+                $("#notificationContainer").fadeToggle(300);
+                $("#notification_count").fadeOut("slow");
+            @endif
+        // return false;
+        // });
+
+        //Document Click hiding the popup 
+        // $(document).click(function(){
+        //     $("#notificationContainer").hide();
+        //     $("#notificationLink").css({"color" : "#777"});
+        // });
+
+        //Popup on click
+        // $("#notificationContainer").click(function(ev){
+        //     return false;
+        // });
+
+        $("#notificationLink").click(function(){
+            if(!$('.notification-backdrop').length){
+                $("#notificationContainer").fadeToggle(300);
+                $("#notification_count").fadeOut("slow");
+                $("#notificationLink").css({"color" : "red"});
+                setNotificationBackdrop();
+            }
+        // return false;
+    });
+
+    $(document).ready(function(){
+        var latest_id = 0;
+
+        $('#notificationFooter').click(function(){
+            loadAllNotification(latest_id);
+            $('#notifications_modal').modal('show');
+        });
+
+        var loadAllNotification = function(_latest_id){
+            swal({
+                    title: 'Loading Info',
+                    text: 'Please wait...',
+                    onOpen: () => {
+                        swal.showLoading()
+                    },
+                    allowOutsideClick: () => !swal.isLoading()
+            })
+            $.ajax({
+                url:"{{route('fetch_notifications')}}",
+                type:'GET',
+                data:{latest_id:_latest_id},
+                success:function(data){
+                    data = data.notifications;
+                    var i = 0;
+                    swal.close();
+                    for(index in data){
+                        $('#notifications_modal .notification-list').append(
+                            '<li style="padding: 10px;background: ghostwhite;">'
+                            +'    <h4 style="border-bottom: 1px solid #cecece;padding-bottom: 10px;">'
+                            +'        <i class="fa fa-check-square-o" aria-hidden="true"></i> Application Approved'
+                            +'        <div>'
+                            +'        <small class="form-text text-muted">'+data[index].created_at+'</small>'
+                            +'        </div>'
+                            +'    </h4>'
+                            +data[index].explanation
+                            +'    <hr>'
+                            +'    <label>Batch : </label>'
+                            +data[index].internshipApplication.training_batch.name
+                            +'    <br>'
+                            +'    <label> Start Date : </label> '
+                            +data[index].internshipApplication.training_batch.start_date
+                            +'<br><label>Time Schedule : </label> '+data[index].internshipApplication.training_batch.schedule
+                            +'</li>')
+                            latest_id = index == 0 ? data[index].id :latest_id;
+                    }
+                }
+            });
+        }
+
+        $('#notifications_modal .notification-list').html('');
+
+        $('#notifications_modal .list').scroll(function(){
+            if($(this).scrollTop() == ($('#notifications_modal .list')[0].scrollHeight - $('#notifications_modal .list').outerHeight())){
+                console.log('bottom most');
+                loadAllNotification(latest_id);
+            }
+        });
+    });
+
+    function setNotificationBackdrop(){
+        @if(\Auth::check() && \Auth::user()->profileProgress() < 26)
+        var div = document.createElement('div');
+        $(div).addClass('notification-backdrop');
+        $(div).css({'position':'fixed', 'z-index':'1','width':'100%','height':'100%', top:'0px', left:'0px', background:'#0a0a0ad4'});
+        $('body').append(div);
+        @endif
+
+        
+        $(div).click(function(){
+            $("#notificationContainer").hide();
+            $("#notificationLink").css({"color" : "#777"});
+            $(div).remove();
+        });
+    }
+    // setNotificationBackdrop();
     });
 </script>

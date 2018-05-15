@@ -4,13 +4,16 @@
   ##Device = Desktops
   ##Screen = 1281px to higher resolution desktops
 */
+    #what-we-do .card {
+        height: 250px;
+    }
 
-  
 }
 
 
-
 @media (min-width: 1025px) and (max-width: 1280px) {
+
+
 /* 
   ##Device = Laptops, Desktops
   ##Screen = B/w 1025px to 1280px
@@ -25,7 +28,6 @@
 }
 
 }
-
 
 
 @media (min-width: 768px) and (max-width: 1024px) {
@@ -70,7 +72,7 @@
 }
 .general_heading h5 {
     font-size: 17px;
-}  
+}
   
 }
 
@@ -82,6 +84,14 @@
   ##Device = Most of the Smartphones Mobiles (Portrait)
   ##Screen = B/w 320px to 479px
 */
+
+#resume-tab-itp{
+    display: none;
+}
+#application-tab-itp{
+    display: none;
+}
+
 .mt-0 .mb-1{
   font-size: 20px!important;
 }
@@ -143,37 +153,149 @@
     top: 170px;
     opacity: 0.8;  
 }
-    
+
+/*Landing page*/
+.header-content-h1 {
+    font-weight: 900;
+    font-size: 2rem;
+    text-transform: uppercase;
+    padding-top: 3rem;
+    margin-bottom: 0;
+    font-family: 'Open Sans', sans-serif;
+}
+.header-content p {
+    font-size: 1.2rem;
+}
+
+.nexseed-logos figure a .gscamplogo {
+    padding-top: 0.5rem!important;
+    /* display: none; */
+}
+
+.btn-frst {
+    margin-left: 1.5rem;
+    color: rgb(53, 53, 53);
+    font-size: 1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-family: Roboto, sans-serif;
+    background: rgb(251, 197, 10);
+    padding: .7rem 2rem;
+    text-decoration: none;
+}
+
+.btn-opposite {
+    font-size: 1rem;
+}
+
+#menuToggle {
+    display: block;
+    position: absolute;
+    top: 77px;
+    left: 24px;
+    z-index: 5;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+#menu {
+    /*position: absolute;*/
+    height: 110vh;
+  }
+
+  #register h2 {
+      font-size: 1.7rem;
+  }
+  #register p {
+      font-size: 1.2rem;
+  }
+
+.btn-reg-opposite {
+    font-size: 1rem;
+    padding: 1.2rem 2rem;
+}
+
+.profile-name h2 {
+    color: #fff;
+    font-size: 15px!important;
+    font-weight: 600;
+    line-height: initial!important;
+}
 }
 
 /*Customized Media Queries*/
 
 @media (max-width: 991px) {
-.nexseed-logos figure a .nex-seedlogo{
-padding-top: 0!important;
-/*display: none;*/
-}
-.nexseed-logos figure a .gscamplogo{
-padding-top: 3.5rem!important;
-/*display: none;*/
-}
-.landing-cont-logos{
-  height: 150px!important;
-}
+
+  .nexseed-logos figure a .nex-seedlogo{
+  padding-top: 0!important;
+  /*display: none;*/
+  }
+  .nexseed-logos figure a .gscamplogo{
+  padding-top: .5rem;
+  /*display: none;*/
+  }
+  .landing-cont-logos{
+    height: 150px!important;
+  }
 
 }
 
+@media (min-width:379px) and (max-width: 429px){
+
+    .btn-frst{
+        margin-bottom: 1rem!important;
+    }
+  }
 
 @media (max-width: 378px) {
 
-.btn-opposite{
-  margin-top: 1rem;
-}
+  .btn-opposite{
+    margin-top: 1rem;
+  }
 }
 
 @media (max-width: 768px) {
 
-#schedulenskills{
-  margin-top: 2rem;
-}
+    
+  #schedulenskills{
+    margin-top: 2rem;
+  }
+
+    #notificationContainer {
+    background-color: #fff;
+    border: 1px solid rgba(100, 100, 100, .4);
+    -webkit-box-shadow: 0 3px 8px rgba(0, 0, 0, .25);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, .25);
+    overflow: visible;
+    position: initial;
+    /* top: 30px; */
+    top: 48px;      
+    margin-left: 0px;
+    margin-bottom: 1rem;
+    width: 100%;
+    z-index: -1;
+    display: none;
+    }
+
+    #notificationContainer:before {
+    content: '';
+    display: block;
+    position: absolute;
+    width: 0;
+    height: 0;
+    color: red;
+    border: 10px solid red;
+    border-color: transparent transparent #989898;
+    margin-top: -20px;
+    margin-left: 15px;
+    }
+
+    .progress {
+        border-radius: 0!important;
+        border: 1px solid #bfbebe;
+        height: 30px;
+        width: 75%;
+    }
+
 }

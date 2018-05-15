@@ -1,6 +1,5 @@
 <?php
 
-
 // this code for the basic authentication
 
 // function authenticate()
@@ -37,7 +36,6 @@
 
 
 // end of basic authentication code
-
 
 /**
  * Laravel - A PHP Framework For Web Artisans
