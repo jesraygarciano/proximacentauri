@@ -64,6 +64,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Location Marker
     |--------------------------------------------------------------------------
     |
     | Automatically add a location marker to the provided location for a
