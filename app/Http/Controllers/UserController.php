@@ -533,7 +533,7 @@ class UserController extends Controller
     public function fetch_latest_notifications(Request $request){
         $notifications = \Auth::user()->notifications()->latest()->limit(1)->get();
         foreach($notifications as $key => $value){
-            $notifications[$key]->internshipApplication = InternshipApplication::find(json_decode($value->meta_data)->app_id)->load('trainingBatch');
+            $notifications[$key]->internshipApplication = InternshipApplication::find($value->meta_data->app_id)->load('trainingBatch');
         }
         return ['notifications'=>$notifications];
     }
@@ -542,12 +542,16 @@ class UserController extends Controller
         $notifications = \Auth::user()->notifications()->latest()->limit(5);
         if($request->latest_id)
         {
-            $notifications->where('notifications.id','>',$request->latest_id);
+            $notifications->where('notifications.id','<',$request->latest_id)->latest();
         }
         $notifications = $notifications->get();
         foreach($notifications as $key => $value){
-            $notifications[$key]->internshipApplication = InternshipApplication::find(json_decode($value->meta_data)->app_id)->load('trainingBatch');
+            $notifications[$key]->internshipApplication = InternshipApplication::find($value->meta_data->app_id)->load('trainingBatch');
         }
         return ['notifications'=>$notifications];
+    }
+
+    public function user_seen_notification(Request $request){
+        \Auth::user()->notifications()->update(['status'=>'seen']);
     }
 }
