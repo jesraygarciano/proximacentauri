@@ -12,4 +12,8 @@ class Notification extends Model
     public function recipient(){
         return $this->belongsTo('App\User','recipient_id');
     }
+
+    public function getMetaDataAttribute(){
+        return json_decode($this->attributes['meta_data']);
+    }
 }
