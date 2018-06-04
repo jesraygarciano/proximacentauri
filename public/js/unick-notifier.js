@@ -35,17 +35,41 @@
 			$.socket.emit('client add', settings.auth_id);
         });
         
-        $.socket.on('notification-channel:App\\Events\\NotificationEvent',function(data){
+        // $.socket.on('notification-channel:App\\Events\\NotificationEvent',function(data){
+		// 	//
+		// 	console.log(data);
+		// 	if(data.data.event == 'created')
+		// 	{
+		// 		// switch(data.data.type){
+		// 		// 	case 'new opening':
+		// 		// 	$this.find('.new_openings').html(new_openings).show();
+        //         // }
+		// 		clearFunc();
+		// 		addItemFunc(data.data.notification);
+		// 	}
+		// 	else
+		// 	{
+		// 		// switch(data.data.type){
+		// 		// 	case 'new opening':
+		// 		// 	$this.find('.new_openings').html(new_openings).css({display:( new_openings < 1 ?'none':'')});
+		// 		// 	break;
+        //         // }
+        //         updateItemFunc(data.data.notification);
+		// 	}
+
+		// });
+
+		$.socket.on('notify-application-progress',function(data){
 			//
 			console.log(data);
-			if(data.data.event == 'created')
+			if(data.event == 'created')
 			{
 				// switch(data.data.type){
 				// 	case 'new opening':
 				// 	$this.find('.new_openings').html(new_openings).show();
                 // }
 				clearFunc();
-				addItemFunc(data.data.notification);
+				addItemFunc(data.notification,true);
 			}
 			else
 			{
@@ -54,8 +78,10 @@
 				// 	$this.find('.new_openings').html(new_openings).css({display:( new_openings < 1 ?'none':'')});
 				// 	break;
                 // }
-                updateItemFunc(data.data.notification);
+                updateItemFunc(data.notification,true);
 			}
+			
+			notification_sound()
 
 		});
 
