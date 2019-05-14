@@ -84,6 +84,8 @@
         {{-- @if( Request::path()!= 'auth/login') --}}
             @include('layouts.footer')
         {{-- @endif --}}
+        
+        {{--start to modify these section--}}
             </div>
     </div>
 
