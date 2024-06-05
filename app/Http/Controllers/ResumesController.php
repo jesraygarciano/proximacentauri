@@ -171,6 +171,11 @@ class ResumesController extends Controller
         $skills = Resume_skill::all();
         $resume = Common::get_master_resume();
         if ($resume) {
+//         $resume = $user->findFirstOrCreateResume();
+//         $educations = $resume->educations()->get();
+//         $experiences = $resume->experiences()->get();
+//         $cr = $resume->character_references()->get();
+//         if($resume){
             $languages_ids = $resume->has_skill()->get()->pluck('id')->toArray();
             $educations = $resume->educations()->get();
             $experiences = $resume->experiences()->get();
@@ -183,7 +188,9 @@ class ResumesController extends Controller
             $cr = array();
         }
 
-        return view('resumes.edit', compact('user', 'skills', 'resume', 'languages_ids', 'educations', 'experiences', 'cr'));
+        $provinces = \DB::table('provinces')->select('name','division','iso_code')->get();
+
+        return view('resumes.edit', compact('provinces', 'user', 'skills', 'resume', 'languages_ids', 'educations', 'experiences', 'cr'));
 
     }
 
@@ -204,7 +211,8 @@ class ResumesController extends Controller
             'email' => 'required',
             'birth_date' => 'required',
             'address1' => 'required',
-            'address2' => 'required',
+            // 'address2' => 'required',
+            'province' => 'required',
             'city' => 'required',
             'country' => 'required',
             'postal' => 'required',
@@ -292,8 +300,14 @@ class ResumesController extends Controller
 
         $resume->has_skill()->detach();
         $resume_skill_ids = $request->input('skills');
+
         foreach ($resume_skill_ids as $resume_skill_id) {
             $resume->has_skill()->attach($resume_skill_id);
+//         if($resume_skill_ids)
+//         {
+//             foreach($resume_skill_ids as $resume_skill_id){
+//                 $resume->has_skill()->attach($resume_skill_id);
+//             }
         }
 
         return redirect('resumes/show')->with('success', 'Updated you resume');

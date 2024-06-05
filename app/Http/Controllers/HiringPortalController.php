@@ -140,8 +140,8 @@ class HiringPortalController extends Controller
         }
 
         if($requests->province){
-            $provinces_search = \DB::table('provinces')->whereRaw('name like "%'.$requests->province.'%" or iso_code like "%'.$requests->province.'%"')->pluck('iso_code');
-            $applicants->whereIn('province_code',$provinces_search);
+            $_applicants = Resume::where('province',$requests->province)->pluck('user_id');
+            $applicants->whereIn('id',$_applicants);
         }
 
         if($requests->gender){

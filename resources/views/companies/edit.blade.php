@@ -4,55 +4,54 @@
     <div class="container">
         <div id="compinfo"> {{--START COMPANYINFO --}}
         <style type="text/css">
-        .error{
-            color:red;
-        }
-        .alert{
-        }
-        .alert-danger{
-            margin: 0 auto 2.5rem auto;
-            padding-left: 3rem;
-        }
-        .alert-danger li{
-            list-style-type: lower-alpha;        
-        }        
-        .cover-image{
-            position: relative;
-            height: 300px;
-            background: #c8c8c8;
-            overflow: hidden;
-            border: 1px solid #cecece;
-        }
-        .cover-image img{
-            position: absolute;
-            top: 50%;
-            transform:translateY(-50%);
-            width: 100%;
-            left: 0px;
-        }
-        .cover-info .picture{
-            padding: 5px;
-            background: white;
-            border: 1px solid #cecece;
-            position: relative;
-            width: 200px;
-        }
+            .error{
+                color:red;
+            }
+            .alert{
+            }
+            .alert-danger{
+                margin: 0 auto 2.5rem auto;
+                padding-left: 3rem;
+            }
+            .alert-danger li{
+                list-style-type: lower-alpha;        
+            }        
+            .cover-image{
+                position: relative;
+                height: 300px;
+                background: #c8c8c8;
+                overflow: hidden;
+                border: 1px solid #cecece;
+            }
+            .cover-image img{
+                position: absolute;
+                top: 50%;
+                transform:translateY(-50%);
+                width: 100%;
+                left: 0px;
+            }
+            .cover-info .picture{
+                padding: 5px;
+                background: white;
+                border: 1px solid #cecece;
+                position: relative;
+                width: 200px;
+            }
 
-        .cover-info .picture img{
-            width: 100%;
-        }
+            .cover-info .picture img{
+                width: 100%;
+            }
 
-        .cover-info{
-        }
+            .cover-info{
+            }
 
-        .cover-info img{
-            border:none!important;
-        }
+            .cover-info img{
+                border:none!important;
+            }
 
-        .ui.form{
-            font-size: 12px;
-        }
-
+            .ui.form{
+                font-size: 12px;
+            }
         </style>
 
     {!!Form::open(['url' => route('companies.update',$company->id), 'method' => 'PATCH', 'files' => true, 'enctype' => 'multipart/form-data', 'id' => 'form-validate']) !!}

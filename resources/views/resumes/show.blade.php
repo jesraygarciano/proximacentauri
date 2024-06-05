@@ -58,6 +58,7 @@
                                             </li>
                                             <li>
                                                 {{$resume->city}}
+                                                {{$resume->province}}
                                                 {{$resume->country}}
                                                 {{$resume->postal}}
                                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

@@ -30,7 +30,7 @@ class MessagerController extends Controller
         $users = \Auth::user()->contacts->load('contact');
 
         foreach($users as $key => $user){
-            $users[$key]['latest_message'] = Message::whereRaw('(( user_id = '.$user->user_id.' and reciever = '.$user->contact_id.') or ( user_id = '.$user->contact_id.' and reciever = '.$user->user_id.'))')->get();
+            $users[$key]['latest_message'] = Message::whereRaw('(( user_id = '.$user->user_id.' and reciever = '.$user->contact_id.') or ( user_id = '.$user->contact_id.' and reciever = '.$user->user_id.'))')->latest()->limit(1)->get();
         }
 
         return ['users'=>$users, 'recieved_request'=> \Auth::user()->receivedContactRequests->load('user')];
@@ -80,7 +80,7 @@ class MessagerController extends Controller
         $contacts = Contact::whereIn('contacts.id',\Auth::user()->contacts()->pluck('id'))->searchKey($requests->keyword)->get()->load('contact');
 
         foreach($contacts as $key => $user){
-            $contacts[$key]['latest_message'] = Message::whereRaw('(( user_id = '.$user->user_id.' and reciever = '.$user->contact_id.') or ( user_id = '.$user->contact_id.' and reciever = '.$user->user_id.'))')->get();
+            $contacts[$key]['latest_message'] = Message::whereRaw('(( user_id = '.$user->user_id.' and reciever = '.$user->contact_id.') or ( user_id = '.$user->contact_id.' and reciever = '.$user->user_id.'))')->latest()->limit(1)->get();
         }
 
         return ['contacts'=>$contacts ,'others'=>$others_users->get(), 'requested'=>$requested->get(), 'recieved_request'=>$recieved_request->get() ];

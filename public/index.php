@@ -1,5 +1,42 @@
 <?php
 
+// this code for the basic authentication
+
+// function authenticate()
+// {
+//     // this is the array for the usernames and passwords
+//     $auth_users = [
+//         [
+//             'username'=>'admin',
+//             'password'=>'admin',
+//         ],
+//         [
+//             'username'=>'admin2',
+//             'password'=>'admin2',
+//         ],
+//     ];
+
+//     foreach($auth_users as $user){
+//         if(@$_SERVER['PHP_AUTH_USER'] === $user['username'] && @$_SERVER['PHP_AUTH_USER'] === $user['password']){
+//             return true;
+//         }
+//     }
+
+//     return false;
+// }
+
+// if(!authenticate())
+// {
+//     header('WWW-Authenticate: Basic');
+//     header('HTTP\ 1.0 401 Unauthorized');
+
+//     echo 'You are not authorized to access content!';
+//     exit;
+// }
+
+
+// end of basic authentication code
+
 /**
  * Laravel - A PHP Framework For Web Artisans
  *

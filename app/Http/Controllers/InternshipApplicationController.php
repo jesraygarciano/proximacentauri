@@ -10,9 +10,11 @@ use App\Resume;
 use App\InternshipApplicationSkills;
 use App\InternshipApplication;
 use App\TrainingBatch;
+use App\Notification;
 use Auth;
 use Mapper;
 use yajra\Datatables\Datatables;
+use Mail;
 
 use Illuminate\Http\Request;
 
@@ -214,8 +216,37 @@ class InternshipApplicationController extends Controller
     }
 
     public function json_update_application_status(Request $requests){
-        InternshipApplication::where('id',$requests->id)
-        ->update(['status'=>$requests->status]);
+        $app = InternshipApplication::find($requests->id);
+        $app->status = $requests->status;
+        $app->setRemark($requests->remark);
+        $app->save();
+
+        $notification = Notification::create([
+            'author_id'=>\Auth::user()->id,
+            'recipient_id'=>$app->user_id,
+            'status'=>'unseen',
+            'explanation'=>$requests->remark,
+            'meta_data'=>json_encode(['type'=>'itp_app','app_id'=>$app->id])
+        ]);
+
+        $notification->internshipApplication = $app->load('trainingBatch');
+
+        event(new \App\Events\NotificationEvent(
+            [
+                'type'=>'internship_application_status',
+                'event'=>$app->status,
+                'notification'=>$notification,
+                'user_id'=>$app->user_id
+            ]
+        ));
+
+        \App\Jobs\ProcessEmail::dispatch([
+            'blade'=>'emails.app-notification',
+            'recipient'=>User::find($app->user_id),
+            'sender'=>\Auth::user(),
+            'remark'=>$requests->remark,
+            'subject'=>'Nexseed Application Progress'
+        ])->delay(now()->addMinutes(10));
     }
 
     public function json_view_application(Request $requests){

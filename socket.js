@@ -11,30 +11,10 @@ var clients = [];
 
 var Message = require('./node_mysql/message');
 
-
-app.get('/', function(req, res){
-    var message = new Message();
-    // message.where('user_id','=',302);
-    // message.where('reciever','=',1);
-    // message.get(function(result){
-    //     console.log(result)
-    //     return res.send('sad');
-    // }, 3);
-
-    message.data = {user_id:302, reciever:1, message:'node server sample'};
-
-    message.save((result)=>{
-        res.send(result);
-    });
-
-    // message.setAsSeen(48, (result)=>{
-    //     res.send(result);
-    // });
-});
-
 redis.subscribe('notification-channel', function(err, count) {
+    console.log('ready-redis');
 	console.log(err);
-	console.log(count);
+    console.log(count);
 });
 
 redis.on('error', err => {
@@ -42,7 +22,7 @@ redis.on('error', err => {
 });
 
 redis.on('message', function(channel, message) {
-    console.log('Message Recieved: ' + message);
+    console.log('Message Received: ' + message);
     message = JSON.parse(message);
 
     for(var index in clients){
@@ -61,42 +41,10 @@ http.listen(3000, function(){
 io.on('connection', function(socket){
     console.log('a user connected');
 
-    handlePrivateMessage(socket);
-    hadleOnlineStatus(socket);
+    handleOnlineStatus(socket);
 });
 
-function handlePrivateMessage(socket){
-    socket.on('s-p-m',function(data,cb){
-        console.log(data);
-        var message = new Message();
-        message.data = {user_id:data.s_id, reciever:data.reciever, message:data.msg};
-        message.save(
-            (result)=>{
-                for(var index in clients){
-                    console.log(clients[index].user_id);
-                    if(clients[index].user_id == data.reciever){
-                        console.log('message sent');
-                        clients[index].emit('r-p-m',data);
-                    }
-                }
-                cb(data);
-            }
-        );
-    });
-
-    socket.on('p-m-snn',function(data,cb){
-        console.log(data);
-        for(var index in clients){
-            console.log(clients[index].user_id);
-            if(clients[index].user_id == data.reciever){
-                console.log('message seen');
-                clients[index].emit('u-m-noti',data);
-            }
-        }
-    });
-}
-
-function hadleOnlineStatus(socket){
+function handleOnlineStatus(socket){
     socket.on('is online ?',function(data,cb){
         var online = false;
         for(var index in clients){

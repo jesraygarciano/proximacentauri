@@ -2,15 +2,12 @@
 
 namespace App;
 
-use Illuminate\Auth\Authenticatable;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Auth\Passwords\CanResetPassword;
-use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
-use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Model implements AuthenticatableContract, CanResetPasswordContract
+class User extends Authenticatable
 {
-    use Authenticatable, CanResetPassword;
+    use Notifiable;
 
     /**
      * The database table used by the model.
@@ -24,9 +21,9 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      *
      * @var array
      */
-    protected $fillable = ['f_name', 'l_name', 'm_name', 'email', 'password', 'birth_date', 'role', 'university', 'graduate_flag', 'program_of_study', 'field_of_study', 'gender', 'postal', 'address1', 'address2', 'city', 'country', 'phone_number', 'photo', 'objective', 'is_active','verify_token'];
+    protected $fillable = ['f_name', 'l_name', 'email', 'password', 'birth_date', 'role', 'university', 'graduate_flag', 'program_of_study', 'field_of_study', 'gender', 'postal', 'address1', 'address2', 'city', 'country', 'phone_number', 'photo', 'objective', 'is_active','verify_token'];
 
-    protected $appends = ['name','photo'];
+    protected $appends = ['name','photo','birthdate'];
 
     /**
      * The attributes excluded from the model's JSON form.
@@ -115,12 +112,24 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return trim($name,' ') != '' ? $name : 'Unknown';
     }
 
+    public function getBirthdateAttribute(){
+        return date('M. d, Y h:i:sa',strtotime($this->attributes['birth_date']));
+    }
+
     public function getPhotoAttribute(){
-        if(!@file_exists('storage/'.$this->attributes['photo']) || @str_replace(' ','',$this->attributes['photo']) == ''){
+        if(!file_exists('storage/'.$this->attributes['photo']) || str_replace(' ','',$this->attributes['photo']) == ''){
             return asset('img/member-placeholder.png');
         }
 
         return asset('storage/'.$this->attributes['photo']);
+    }
+
+    public function getCoverImageAttribute(){
+        if(!file_exists('storage/'.$this->attributes['cover_image']) || str_replace(' ','',$this->attributes['cover_image']) == ''){
+            return asset('img/default-opening.png');
+        }
+
+        return asset('storage/'.$this->attributes['cover_image']);
     }
 
     public function companies_that_scout_users_save($company_id)
@@ -241,6 +250,10 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     //     return $this->hasManyThrough('App\Resume', 'App\Opening');
     // }
 
+    public function resume(){
+        return $this->hasMany('App\Resume');
+    }
+
     public function requestMessage($data){
         if(!$this->contactExist($data->contact_id))
         {
@@ -281,10 +294,6 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return $this->hasMany('App\Contact','contact_id')->where('status','requesting');
     }
 
-    public function resume(){
-        return $this->hasMany('App\Resume');
-    }
-
     public function findFirstOrCreateResume(){
         $resume = $this->resume()->first();
 
@@ -311,4 +320,83 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     public function intershipApplication(){
         return $this->hasMany('App\InternshipApplication');
     }
+
+    public function profileProgress(){
+        $resume = $this->findFirstOrCreateResume();
+
+        $fields = [
+            'f_name',
+            'm_name',
+            'l_name',
+            'phone_number',
+            'email',
+            'birth_date',
+            'address1',
+            'address2',
+            'city',
+            'country',
+            'postal',
+            'gender',
+            'marital_status',
+            'spoken_language',
+            'photo',
+            'summary',
+            'websites',
+            'objective',
+            'seminars_attended',
+            'awards',
+            'other_skills',
+        ];
+
+        $filled = 0;
+        $_resume = $resume->toArray();
+        foreach($fields as $field){
+            // 
+            if($_resume[$field]){
+                $filled++;
+            }
+        }
+
+        if($resume->educations->count()) $filled++;
+        if($resume->skills->count()) $filled++;
+        if($resume->experiences->count()) $filled++;
+        // if($resume->character_references->count()) $filled++;
+
+        return $p = (int) (($filled / (count($fields) + 3)) * 100);
+    }
+
+    public function saveResumeFile($file){
+        $arrayExtensions = array("pdf", "docx", "dotx");
+
+        $extension = $file->getClientOriginalExtension();
+
+        $msStr = substr(explode(".", (microtime(true) . ""))[1], 0, 3);
+        $file_name = date("Y_m_d_H_i_s" . "_" . $msStr).'.'.$extension;
+
+        if (in_array($extension, $arrayExtensions))
+        {
+            $file->move(
+                public_path('/storage/'), $file_name
+            );
+
+            $resume = $this->findFirstOrCreateResume();
+            $resume->resume_file = $file_name;
+            $resume->save();
+
+            return ['status'=>'success'];
+        }
+
+        return ['status'=>'fail', 'message'=>'invalid_file'];
+    }
+
+    public function notifications(){
+        return $this->hasMany('App\Notification','recipient_id');
+    }
+
+    // Email Verify
+    public function verifyUser()
+    {
+    return $this->hasOne('App\VerifyUser');
+    }
+        
 }

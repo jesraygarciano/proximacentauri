@@ -1,14 +1,14 @@
 <style type="text/css">
-            .ribbon {
-            position: absolute;
-            right: -7px;
-            bottom: 135px;
-            z-index: 1;
-            overflow: hidden;
-            width: 113px;
-            height: 73px;
-            text-align: right;            
-        }
+    .ribbon {
+        position: absolute;
+        right: -7px;
+        bottom: 135px;
+        z-index: 1;
+        overflow: hidden;
+        width: 113px;
+        height: 73px;
+        text-align: right;            
+    }
 </style>
 <div class="company-title-list" style="padding-bottom: 40px; position:relative; background: white; box-shadow: 0 2px 4px 0 rgba(0,0,0,0.16),0 2px 3px 0 rgba(0,0,0,0.12)!important; border:1px solid #dddddd;">
 

@@ -6,7 +6,12 @@ use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use App\Mail\VerifyMail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+use App\VerifyUser;
+// use Illuminate\Auth\Events\VerifyUser;
+
 
 class RegisterController extends Controller
 {
@@ -23,11 +28,18 @@ class RegisterController extends Controller
 
     use RegistersUsers;
 
+        protected function registered(Request $request, $user)
+        {
+            $this->guard()->logout();
+            return redirect('/login')->with('status', 'We sent you an activation code. Check your email and click on the link to verify.');
+        }
+        
     /**
      * Where to redirect users after registration.
      *
      * @var string
      */
+    
     protected $redirectTo = '/home';
 
     /**
@@ -49,15 +61,11 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => 'required|string|max:255',
+            'f_name' => 'required|max:255',
+            'l_name' => 'required|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
         ]);
-    }
-
-    protected function judge($status)
-    {
-        return view('auth.register', compact('status'));
     }
 
     /**
@@ -66,28 +74,50 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\User
      */
-    protected function register(Request $request)
+    protected function create(array $data)
     {
-        $this->validate($request, [
-            'f_name' => 'required|max:255',
-            'l_name' => 'required|max:255',
-            // 'm_name' => 'max:255',
-            // 'birth_date' => 'required',
-            'role' => 'required',
-            'email' => 'required|email|max:255|unique:users',
-            'password' => 'required|confirmed|min:6',
-        ]);
+        // return User::create([
+        //     'f_name' => $data['f_name'],
+        //     'l_name' => $data['l_name'],
+        //     'email' => $data['email'],
+        //     'password' => bcrypt($data['password']),
+        // ]);
 
         $user = User::create([
-            'f_name' => $request->f_name,
-            'l_name' => $request->l_name,
-            'role' => $request->status == 'hiring' ? 1 : 0,
-            'email' => $request->email,
-            'password' => bcrypt($request->password),
+            'f_name' => $data['f_name'],
+            'l_name' => $data['l_name'],
+            'email' => $data['email'],
+            'password' => bcrypt($data['password']),
         ]);
+ 
+        $verifyUser = VerifyUser::create([
+            'user_id' => $user->id,
+            'token' => str_random(40)
+        ]);
+ 
+        Mail::to($user->email)->send(new VerifyMail($user));
+ 
+        return $user;
 
-        \Auth::login($user,true);
-
-        return redirect('/');
     }
+    
+    public function verifyUser($token)
+    {
+        $verifyUser = VerifyUser::where('token', $token)->first();
+        if(isset($verifyUser) ){
+            $user = $verifyUser->user;
+            if(!$user->verified) {
+                $verifyUser->user->verified = 1;
+                $verifyUser->user->save();
+                $status = "Your e-mail is verified. You can now login.";
+            }else{
+                $status = "Your e-mail is already verified. You can now login.";
+            }
+        }else{
+            return redirect('/login')->with('warning', "Sorry your email cannot be identified.");
+        }
+ 
+        return redirect('/login')->with('status', $status);
+    }
+
 }

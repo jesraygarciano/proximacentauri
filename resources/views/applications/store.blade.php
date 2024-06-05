@@ -11,21 +11,20 @@
     </article>
 
     <br />
-
          
-         <form role="form" method="POST" action="/auth/register/hiring">
-                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+    <form role="form" method="POST" action="/auth/register/hiring">
+        <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
-                    <div class="form-group">
-                        {!! Form::label('description', 'Description:', ['class' => 'control-label']) !!}
-                          {!! Form::textarea('f_name', old('f_name'), ['class' => 'form-control']) !!}
-                    </div>
+        <div class="form-group">
+            {!! Form::label('description', 'Description:', ['class' => 'control-label']) !!}
+                {!! Form::textarea('f_name', old('f_name'), ['class' => 'form-control']) !!}
+        </div>
 
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-primary">
-                          Submit application
-                        </button>
-                    </div>
-          </form>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">
+                Submit application
+            </button>
+        </div>
+    </form>
 </div>
 @endsection

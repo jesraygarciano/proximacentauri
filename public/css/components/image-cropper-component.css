@@ -29,6 +29,7 @@
     color: white;
     display: block;
     cursor: pointer;
+    z-index: 1;
 }
 
 .crop-control .image-container .hover-div p{
@@ -79,6 +80,7 @@
     color: white;
     display: block;
     cursor: pointer;
+    z-index: 1;
 }
 
 .crop-control .image-container-cover .hover-div p{
@@ -90,4 +92,30 @@
 
 .crop-control:hover .hover-div{
     opacity: 1;
+}
+
+.crop-control .drag-element{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 100%;
+    width: 100%;
+    background: white;
+    opacity: 0;
+    transition:500ms ease all;
+}
+
+.is-dragover .drag-element{
+    opacity: 1;
+}
+
+.document-dragging .drag-element{
+    opacity: 0.5;
+}
+
+.crop-control .drag-element svg{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%) translateX(-50%);
+    left: 50%;
 }

@@ -39,82 +39,81 @@
       position: absolute;
       transform:translateY(-50%);
   }
- .user-info .user-photo{
-    padding: 5px;
-    background: white;
-    border: 1px solid #cecece;
-    position: relative;
+  .user-info .user-photo{
+      padding: 5px;
+      background: white;
+      border: 1px solid #cecece;
+      position: relative;
+    }
+
+  .user-info .user-photo img{
+      width: 100%;
+    }
+
+  .user-info img{
+      border:none!important;
+    }
+
+  .user-wrapper{
+      position: relative;
+      overflow: hidden;
   }
 
-.user-info .user-photo img{
-    width: 100%;
+  .user-wrapper .bg-img{
+      opacity: 0;
+      z-index: -11;
+      width: 100%;
   }
 
-.user-info img{
-    border:none!important;
+  .user-wrapper ._image{
+      width: 100%;
+      top:50%;
+      left: 0px;
+      position: absolute;
+      transform:translateY(-50%);
   }
 
-.user-wrapper{
-    position: relative;
-    overflow: hidden;
-}
+  .infra-user-photo{
+    /*background: #ececec;*/
+    padding-top: 5px;
+    border: 1px solid #ddd;
+    box-shadow: 2px 2px 4px 0 rgba(0,0,0,0.16),0 2px 3px 0 rgba(0,0,0,0.12)!important;
+  }
 
-.user-wrapper .bg-img{
-    opacity: 0;
-    z-index: -11;
-    width: 100%;
-}
-
-.user-wrapper ._image{
-    width: 100%;
-    top:50%;
-    left: 0px;
-    position: absolute;
-    transform:translateY(-50%);
-}
-
-.infra-user-photo{
-  /*background: #ececec;*/
-  padding-top: 5px;
-  border: 1px solid #ddd;
-  box-shadow: 2px 2px 4px 0 rgba(0,0,0,0.16),0 2px 3px 0 rgba(0,0,0,0.12)!important;
-}
-
-.main-name-info h2{
-  font-weight: 600;
-}
-#infra-user-about{
-  padding: 20px 20px 0 20px;
-  font-weight: 600;
-}
-#infra-user-cont{
-  padding: 20px 20px 0 20px;
-  font-weight: 600;
-}
-.infra-user-photo p{
-  padding: 0 20px 20px 20px;
-}
-.infra-user-photo h5{
-  font-weight: 600;
-  padding: 0 20px 20px 20px;
-}
-.user-main-name{
-  padding: 10px;
-}
-.user-cont-info{
-padding: 5px;
-}
-.infra-user-photo ul{
-  list-style: none;
-}
-.infra-user-photo ul li{
-  list-style: none;
+  .main-name-info h2{
+    font-weight: 600;
+  }
+  #infra-user-about{
+    padding: 20px 20px 0 20px;
+    font-weight: 600;
+  }
+  #infra-user-cont{
+    padding: 20px 20px 0 20px;
+    font-weight: 600;
+  }
+  .infra-user-photo p{
+    padding: 0 20px 20px 20px;
+  }
+  .infra-user-photo h5{
+    font-weight: 600;
+    padding: 0 20px 20px 20px;
+  }
+  .user-main-name{
+    padding: 10px;
+  }
+  .user-cont-info{
   padding: 5px;
-}
-.infra-user-cont-tag{
-  font-weight: 600;
-}
-
+  }
+  .infra-user-photo ul{
+    list-style: none;
+  }
+  .infra-user-photo ul li{
+    list-style: none;
+    padding: 5px;
+  }
+  .infra-user-cont-tag{
+    font-weight: 600;
+  }
 </style>
   <div class="row">
     <div class="col-md-12 user-cover-info">

@@ -18,6 +18,7 @@ class SocialAuthController extends Controller
    */
     public function redirect(Request $requests)
     {
+        \Session::flash('re_url', $requests->re_url);
         return Socialite::driver($requests->media)->redirect();
     }
 
@@ -30,13 +31,15 @@ class SocialAuthController extends Controller
     {
         $user = $service->createOrGetUser(Socialite::driver('facebook')->user(),'facebook');
         auth()->login($user);
-        return redirect()->to('/');
+        $re_url = \Session::get('re_url');
+        return redirect()->to($re_url ? route($re_url) : '/');
     }
 
     public function callbackGithub(SocialAccountService $service)
     {
         $user = $service->createOrGetUser(Socialite::driver('github')->user(),'github');
         auth()->login($user);
-        return redirect()->to('/');
+        $re_url = \Session::get('re_url');
+        return redirect()->to($re_url ? route($re_url) : '/');
     }
 }

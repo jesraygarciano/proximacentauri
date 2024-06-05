@@ -162,15 +162,27 @@
                                         <div class="col-md-offset-1 col-md-11">
                                             <div class="col-md-4">
                                                 <div class="form-group required">
-                                                    {!!Form::label('address1', 'Address1', ['class' => 'required-label'])!!}
+                                                    {!!Form::label('address1', 'Address', ['class' => 'required-label'])!!}
                                                     {!!Form::text('address1', $resume->address1, ['class' => 'form-control'])!!}
                                                 </div>
                                             </div>
 
-                                            <div class="col-md-4">
+                                            <!-- <div class="col-md-4">
                                                 <div class="form-group required">
                                                     {!!Form::label('address2', 'Address2', ['class' => 'required-label'])!!}
                                                     {!!Form::text('address2', $resume->address2, ['class' => 'form-control'])!!}
+                                                </div>
+                                            </div> -->
+
+                                            <div class="col-md-4">
+                                                <div class="form-group required">
+                                                    <label for="province" class="required-label">Province</label>
+                                                    <select class="form-control" name="province" id="province">
+                                                        <option value="" checked>Select Province</option>
+                                                        @foreach($provinces as $province)
+                                                            <option value="{{$province->name}}">{{$province->name}}</option>
+                                                        @endforeach
+                                                    </select>
                                                 </div>
                                             </div>
 
@@ -1137,16 +1149,25 @@
                         rules: [
                             {
                                 type:'empty',
-                                prompt:'Please enter your address1'
+                                prompt:'Please enter your address'
                             }
                         ]
                     },
-                    address2:{
-                        identifier:'address2',
+                    // address2:{
+                    //     identifier:'address2',
+                    //     rules: [
+                    //         {
+                    //             type:'empty',
+                    //             prompt:'Please enter your address2'
+                    //         }
+                    //     ]
+                    // },
+                    province:{
+                        identifier:'province',
                         rules: [
                             {
                                 type:'empty',
-                                prompt:'Please enter your address2'
+                                prompt:'Please choose your province'
                             }
                         ]
                     },

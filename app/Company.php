@@ -8,6 +8,7 @@ class Company extends Model
 {
     protected $fillable = ['company_name', 'email', 'password', 'in_charge', 'ceo_name', 'postal', 'address1', 'address2', 'city', 'country', 'url', 'tel', 'number_of_employee', 'established_at', 'facebook_url', 'twitter_url', 'company_logo', 'background_photo', 'company_introduction', 'what', 'what_photo1', 'what_photo1_explanation', 'what_photo2', 'what_photo2_explanation', 'bill_company_name', 'bill_postal', 'bill_address1', 'bill_address2', 'bill_city', 'bill_country', 'user_id', 'created_at', 'updated_at', 'is_active', 'company_size'];
 
+
     protected $appends = ['population'];
 
     public function openings()
@@ -15,7 +16,8 @@ class Company extends Model
         return $this->hasMany(Opening::class);
     }
 
-    public function applications(){
+    public function applications()
+    {
         return $this->hasManyThrough('\App\Application','\App\Opening');
     }
 
@@ -36,7 +38,7 @@ class Company extends Model
     }
 
     public function getPopulationAttribute(){
-        switch (@$this->attributes['company_size']) {
+        switch ($this->attributes['company_size']) {
             case 1:
                 return '1 ~ 10 employees';
                 break;
@@ -68,6 +70,11 @@ class Company extends Model
         }
     }
 
+    /*public function company_google_mapper()
+    {
+        return $this->attributes['address1']. " ". $this->attributes['city']. " ". $this->attributes['country'];
+    }*/
+
     public function getCompanyLogoAttribute(){
         if(!file_exists('storage/'.$this->attributes['company_logo']) || str_replace(' ','',$this->attributes['company_logo']) == ''){
             return asset('img/default-company.png');
@@ -76,19 +83,11 @@ class Company extends Model
         return asset('storage/'.$this->attributes['company_logo']);
     }
 
-    public function getBackgroundPhotoAttribute(){
+    public function getCompanyCoverAttribute(){
         if(!file_exists('storage/'.$this->attributes['background_photo']) || str_replace(' ','',$this->attributes['background_photo']) == ''){
             return asset('img/default-opening.jpg');
         }
 
         return asset('storage/'.$this->attributes['background_photo']);
-    }
-
-    public function getWhatPhoto1Attribute(){
-        if(!file_exists('storage/'.$this->attributes['what_photo1']) || str_replace(' ','',$this->attributes['what_photo1']) == ''){
-            return asset('img/default-opening.jpg');
-        }
-
-        return asset('storage/'.$this->attributes['what_photo1']);
     }
 }

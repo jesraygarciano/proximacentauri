@@ -4,7 +4,7 @@ CAROSEL FOR FEATURED JOB POST
 
 (function($){
 
-  $.fn.featuredPostCarosel = function(options){
+  $.fn.featuredPostCarosel_experiment = function(options){
 
     var $this = $(this);
 
@@ -134,7 +134,7 @@ CAROSEL FOR FEATURED JOB POST
   };
 
 
-  $.fn.featuredPostCarosel_specimen = function(options){
+  $.fn.featuredPostCarosel = function(options){
 
     var $this = $(this);
 

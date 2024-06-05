@@ -54,6 +54,7 @@
 
 		$.socket.on('reconnect', function () {
 			//
+			$.socket.emit('client add', settings.auth_id);
 		});
 
 		$.socket.on('reconnect_error', function () {
